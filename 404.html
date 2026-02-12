@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | SUPRABHAT</title>
+    <meta
+      name="description"
+      content="The page you're looking for doesn't exist."
+    />
+    <meta property="og:title" content="404 - Page Not Found | SUPRABHAT" />
+    <meta
+      property="og:description"
+      content="The page you're looking for doesn't exist."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--color-bg-primary, #f8f9fa);
+        color: var(--color-text-primary, #1a1a1a);
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+      .error-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+      .error-code {
+        font-size: 6rem;
+        font-weight: 800;
+        color: var(--color-orange-500, #ff8c42);
+        line-height: 1;
+        margin: 0;
+      }
+      .error-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 1rem 0;
+        color: var(--color-text-primary, #1a1a1a);
+      }
+      .error-description {
+        font-size: 1.125rem;
+        color: var(--color-text-secondary, #666);
+        margin-bottom: 2rem;
+        max-width: 500px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 3rem;
+      }
+      .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid var(--color-orange-500, #ff8c42);
+        background: var(--color-orange-500, #ff8c42);
+        color: white;
+        cursor: pointer;
+      }
+      .button:hover {
+        background: var(--color-orange-600, #e67e34);
+        border-color: var(--color-orange-600, #e67e34);
+      }
+      .button.secondary {
+        background: transparent;
+        color: var(--color-orange-500, #ff8c42);
+      }
+      .button.secondary:hover {
+        background: var(--color-orange-50, #fff4ec);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-container">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-description">
+        Sorry! The page you're looking for doesn't exist. It might have been
+        moved or deleted.
+      </p>
+      <div class="nav-links">
+        <a href="/" class="button">Go Home</a>
+        <a href="/#contact" class="button secondary">Contact Me</a>
+      </div>
+    </div>
+  </body>
+</html>

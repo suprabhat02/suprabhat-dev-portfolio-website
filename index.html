@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Suprabhat Kumar — Front-End Developer &amp; Web Designer (React,
+      TypeScript, Next.js)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Front-End Developer & web designer building high-performance, accessible web apps and responsive websites with React, Next.js, TypeScript, Redux Toolkit, and Tailwind CSS."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <!-- Netlify placeholder: replace with your real domain -->
+    <link rel="canonical" href="https://YOUR-SITE.netlify.app/" />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Suprabhat Kumar — Front-End Developer & Web Designer (React, TypeScript, Next.js)"
+    />
+    <meta
+      property="og:description"
+      content="Front-End Developer & web designer building accessible, high-performance web apps and responsive websites with React, Next.js, and TypeScript."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://YOUR-SITE.netlify.app/" />
+    <meta
+      property="og:image"
+      content="https://YOUR-SITE.netlify.app/assets/images/og-image.svg"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Suprabhat Kumar — Front-End Developer & Web Designer (React, TypeScript, Next.js)"
+    />
+    <meta
+      name="twitter:description"
+      content="Front-End Developer & web designer building accessible, high-performance web apps and responsive websites with React, Next.js, and TypeScript."
+    />
+    <meta
+      name="twitter:image"
+      content="https://YOUR-SITE.netlify.app/assets/images/og-image.svg"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Critical Images -->
+    <link
+      rel="preload"
+      href="./assets/images/suprabhat.webp"
+      as="image"
+      type="image/webp"
+    />
+
+    <!-- Critical CSS -->
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .skip-link {
+        position: absolute;
+        left: -999rem;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+        width: auto;
+        height: auto;
+        padding: 0.75rem 1rem;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        border: 0.125rem solid var(--color-orange-500);
+        border-radius: 0.5rem;
+        z-index: 1000;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="./styles/main.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Suprabhat Kumar",
+        "jobTitle": "Software Engineer",
+        "description": "Front-End Developer & web designer building high-performance, accessible web apps and responsive websites with React, Next.js, and TypeScript.",
+        "url": "https://YOUR-SITE.netlify.app/",
+        "sameAs": [
+          "https://www.linkedin.com/in/suprabhatkumar/",
+          "https://github.com/supz-topdigi"
+        ],
+        "knowsAbout": [
+          "Web Design",
+          "Front-End Web Development",
+          "Web Applications",
+          "UI Engineering",
+          "Design Systems",
+          "Core Web Vitals",
+          "HTML",
+          "CSS",
+          "Sass",
+          "Tailwind CSS",
+          "Chakra UI",
+          "Headless UI",
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Redux Toolkit",
+          "React Query",
+          "GraphQL",
+          "jQuery",
+          "Accessibility",
+          "Responsive Web Design"
+          "Anthropic AI"
+          "Claude AI"
+          "Storybook"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <output class="app-loader" data-app-loader aria-live="polite">
+      Loading...
+    </output>
+    <noscript>
+      <style>
+        .app-loader {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="#top" aria-label="Go to top">Suprabhat</a>
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-controls" aria-label="Appearance controls">
+          <fieldset class="segmented">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+
+          <fieldset class="accent-switch">
+            <legend class="sr-only">Accent palette</legend>
+            <button
+              class="accent-switch__btn"
+              type="button"
+              data-accent-option="orange"
+              aria-label="Accent: Orange"
+              aria-pressed="false"
+            >
+              <span
+                class="accent-swatch accent-swatch--orange"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <span class="accent-switch__label">Accent</span>
+            <button
+              class="accent-switch__btn"
+              type="button"
+              data-accent-option="neon"
+              aria-label="Accent: Neon"
+              aria-pressed="false"
+            >
+              <span
+                class="accent-swatch accent-swatch--neon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </fieldset>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero section" id="top" aria-labelledby="hero-title">
+        <div class="container hero-content">
+          <div>
+            <p class="eyebrow">
+              Front-End Developer &amp; Web Designer from
+              <img
+                data-src="./assets/icons/india-flag-icon.svg"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                alt="India flag"
+                width="28"
+                height="28"
+                decoding="async"
+                aria-labelledby="indian-flag"
+                class="lazy-image"
+              />
+              <span id="indian-flag" class="skip-link"
+                >This image represents the flag of India.</span
+              >
+            </p>
+            <h1 id="hero-title">Suprabhat Kumar</h1>
+            <p class="lead">
+              I design and build high-performance, accessible front-end web apps
+              and responsive websites with React, Next.js, and TypeScript.
+            </p>
+            <div class="button-group">
+              <a class="button primary" href="#contact">Contact</a>
+              <a class="button secondary" href="/assets/SUPZ-Topdigi-Resume.pdf"
+                >Resume</a
+              >
+            </div>
+          </div>
+          <figure class="hero-media hero-media--tilt">
+            <div class="hero-media__frame">
+              <img
+                class="hero-image"
+                src="./assets/images/suprabhat.webp"
+                width="640"
+                height="640"
+                alt="Portrait of Suprabhat Kumar, Software Engineer"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <div class="container">
+          <h2 id="about-title">About</h2>
+          <p>
+            Front-end developer and web designer focused on modern web
+            application UI. I build responsive layouts, reusable components, and
+            design-system-ready interfaces.
+          </p>
+          <p>
+            I ship fast, accessible front-end web apps using React and Next.js,
+            with TypeScript for reliability and Redux Toolkit / React Query for
+            predictable state and data flows.
+          </p>
+          <p>
+            My priorities: clean UI engineering, great web design, and
+            performance that holds up in real-world devices and networks.
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="section skills"
+        id="skills"
+        aria-labelledby="skills-title"
+      >
+        <div class="container">
+          <h2 id="skills-title">Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <h3>Front-End</h3>
+              <ul>
+                <li>React.js + Next.js</li>
+                <li>JavaScript + TypeScript</li>
+                <li>HTML + CSS + Sass</li>
+                <li>Tailwind CSS</li>
+              </ul>
+            </div>
+            <div class="skill-card">
+              <h3>UI Libraries</h3>
+              <ul>
+                <li>Chakra UI</li>
+                <li>Headless UI</li>
+                <li>React Bootstrap</li>
+                <li>Ant Design</li>
+              </ul>
+            </div>
+            <div class="skill-card">
+              <h3>State & Data</h3>
+              <ul>
+                <li>Git workflows</li>
+                <li>Redux Toolkit</li>
+                <li>React Hooks + Context API</li>
+                <li>React Query</li>
+                <li>GraphQL</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section experience"
+        id="experience"
+        aria-labelledby="experience-title"
+      >
+        <div class="container">
+          <h2 id="experience-title">Experience</h2>
+          <article class="experience-item">
+            <header>
+              <h3>Software Engineer III — Topsoe</h3>
+              <p class="meta">May 2025 — Present · Hybrid</p>
+            </header>
+            <ul>
+              <li>Build sleek, modern interfaces with React and TypeScript.</li>
+              <li>Ship predictable UI state with Redux Toolkit.</li>
+              <li>
+                Collaborate with cross-functional teams in a hybrid setup.
+              </li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <header>
+              <h3>Associate Projects — Cognizant</h3>
+              <p class="meta">
+                Feb 2024 — Apr 2025 · Noida, Uttar Pradesh, India · On-site
+              </p>
+            </header>
+            <ul>
+              <li>Developed UI features using TypeScript.</li>
+              <li>Worked with GraphQL-backed data flows.</li>
+              <li>Implemented responsive, modern user interfaces.</li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <header>
+              <h3>Implementation Web Developer — TrueBlue Inc.</h3>
+              <p class="meta">
+                Dec 2023 — Jan 2024 · Gurugram, Haryana, India · On-site
+              </p>
+            </header>
+            <ul>
+              <li>Implemented responsive UI updates for web experiences.</li>
+              <li>Integrated components and ensured consistent UI behavior.</li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <header>
+              <h3>Senior Frontend Developer — MobileCoderz</h3>
+              <p class="meta">
+                Oct 2023 — Nov 2023 · Noida, Uttar Pradesh, India
+              </p>
+            </header>
+            <ul>
+              <li>
+                Built modern front-end experiences with React and Next.js.
+              </li>
+              <li>Collaborated on UI delivery and component integration.</li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <header>
+              <h3>Frontend Developer — MobileCoderz</h3>
+              <p class="meta">
+                Feb 2022 — Sep 2023 · Noida, Uttar Pradesh, India
+              </p>
+            </header>
+            <ul>
+              <li>
+                Developed responsive interfaces and reusable UI components.
+              </li>
+              <li>Worked across React, TypeScript, and modern CSS.</li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <header>
+              <h3>UI Developer — Swaragh Technologies</h3>
+              <p class="meta">
+                Dec 2019 — Jan 2022 · Bengaluru, Karnataka, India
+              </p>
+            </header>
+            <ul>
+              <li>Created responsive UI using HTML, CSS, and JavaScript.</li>
+              <li>Built interactive behaviors with jQuery where needed.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section tools" id="tools" aria-labelledby="tools-title">
+        <div class="container">
+          <h2 id="tools-title">Tools &amp; Technologies</h2>
+          <p class="lead">
+            The stack I use to ship fast, accessible, scalable UI.
+          </p>
+
+          <ul class="tools-grid">
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/typescript.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="TypeScript logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>TypeScript</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/react.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="React.js logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>React</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/nextjs.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Next.js logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Next.js</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/redux.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Redux logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Redux</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/nodejs.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Node.js logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Node.js</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/figma.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Figma logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Figma</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/tailwindcss.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Tailwind CSS logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Tailwind CSS</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/git.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Git logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Git</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/sass.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Sass logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Sass</h3>
+              </article>
+            </li>
+
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/jquery.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="jQuery logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>jQuery</h3>
+              </article>
+            </li>
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/claude.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Anthropic AI logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Anthropic AI</h3>
+              </article>
+            </li>
+            <li>
+              <article class="tool-card">
+                <div class="tool-logo">
+                  <img
+                    data-src="./assets/techicons/storybook-icon.svg"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                    width="28"
+                    height="28"
+                    alt="Storybook logo"
+                    decoding="async"
+                    class="lazy-image"
+                  />
+                </div>
+                <h3>Storybook</h3>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section philosophy" aria-labelledby="philosophy-title">
+        <div class="container">
+          <h2 id="philosophy-title">Design Philosophy</h2>
+          <p>
+            I believe great UI is invisible: fast, inclusive, and focused on the
+            task at hand. I build with performance budgets, accessibility
+            checklists, and clean engineering practices from day one for both
+            websites and front-end web applications.
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="section contact"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div class="container">
+          <h2 id="contact-title">Contact</h2>
+          <p>
+            Interested in collaborating? Let's build a polished, accessible
+            product together.
+          </p>
+
+          <form class="contact-form" data-contact-form>
+            <input
+              type="hidden"
+              name="to_email"
+              value="suprabhatkumar02@gmail.com"
+            />
+            <input
+              type="text"
+              name="website"
+              style="display: none"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <div class="form-field">
+              <label for="contact-name">Name</label>
+              <input
+                id="contact-name"
+                name="from_name"
+                placeholder="Your Name...."
+                type="text"
+                autocomplete="name"
+                required
+                aria-describedby="name-error"
+              />
+              <span id="name-error" class="form-error" role="alert"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-email">Email</label>
+              <input
+                id="contact-email"
+                name="reply_to"
+                placeholder="Goes your email...."
+                type="email"
+                autocomplete="email"
+                required
+                aria-describedby="email-error"
+              />
+              <span id="email-error" class="form-error" role="alert"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-message">Query</label>
+              <textarea
+                placeholder="Let me know your project/business idea 💡...."
+                id="contact-message"
+                name="message"
+                rows="6"
+                required
+                aria-describedby="message-error"
+              ></textarea>
+              <span id="message-error" class="form-error" role="alert"></span>
+            </div>
+
+            <div class="form-actions">
+              <button class="button primary" type="submit">Send message</button>
+              <output
+                class="form-status"
+                aria-live="polite"
+                data-form-status
+              ></output>
+            </div>
+          </form>
+
+          <div class="contact-links">
+            <a href="mailto:suprabhatkumar02@gmail.com"
+              >suprabhatkumar02@gmail.com</a
+            >
+            <a
+              href="https://www.linkedin.com/in/suprabhatkumar/"
+              rel="noopener noreferrer"
+              target="_blank"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/suprabhat02"
+              rel="noopener noreferrer"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>
+          &#169; <span id="currentyear"></span> SUPRABHAT. All rights reserved.
+        </p>
+        <div class="header-controls" aria-label="Appearance controls">
+          <fieldset class="segmented">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+
+          <fieldset class="accent-switch">
+            <legend class="sr-only">Accent palette</legend>
+            <button
+              class="accent-switch__btn"
+              type="button"
+              data-accent-option="orange"
+              aria-label="Accent: Orange"
+              aria-pressed="false"
+            >
+              <span
+                class="accent-swatch accent-swatch--orange"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <span class="accent-switch__label">Accent</span>
+            <button
+              class="accent-switch__btn"
+              type="button"
+              data-accent-option="neon"
+              aria-label="Accent: Neon"
+              aria-pressed="false"
+            >
+              <span
+                class="accent-swatch accent-swatch--neon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </fieldset>
+        </div>
+      </div>
+      <button
+        class="back-to-top"
+        id="back-to-top-btn"
+        aria-label="Back to top"
+        hidden
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 20v-16m0 0l-5 5m5-5l5 5"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+    </footer>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <script src="./scripts/main.js" defer></script>
+  </body>
+</html>
