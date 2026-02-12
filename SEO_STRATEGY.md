@@ -3,6 +3,7 @@
 ## ✅ Already Implemented
 
 ### On-Page SEO (100% Complete)
+
 - ✅ Title tags with primary keywords (React, TypeScript, Next.js)
 - ✅ Meta description with LSI keywords
 - ✅ H1 proper semantic structure
@@ -24,6 +25,7 @@
 ## 🎯 IMMEDIATE ACTIONS (Critical Priority - Do This First)
 
 ### 1. **Submit Sitemap & Set Up Google Search Console** (15 min)
+
 ```
 Steps:
 1. Go to https://search.google.com/search-console
@@ -32,11 +34,13 @@ Steps:
 4. Request indexation for homepage and key pages
 5. Check for any indexing errors
 ```
+
 **Impact:** 🔥 High - Gets Google to crawl and index your site
 
 ---
 
 ### 2. **Set Up Google Analytics 4 (GA4)** (10 min)
+
 ```
 Steps:
 1. Create GA4 property at https://analytics.google.com
@@ -44,23 +48,33 @@ Steps:
 3. Copy Measurement ID (G-XXXXXXXXXX)
 4. Add this to your netlify.toml or index.html:
 ```
+
 Add to `<head>` in index.html:
+
 ```html
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_MEASUREMENT_ID"></script>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_MEASUREMENT_ID"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-YOUR_MEASUREMENT_ID');
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-YOUR_MEASUREMENT_ID");
 </script>
 ```
+
 **Impact:** 🔥 High - Track traffic, user behavior, conversions
 
 ---
 
 ### 3. **Update Twitter Handle** (2 min)
+
 In your index.html, change:
+
 - `@suprabhat_dev` to your actual Twitter/X handle
 - If you don't have Twitter, create one or remove these tags
 
@@ -69,6 +83,7 @@ In your index.html, change:
 ---
 
 ### 4. **Verify Website Ownership**
+
 ```
 Tools to use (all are free):
 1. Google Search Console → Add via meta tag or file upload
@@ -81,22 +96,24 @@ Tools to use (all are free):
 ## 📊 MEDIUM PRIORITY (Do This Next Week)
 
 ### 5. **Create Comprehensive Blog/Articles Section**
+
 - Write blog posts about: React best practices, Next.js optimization, TypeScript tips
 - Target long-tail keywords: "how to optimize react performance", "next.js routing guide"
 - Publish 1 post/week for 8 weeks minimum
-**Impact:** 🔥 HIGHEST - Brings organic traffic and builds authority
+  **Impact:** 🔥 HIGHEST - Brings organic traffic and builds authority
 
 ---
 
 ### 6. **Optimize Images Further**
+
 Current: WebP with lazy loading ✅
 Next: Generate multiple sizes (AVIF format, srcset)
 
 ```html
 <!-- Example: Updated image with AVIF -->
 <picture>
-  <source srcset="./assets/images/suprabhat.avif" type="image/avif">
-  <source srcset="./assets/images/suprabhat.webp" type="image/webp">
+  <source srcset="./assets/images/suprabhat.avif" type="image/avif" />
+  <source srcset="./assets/images/suprabhat.webp" type="image/webp" />
   <img src="./assets/images/suprabhat.webp" alt="Suprabhat Kumar" />
 </picture>
 ```
@@ -104,6 +121,7 @@ Next: Generate multiple sizes (AVIF format, srcset)
 ---
 
 ### 7. **Add Breadcrumb Schema JSON-LD**
+
 ```json
 {
   "@context": "https://schema.org",
@@ -134,15 +152,17 @@ Next: Generate multiple sizes (AVIF format, srcset)
 ---
 
 ### 8. **Build Quality Backlinks**
+
 - Comment on popular dev blogs (Dev.to, Medium, CSS-Tricks)
 - Submit portfolio to: Dribbble, Behance, GitHub trending
 - Reach out to developer communities for features
 - Write guest posts on tech publications
-**Impact:** 🔥 Very High - Authority signals to Google
+  **Impact:** 🔥 Very High - Authority signals to Google
 
 ---
 
 ### 9. **Create Open Graph Images (Dynamic)**
+
 - Currently using generic og-image.svg
 - Create custom images for each blog post
 - Use tools like: Figma, Canva, or Vercel OG Image Generator
@@ -150,6 +170,7 @@ Next: Generate multiple sizes (AVIF format, srcset)
 ---
 
 ### 10. **Add Schema Markup for Contact Form**
+
 ```json
 {
   "@context": "https://schema.org",
@@ -165,23 +186,27 @@ Next: Generate multiple sizes (AVIF format, srcset)
 ## 🏆 LONG-TERM STRATEGY (Ongoing)
 
 ### 11. **Keywords to Target** (Research & Optimize)
+
 **Primary:** React developer, Front-end developer, Web designer, TypeScript
 **Secondary:** Next.js, Accessible web, Performance optimization, UI design
 **Long-tail:** "Hire front-end developer", "React consulting", "Web accessibility expert"
 
 ### 12. **Content Calendar**
+
 - Week 1-2: "React Performance Optimization Guide"
 - Week 3-4: "Accessible Web Design Trends 2026"
 - Week 5-6: "Next.js vs Create React App"
 - Week 7-8: "TypeScript Best Practices for React"
 
 ### 13. **Link Building Strategy**
+
 - Guest posts on 5-10 reputable dev blogs
 - Interview features on design/dev podcasts
 - Contribute to open source (shows credibility)
 - Mention on LinkedIn, Twitter (build personal brand)
 
 ### 14. **Social Signals**
+
 - Share blog posts on Twitter, LinkedIn
 - Engage with dev communities: Dev.to, Hashnode, Reddit (/r/webdev)
 - Participate in WebDev Twitter discussions
@@ -192,14 +217,17 @@ Next: Generate multiple sizes (AVIF format, srcset)
 ## 📈 Tracking & Monitoring
 
 ### Core Web Vitals to Monitor
+
 ```
 1. Largest Contentful Paint (LCP) - Target: < 2.5s ✅ (Your site: ~1.2s)
 2. First Input Delay (FID) - Target: < 100ms ✅ (Your site: ~60ms)
 3. Cumulative Layout Shift (CLS) - Target: < 0.1 ✅ (Your site: ~0.08)
 ```
+
 Monitor at: https://pagespeed.web.dev/
 
 ### Tools to Use (All Free)
+
 1. **Google Search Console** - Track rankings, fix errors
 2. **Google Analytics 4** - User behavior, traffic sources
 3. **Ahrefs Webmaster Tools** - Backlinks, domain authority
@@ -211,19 +239,19 @@ Monitor at: https://pagespeed.web.dev/
 
 ## ⚡ Quick SEO Score Summary
 
-| Metric | Current | Target | Status |
-|--------|---------|--------|--------|
-| Mobile Friendly | ✅ Yes | ✅ Yes | **Perfect** |
-| Page Speed | 95/100 | 90+/100 | **Excellent** |
-| Accessibility | WCAG AA | WCAG AA | **Perfect** |
-| Meta Tags | ✅ Complete | ✅ Complete | **Perfect** |
-| Schema Markup | ✅ Person | ✅ Multiple | **Good** |
-| Sitemap | ✅ Yes | ✅ Yes | **Perfect** |
-| Robots.txt | ✅ Yes | ✅ Yes | **Perfect** |
-| Canonical | ✅ Yes | ✅ Yes | **Perfect** |
-| Internal Links | ✅ Good | ✅ Excellent | **In Progress** |
-| Backlinks | ❌ 0 | 50+ | **Needs Work** |
-| Content | ❌ Minimal | 10-15 articles | **Needs Work** |
+| Metric          | Current     | Target         | Status          |
+| --------------- | ----------- | -------------- | --------------- |
+| Mobile Friendly | ✅ Yes      | ✅ Yes         | **Perfect**     |
+| Page Speed      | 95/100      | 90+/100        | **Excellent**   |
+| Accessibility   | WCAG AA     | WCAG AA        | **Perfect**     |
+| Meta Tags       | ✅ Complete | ✅ Complete    | **Perfect**     |
+| Schema Markup   | ✅ Person   | ✅ Multiple    | **Good**        |
+| Sitemap         | ✅ Yes      | ✅ Yes         | **Perfect**     |
+| Robots.txt      | ✅ Yes      | ✅ Yes         | **Perfect**     |
+| Canonical       | ✅ Yes      | ✅ Yes         | **Perfect**     |
+| Internal Links  | ✅ Good     | ✅ Excellent   | **In Progress** |
+| Backlinks       | ❌ 0        | 50+            | **Needs Work**  |
+| Content         | ❌ Minimal  | 10-15 articles | **Needs Work**  |
 
 ---
 
