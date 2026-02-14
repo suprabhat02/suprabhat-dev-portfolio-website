@@ -1,32 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://suprabhat.dev/</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://suprabhat-portfolio.netlify.app/</loc>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://suprabhat.dev/#skills</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://suprabhat-portfolio.netlify.app/blog.html</loc>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://suprabhat.dev/#tools</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/css-flexbox-tutorial-for-beginners.html</loc>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://suprabhat.dev/#portfolio</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/how-to-center-a-div-in-css.html</loc>
+    <lastmod>2026-02-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://suprabhat.dev/#contact</loc>
-    <lastmod>2024-01-01</lastmod>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/javascript-array-methods-explained.html</loc>
+    <lastmod>2026-02-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/building-accessible-react-components.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/nextjs-performance-optimization.html</loc>
+    <lastmod>2026-02-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/react-query-vs-redux-toolkit.html</loc>
+    <lastmod>2026-02-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/lazy-loading-images-core-web-vitals.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/aria-patterns-react-guide.html</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/keyboard-navigation-spa.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/screen-reader-testing-react.html</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suprabhat-portfolio.netlify.app/blog/accessible-forms-react-hook-form.html</loc>
+    <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

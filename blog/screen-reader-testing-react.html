@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Screen Reader Testing for React Developers | Step-by-Step Guide (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Learn screen reader testing for React apps with NVDA and VoiceOver. Step-by-step guide to make your components accessible with simple techniques."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="screen reader testing, nvda, voiceover, accessibility testing react, screen reader guide, a11y testing, jaws, assistive technology testing"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://suprabhat-portfolio.netlify.app/blog/screen-reader-testing-react.html"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Screen Reader Testing for React Developers | Step-by-Step Guide (2026)"
+    />
+    <meta
+      property="og:description"
+      content="Learn screen reader testing for React apps with NVDA and VoiceOver. Step-by-step guide to make your components accessible with simple techniques."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/screen-reader-testing-react.html"
+    />
+    <meta property="article:published_time" content="2026-02-03" />
+    <meta property="article:author" content="Suprabhat Kumar" />
+    <meta property="article:section" content="Accessibility" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Screen Reader Testing for React Developers"
+    />
+    <meta
+      name="twitter:description"
+      content="Step-by-step guide to screen reader testing for React apps."
+    />
+    <meta name="twitter:creator" content="@suprabhat" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-03">February 3, 2026</time>
+            <span class="blog-post-category">Accessibility</span>
+            <span>6 min read</span>
+          </div>
+          <h1>Screen Reader Testing for React Developers</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Testing with screen readers is the only way to truly know if your
+            React app is accessible. Automated tools catch only 30-40% of
+            accessibility issues. In this guide, you'll learn how to test with
+            NVDA (Windows) and VoiceOver (Mac), understand what to listen for,
+            and fix common issues in React components.
+          </p>
+
+          <h2>Why Screen Reader Testing is Essential</h2>
+
+          <p>Here's why you can't rely on automated tools alone:</p>
+
+          <ul>
+            <li>
+              <strong>User experience</strong> - Automated tools can't detect
+              confusing experiences
+            </li>
+            <li>
+              <strong>Context matters</strong> - What sounds good on paper might
+              be awful to hear
+            </li>
+            <li>
+              <strong>Dynamic content</strong> - React's dynamic updates need
+              manual verification
+            </li>
+            <li>
+              <strong>Real-world validation</strong> - See how actual users
+              experience your app
+            </li>
+            <li>
+              <strong>Legal protection</strong> - Manual testing is often
+              required for compliance
+            </li>
+          </ul>
+
+          <h2>Getting Started with NVDA (Windows)</h2>
+
+          <p>
+            NVDA is a free, open-source screen reader for Windows. Perfect for
+            testing:
+          </p>
+
+          <h3>Installing NVDA</h3>
+
+          <pre><code>1. Download from https://www.nvaccess.org/download/
+2. Run installer (choose "Install NVDA on this computer")
+3. NVDA starts automatically
+4. Listen for the welcome message</code></pre>
+
+          <h3>Essential NVDA Commands</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ctrl</td>
+                <td>Stop speaking</td>
+              </tr>
+              <tr>
+                <td>NVDA + Q</td>
+                <td>Quit NVDA</td>
+              </tr>
+              <tr>
+                <td>NVDA + Space</td>
+                <td>Toggle focus/browse mode</td>
+              </tr>
+              <tr>
+                <td>H</td>
+                <td>Next heading</td>
+              </tr>
+              <tr>
+                <td>Shift + H</td>
+                <td>Previous heading</td>
+              </tr>
+              <tr>
+                <td>D</td>
+                <td>Next landmark</td>
+              </tr>
+              <tr>
+                <td>K</td>
+                <td>Next link</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>Next button</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>Next form field</td>
+              </tr>
+              <tr>
+                <td>NVDA + F7</td>
+                <td>Elements list</td>
+              </tr>
+              <tr>
+                <td>NVDA + Down Arrow</td>
+                <td>Say all (read from cursor)</td>
+              </tr>
+              <tr>
+                <td>Insert + F1</td>
+                <td>Help menu</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            <strong>Note:</strong> NVDA key is usually Insert or Caps Lock
+            (configurable)
+          </p>
+
+          <h3>NVDA Testing Workflow</h3>
+
+          <pre><code>// 1. Start NVDA
+// 2. Open your React app in browser
+// 3. Press NVDA + Space to enter browse mode
+
+// 4. Test navigation:
+// - Press H repeatedly to navigate headings
+// - Press D to jump between landmarks
+// - Press K to move through links
+// - Press F to visit form fields
+
+// 5. Test interactive elements:
+// - Tab to buttons, verify they're announced
+// - Fill out forms, listen to labels and errors
+// - Open modals, verify focus management
+
+// 6. Test dynamic content:
+// - Make changes trigger, verify announcements
+// - Check live regions work correctly</code></pre>
+
+          <h2>Getting Started with VoiceOver (Mac)</h2>
+
+          <p>VoiceOver is built into macOS. No installation needed!</p>
+
+          <h3>Enabling VoiceOver</h3>
+
+          <pre><code>1. Cmd + F5 (or touch Touch ID 3 times)
+2. VoiceOver starts speaking
+3. First time: complete Quick Start tutorial
+4. Cmd + F5 to turn off</code></pre>
+
+          <h3>Essential VoiceOver Commands</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Command</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ctrl</td>
+                <td>Stop speaking</td>
+              </tr>
+              <tr>
+                <td>Cmd + F5</td>
+                <td>Turn on/off VoiceOver</td>
+              </tr>
+              <tr>
+                <td>VO + Right Arrow</td>
+                <td>Next item</td>
+              </tr>
+              <tr>
+                <td>VO + Left Arrow</td>
+                <td>Previous item</td>
+              </tr>
+              <tr>
+                <td>VO + Cmd + H</td>
+                <td>Next heading</td>
+              </tr>
+              <tr>
+                <td>VO + Cmd + J</td>
+                <td>Next form control</td>
+              </tr>
+              <tr>
+                <td>VO + Cmd + L</td>
+                <td>Next link</td>
+              </tr>
+              <tr>
+                <td>VO + U</td>
+                <td>Rotor (elements list)</td>
+              </tr>
+              <tr>
+                <td>VO + A</td>
+                <td>Read all</td>
+              </tr>
+              <tr>
+                <td>VO + Space</td>
+                <td>Click/activate</td>
+              </tr>
+              <tr>
+                <td>VO + Shift + Down</td>
+                <td>Enter group</td>
+              </tr>
+              <tr>
+                <td>VO + Shift + Up</td>
+                <td>Exit group</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            <strong>Note:</strong> VO = Ctrl + Option (VoiceOver modifier keys)
+          </p>
+
+          <h2>What to Test in Your React Components</h2>
+
+          <h3>1. Headings and Document Structure</h3>
+
+          <pre><code>// Bad - No heading hierarchy
+&lt;div&gt;
+  &lt;h1&gt;Page Title&lt;/h1&gt;
+  &lt;h3&gt;Subsection&lt;/h3&gt; {/* Skips h2 */}
+  &lt;h2&gt;Another section&lt;/h2&gt; {/* Wrong order */}
+&lt;/div&gt;
+
+// Good - Proper hierarchy
+&lt;div&gt;
+  &lt;h1&gt;Page Title&lt;/h1&gt;
+  &lt;h2&gt;Main Section&lt;/h2&gt;
+  &lt;h3&gt;Subsection&lt;/h3&gt;
+  &lt;h2&gt;Another Section&lt;/h2&gt;
+&lt;/div&gt;
+
+// Testing:
+// 1. Press H (or VO + Cmd + H) to navigate headings
+// 2. Verify hierarchy makes sense
+// 3. Check no levels are skipped</code></pre>
+
+          <h3>2. Landmarks and Regions</h3>
+
+          <pre><code>// Good landmark structure
+function Layout() {
+  return (
+    &lt;&gt;
+      &lt;header&gt;
+        &lt;nav aria-label="Main navigation"&gt;{/* Nav */}&lt;/nav&gt;
+      &lt;/header&gt;
+      
+      &lt;main&gt;
+        &lt;section aria-labelledby="about-heading"&gt;
+          &lt;h2 id="about-heading"&gt;About Us&lt;/h2&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      
+      &lt;aside aria-label="Sidebar"&gt;{/* Sidebar */}&lt;/aside&gt;
+      
+      &lt;footer&gt;{/* Footer */}&lt;/footer&gt;
+    &lt;/&gt;
+  );
+}
+
+// Testing:
+// NVDA: Press D to jump between landmarks
+// VoiceOver: VO + U, then use Left/Right arrows to navigate
+// Verify: All major sections are announced clearly</code></pre>
+
+          <h3>3. Forms and Inputs</h3>
+
+          <pre><code>// What screen readers should announce
+&lt;form&gt;
+  &lt;label htmlFor="email"&gt;
+    Email address
+    &lt;span aria-label="required"&gt;*&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;input
+    id="email"
+    type="email"
+    aria-required="true"
+    aria-describedby="email-hint"
+    aria-invalid={hasError}
+  /&gt;
+  &lt;div id="email-hint"&gt;We'll never share your email&lt;/div&gt;
+  {hasError && (
+    &lt;div role="alert"&gt;Please enter a valid email&lt;/div&gt;
+  )}
+&lt;/form&gt;
+
+// What you should hear:
+// "Email address, required, edit text"
+// "We'll never share your email"
+// (if error) "Please enter a valid email"
+
+// Testing checklist:
+// ✅ Label is read before input
+// ✅ Required status is announced
+// ✅ Helper text is read
+// ✅ Error messages are announced immediately
+// ✅ Can fill out form using Tab and keyboard only</code></pre>
+
+          <h3>4. Buttons and Links</h3>
+
+          <pre><code>// Bad - No context
+&lt;button onClick={handleDelete}&gt;Delete&lt;/button&gt;
+&lt;a href="/learn-more"&gt;Click here&lt;/a&gt;
+
+// Good - Clear labels
+&lt;button onClick={handleDelete} aria-label="Delete product Apple iPhone"&gt;
+  Delete
+&lt;/button&gt;
+&lt;a href="/learn-more"&gt;Learn more about our accessibility features&lt;/a&gt;
+
+// Icon-only buttons need labels
+&lt;button aria-label="Close modal" onClick={close}&gt;
+  &lt;CloseIcon aria-hidden="true" /&gt;
+&lt;/button&gt;
+
+// What you should hear:
+// "Delete product Apple iPhone, button"
+// "Learn more about our accessibility features, link"
+// "Close modal, button"
+
+// Testing:
+// NVDA: Press B for buttons, K for links
+// VoiceOver: VO + Cmd + L for links
+// Verify: Each has clear, descriptive text</code></pre>
+
+          <h3>5. Dynamic Content and Live Regions</h3>
+
+          <pre><code>// Announcement component
+function Notification({ message, type }) {
+  return (
+    &lt;div
+      role={type === 'error' ? 'alert' : 'status'}
+      aria-live={type === 'error' ? 'assertive' : 'polite'}
+      aria-atomic="true"
+    &gt;
+      {message}
+    &lt;/div&gt;
+  );
+}
+
+// Testing dynamic updates
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;
+        Increment
+      &lt;/button&gt;
+      &lt;div role="status" aria-live="polite" aria-atomic="true"&gt;
+        Count: {count}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+// What to test:
+// 1. Click button
+// 2. Wait 1-2 seconds
+// 3. Verify new count is announced
+// 4. Check announcement doesn't interrupt other reading</code></pre>
+
+          <h2>React-Specific Testing Scenarios</h2>
+
+          <h3>Testing Modal Dialogs</h3>
+
+          <pre><code>function TestModal() {
+  // 1. Tab to "Open Modal" button
+  // 2. Verify: "Open modal, button"
+  // 3. Press Enter or Space
+  // 4. Verify: Focus moves to modal
+  // 5. Verify: Modal title is announced
+  // 6. Try to Tab - focus should stay in modal
+  // 7. Press Escape
+  // 8. Verify: Focus returns to trigger button
+  
+  return (
+    &lt;Modal
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      aria-labelledby="modal-title"
+    &gt;
+      &lt;h2 id="modal-title"&gt;Confirm Delete&lt;/h2&gt;
+      &lt;p&gt;Are you sure?&lt;/p&gt;
+      &lt;button onClick={handleConfirm}&gt;Yes, delete&lt;/button&gt;
+      &lt;button onClick={handleCancel}&gt;Cancel&lt;/button&gt;
+    &lt;/Modal&gt;
+  );
+}</code></pre>
+
+          <h3>Testing Accordions</h3>
+
+          <pre><code>function TestAccordion() {
+  // 1. Tab to accordion button
+  // 2. Verify: "Section title, button, collapsed"
+  // 3. Press Enter
+  // 4. Verify: "Section title, button, expanded"
+  // 5. Tab to next item
+  // 6. Verify: Content is read
+  
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;
+        &lt;button
+          aria-expanded={isOpen}
+          aria-controls="panel-1"
+        &gt;
+          Section Title
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div id="panel-1" hidden={!isOpen}&gt;
+        Content goes here
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h3>Testing Tabs</h3>
+
+          <pre><code>function TestTabs() {
+  // 1. Tab to first tab
+  // 2. Verify: "Tab 1, tab, 1 of 3, selected"
+  // 3. Press Right Arrow
+  // 4. Verify: "Tab 2, tab, 2 of 3"
+  // 5. Press Space or Enter
+  // 6. Verify: "Tab 2, tab, selected"
+  // 7. Tab to panel
+  // 8. Verify: Panel content is read
+  
+  return (
+    &lt;div&gt;
+      &lt;div role="tablist"&gt;
+        &lt;button
+          role="tab"
+          aria-selected={active === 0}
+          aria-controls="panel-1"
+        &gt;
+          Tab 1
+        &lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div role="tabpanel" id="panel-1"&gt;
+        Panel content
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>Common Issues and How to Fix Them</h2>
+
+          <h3>Issue 1: "Clickable" Announced for Everything</h3>
+
+          <pre><code>// Problem: Using divs with onClick
+&lt;div onClick={handleClick}&gt;Click me&lt;/div&gt;
+// Heard: "Click me, clickable" (vague)
+
+// Solution: Use semantic HTML
+&lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;
+// Heard: "Click me, button" (clear)</code></pre>
+
+          <h3>Issue 2: Icon Buttons with No Labels</h3>
+
+          <pre><code>// Problem
+&lt;button&gt;&lt;TrashIcon /&gt;&lt;/button&gt;
+// Heard: "Button" (unhelpful)
+
+// Solution
+&lt;button aria-label="Delete item"&gt;
+  &lt;TrashIcon aria-hidden="true" /&gt;
+&lt;/button&gt;
+// Heard: "Delete item, button"</code></pre>
+
+          <h3>Issue 3: Form Errors Not Announced</h3>
+
+          <pre><code>// Problem - Error shown visually only
+{error && &lt;div className="error"&gt;{error}&lt;/div&gt;}
+
+// Solution - Use role="alert"
+{error && &lt;div role="alert"&gt;{error}&lt;/div&gt;}
+// Announced immediately when appears</code></pre>
+
+          <h3>Issue 4: Loading States Not Announced</h3>
+
+          <pre><code>// Problem
+{isLoading && &lt;Spinner /&gt;}
+
+// Solution
+{isLoading && (
+  &lt;div role="status" aria-live="polite"&gt;
+    &lt;span className="sr-only"&gt;Loading...&lt;/span&gt;
+    &lt;Spinner aria-hidden="true" /&gt;
+  &lt;/div&gt;
+)}</code></pre>
+
+          <h2>Screen Reader Testing Checklist</h2>
+
+          <ul>
+            <li>✅ Navigate entire app using only screen reader</li>
+            <li>✅ Verify all images have alt text</li>
+            <li>✅ Check all buttons have descriptive labels</li>
+            <li>✅ Confirm form fields have labels</li>
+            <li>✅ Test error messages are announced</li>
+            <li>✅ Verify modals trap focus correctly</li>
+            <li>✅ Check headings follow proper hierarchy</li>
+            <li>✅ Test landmarks are present and labeled</li>
+            <li>✅ Confirm dynamic content is announced</li>
+            <li>✅ Verify skip links work</li>
+            <li>✅ Check focus order makes sense</li>
+            <li>✅ Test with both NVDA and VoiceOver</li>
+          </ul>
+
+          <h2>Debugging Tips</h2>
+
+          <pre><code>// 1. Use browser DevTools Accessibility tree
+// Chrome: DevTools > Elements > Accessibility tab
+
+// 2. Log ARIA attributes in React
+useEffect(() => {
+  const button = buttonRef.current;
+  console.log({
+    role: button.getAttribute('role'),
+    'aria-label': button.getAttribute('aria-label'),
+    'aria-expanded': button.getAttribute('aria-expanded'),
+  });
+}, []);
+
+// 3. Test one component at a time
+// Create isolated test page for complex components
+
+// 4. Record yourself testing
+// Listen back to catch issues you missed</code></pre>
+
+          <h2>Automated Testing to Complement Manual Testing</h2>
+
+          <pre><code>// Use React Testing Library with jest-axe
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
+
+test('component has no accessibility violations', async () => {
+  const { container } = render(&lt;MyComponent /&gt;);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+// Test screen reader announcements
+import { render, screen } from '@testing-library/react';
+
+test('error is announced', () => {
+  render(&lt;Form error="Invalid email" /&gt;);
+  const alert = screen.getByRole('alert');
+  expect(alert).toHaveTextContent('Invalid email');
+});</code></pre>
+
+          <h2>Resources for Learning More</h2>
+
+          <ul>
+            <li>
+              <strong>WebAIM Screen Reader Survey</strong> - User preferences
+              and behavior
+            </li>
+            <li><strong>NVDA User Guide</strong> - Complete documentation</li>
+            <li>
+              <strong>VoiceOver User Guide</strong> - Apple's official guide
+            </li>
+            <li>
+              <strong>Screen Reader Basics</strong> - Free course from Deque
+            </li>
+            <li><strong>A11ycasts</strong> - Video series on accessibility</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>Automated tools only catch 30-40% of accessibility issues</li>
+            <li>NVDA (Windows) and VoiceOver (Mac) are free and easy to use</li>
+            <li>Test with eyes closed to experience what users hear</li>
+            <li>Focus on headings, landmarks, forms, and dynamic content</li>
+            <li>
+              React's dynamic nature requires extra attention to announcements
+            </li>
+            <li>
+              Common issues: Missing labels, no error announcements, poor focus
+              management
+            </li>
+            <li>
+              Manual testing should complement, not replace, automated testing
+            </li>
+          </ul>
+
+          <p>
+            Screen reader testing might feel awkward at first, but it's the only
+            way to truly understand how accessible your React app is. Start with
+            15 minutes per week, test one component at a time, and gradually
+            build your skills. Your users with disabilities will thank you!
+          </p>
+
+          <blockquote>
+            💡 Pro tip: Join the "blind-users" channel in accessibility-focused
+            Slack communities. Ask real screen reader users to test your app and
+            provide feedback. Their insights are invaluable!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

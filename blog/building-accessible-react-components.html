@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Building Accessible React Components with TypeScript | A Beginner's Guide
+      (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Learn how to build accessible React components with TypeScript. Simple beginner-friendly guide covering ARIA attributes, keyboard navigation, focus management, and screen reader support with code examples."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="accessible react components, react accessibility, typescript accessibility, ARIA react, keyboard navigation react, screen reader react, react a11y, web accessibility tutorial, react accessible components"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://suprabhat-portfolio.netlify.app/blog/building-accessible-react-components.html"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Building Accessible React Components with TypeScript"
+    />
+    <meta
+      property="og:description"
+      content="Learn how to build accessible React components with TypeScript. Simple beginner-friendly guide with code examples."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/building-accessible-react-components.html"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Building Accessible React Components with TypeScript"
+    />
+    <meta
+      name="twitter:description"
+      content="Learn how to build accessible React components with TypeScript. Simple beginner-friendly guide with code examples."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-12">February 12, 2026</time>
+            <span class="blog-post-category">React</span>
+            <span>8 min read</span>
+          </div>
+          <h1>Building Accessible React Components with TypeScript</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Web accessibility isn't optional—it's essential. In this
+            beginner-friendly guide, you'll learn how to build accessible React
+            components using TypeScript. Whether you're new to accessibility or
+            React, this practical tutorial will help you create inclusive web
+            applications that everyone can use.
+          </p>
+
+          <h2>Why Accessibility Matters in React</h2>
+
+          <p>
+            Over 1 billion people worldwide live with some form of disability.
+            Making your React apps accessible means:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Wider audience</strong> - Your app works for everyone,
+              including people using screen readers or keyboard navigation
+            </li>
+            <li>
+              <strong>Better SEO</strong> - Search engines favor accessible
+              websites
+            </li>
+            <li>
+              <strong>Legal compliance</strong> - Many countries require web
+              accessibility (WCAG guidelines)
+            </li>
+            <li>
+              <strong>Improved UX</strong> - Accessible design benefits all
+              users
+            </li>
+          </ul>
+
+          <h2>Setting Up TypeScript for Accessible Components</h2>
+
+          <p>
+            TypeScript helps catch accessibility issues at compile time. Here's
+            how to type your accessible props:
+          </p>
+
+          <pre><code>// types.ts
+          import { AriaAttributes, HTMLAttributes } from 'react';
+
+// Extend HTML attributes with ARIA props
+interface AccessibleProps extends HTMLAttributes&lt;HTMLElement&gt;, AriaAttributes {
+  className?: string;
+}
+
+// Button with accessible props
+interface ButtonProps extends AccessibleProps {
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+}</code></pre>
+
+          <h2>Building an Accessible Button Component</h2>
+
+          <p>
+            Let's start with the most common component—a button. Here's how to
+            make it fully accessible:
+          </p>
+
+          <pre><code>// Button.tsx
+import React from 'react';
+
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+  ariaLabel?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const Button: React.FC&lt;ButtonProps&gt; = ({
+  children,
+  onClick,
+  variant = 'primary',
+  disabled = false,
+  ariaLabel,
+  type = 'button',
+  ...props
+}) => {
+  return (
+    &lt;button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      aria-disabled={disabled}
+      className={`btn btn--${variant} ${disabled ? 'btn--disabled' : ''}`}
+      {...props}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+};
+
+export default Button;
+
+// Usage
+&lt;Button onClick={handleSubmit} ariaLabel="Submit form"&gt;
+  Submit
+&lt;/Button&gt;</code></pre>
+
+          <h3>Key Accessibility Features:</h3>
+
+          <ul>
+            <li>
+              <strong>Semantic HTML</strong> - Using real
+              <code>&lt;button&gt;</code> instead of <code>&lt;div&gt;</code>
+            </li>
+            <li><strong>aria-label</strong> - Screen reader description</li>
+            <li><strong>aria-disabled</strong> - Announces disabled state</li>
+            <li>
+              <strong>type attribute</strong> - Prevents form submission bugs
+            </li>
+          </ul>
+
+          <h2>Creating an Accessible Modal Dialog</h2>
+
+          <p>
+            Modals require special attention for accessibility. Here's a
+            complete implementation:
+          </p>
+
+          <pre><code>// Modal.tsx
+import React, { useEffect, useRef } from 'react';
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+}
+
+const Modal: React.FC&lt;ModalProps&gt; = ({ isOpen, onClose, title, children }) => {
+  const modalRef = useRef&lt;HTMLDivElement&gt;(null);
+  const closeButtonRef = useRef&lt;HTMLButtonElement&gt;(null);
+
+  // Focus trap - keep focus inside modal
+  useEffect(() => {
+    if (isOpen) {
+      // Focus close button when modal opens
+      closeButtonRef.current?.focus();
+      
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [isOpen]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    &lt;div
+      className="modal-overlay"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    &gt;
+      &lt;div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        ref={modalRef}
+      &gt;
+        &lt;div className="modal-header"&gt;
+          &lt;h2 id="modal-title"&gt;{title}&lt;/h2&gt;
+          &lt;button
+            ref={closeButtonRef}
+            onClick={onClose}
+            aria-label="Close modal"
+            className="modal-close"
+          &gt;
+            ✕
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div className="modal-body"&gt;
+          {children}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Modal;</code></pre>
+
+          <h3>Accessibility Features Explained:</h3>
+
+          <ul>
+            <li>
+              <strong>role="dialog"</strong> - Tells screen readers this is a
+              dialog
+            </li>
+            <li>
+              <strong>aria-modal="true"</strong> - Indicates modal behavior
+            </li>
+            <li><strong>aria-labelledby</strong> - Links to the modal title</li>
+            <li>
+              <strong>Focus management</strong> - Automatically focuses close
+              button
+            </li>
+            <li>
+              <strong>Escape key</strong> - Standard keyboard shortcut to close
+            </li>
+            <li>
+              <strong>Body scroll lock</strong> - Prevents background scrolling
+            </li>
+          </ul>
+
+          <h2>Building an Accessible Form</h2>
+
+          <p>
+            Forms are crucial for accessibility. Here's how to create an input
+            component:
+          </p>
+
+          <pre><code>// Input.tsx
+import React, { useId } from 'react';
+
+interface InputProps {
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (value: string) => void;
+  error?: string;
+  required?: boolean;
+  placeholder?: string;
+  helpText?: string;
+}
+
+const Input: React.FC&lt;InputProps&gt; = ({
+  label,
+  type = 'text',
+  value,
+  onChange,
+  error,
+  required = false,
+  placeholder,
+  helpText,
+}) => {
+  const id = useId();
+  const errorId = `${id}-error`;
+  const helpId = `${id}-help`;
+
+  return (
+    &lt;div className="form-field"&gt;
+      &lt;label htmlFor={id} className="form-label"&gt;
+        {label}
+        {required && &lt;span aria-label="required"&gt; *&lt;/span&gt;}
+      &lt;/label&gt;
+      
+      {helpText && (
+        &lt;p id={helpId} className="form-help"&gt;
+          {helpText}
+        &lt;/p&gt;
+      )}
+      
+      &lt;input
+        id={id}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required={required}
+        aria-required={required}
+        aria-invalid={!!error}
+        aria-describedby={
+          error ? errorId : helpText ? helpId : undefined
+        }
+        className={`form-input ${error ? 'form-input--error' : ''}`}
+      /&gt;
+      
+      {error && (
+        &lt;p id={errorId} className="form-error" role="alert"&gt;
+          {error}
+        &lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+};
+
+export default Input;
+
+// Usage
+&lt;Input
+  label="Email Address"
+  type="email"
+  value={email}
+  onChange={setEmail}
+  required
+  helpText="We'll never share your email"
+  error={emailError}
+/&gt;</code></pre>
+
+          <h3>Form Accessibility Features:</h3>
+
+          <ul>
+            <li>
+              <strong>Unique IDs</strong> - Using <code>useId()</code> for
+              proper label association
+            </li>
+            <li><strong>aria-required</strong> - Announces required fields</li>
+            <li><strong>aria-invalid</strong> - Indicates validation errors</li>
+            <li>
+              <strong>aria-describedby</strong> - Links help text and errors
+            </li>
+            <li>
+              <strong>role="alert"</strong> - Screen readers announce errors
+              immediately
+            </li>
+          </ul>
+
+          <h2>Accessible Navigation with TypeScript</h2>
+
+          <p>
+            Navigation requires keyboard support and proper ARIA attributes:
+          </p>
+
+          <pre><code>// Navigation.tsx
+import React, { useState } from 'react';
+
+interface NavItem {
+  label: string;
+  href: string;
+  current?: boolean;
+}
+
+interface NavigationProps {
+  items: NavItem[];
+}
+
+const Navigation: React.FC&lt;NavigationProps&gt; = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent,
+    index: number
+  ) => {
+    const { key } = event;
+    
+    if (key === 'ArrowRight') {
+      event.preventDefault();
+      const nextIndex = (index + 1) % items.length;
+      setActiveIndex(nextIndex);
+      document.getElementById(`nav-item-${nextIndex}`)?.focus();
+    } else if (key === 'ArrowLeft') {
+      event.preventDefault();
+      const prevIndex = (index - 1 + items.length) % items.length;
+      setActiveIndex(prevIndex);
+      document.getElementById(`nav-item-${prevIndex}`)?.focus();
+    } else if (key === 'Home') {
+      event.preventDefault();
+      setActiveIndex(0);
+      document.getElementById('nav-item-0')?.focus();
+    } else if (key === 'End') {
+      event.preventDefault();
+      const lastIndex = items.length - 1;
+      setActiveIndex(lastIndex);
+      document.getElementById(`nav-item-${lastIndex}`)?.focus();
+    }
+  };
+
+  return (
+    &lt;nav aria-label="Main navigation"&gt;
+      &lt;ul role="menubar" className="nav-list"&gt;
+        {items.map((item, index) => (
+          &lt;li key={item.href} role="none"&gt;
+            &lt;a
+              id={`nav-item-${index}`}
+              href={item.href}
+              role="menuitem"
+              tabIndex={index === activeIndex ? 0 : -1}
+              aria-current={item.current ? 'page' : undefined}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              className="nav-link"
+            &gt;
+              {item.label}
+            &lt;/a&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  );
+};
+
+export default Navigation;</code></pre>
+
+          <h2>Common ARIA Attributes Explained</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Purpose</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>aria-label</code></td>
+                <td>Provides accessible name</td>
+                <td><code>aria-label="Close menu"</code></td>
+              </tr>
+              <tr>
+                <td><code>aria-labelledby</code></td>
+                <td>References another element for label</td>
+                <td><code>aria-labelledby="modal-title"</code></td>
+              </tr>
+              <tr>
+                <td><code>aria-describedby</code></td>
+                <td>References description text</td>
+                <td><code>aria-describedby="help-text"</code></td>
+              </tr>
+              <tr>
+                <td><code>aria-expanded</code></td>
+                <td>Indicates if element is expanded</td>
+                <td><code>aria-expanded="true"</code></td>
+              </tr>
+              <tr>
+                <td><code>aria-hidden</code></td>
+                <td>Hides from screen readers</td>
+                <td><code>aria-hidden="true"</code></td>
+              </tr>
+              <tr>
+                <td><code>aria-live</code></td>
+                <td>Announces dynamic content</td>
+                <td><code>aria-live="polite"</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Testing Your Accessible Components</h2>
+
+          <p>Here's how to test accessibility:</p>
+
+          <h3>1. Keyboard Testing</h3>
+
+          <ul>
+            <li>
+              <strong>Tab</strong> - Navigate through interactive elements
+            </li>
+            <li><strong>Shift + Tab</strong> - Navigate backwards</li>
+            <li><strong>Enter/Space</strong> - Activate buttons</li>
+            <li><strong>Escape</strong> - Close modals/dropdowns</li>
+            <li><strong>Arrow keys</strong> - Navigate lists/menus</li>
+          </ul>
+
+          <h3>2. Screen Reader Testing</h3>
+
+          <pre><code>// Install React Testing Library
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+
+// Button.test.tsx
+import { render, screen } from '@testing-library/react';
+import Button from './Button';
+
+describe('Button Accessibility', () => {
+  test('has accessible role', () => {
+    render(&lt;Button&gt;Click me&lt;/Button&gt;);
+    const button = screen.getByRole('button', { name: 'Click me' });
+    expect(button).toBeInTheDocument();
+  });
+
+  test('announces disabled state', () => {
+    render(&lt;Button disabled&gt;Submit&lt;/Button&gt;);
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-disabled', 'true');
+  });
+});</code></pre>
+
+          <h3>3. Automated Tools</h3>
+
+          <pre><code>// Install axe-core
+npm install --save-dev @axe-core/react
+
+// index.tsx (development only)
+if (process.env.NODE_ENV !== 'production') {
+  import('@axe-core/react').then(axe => {
+    axe.default(React, ReactDOM, 1000);
+  });
+}</code></pre>
+
+          <h2>Best Practices Checklist</h2>
+
+          <ul>
+            <li>
+              ✅ Use semantic HTML (<code>&lt;button&gt;</code>,
+              <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>)
+            </li>
+            <li>✅ Always provide text alternatives for images</li>
+            <li>✅ Ensure sufficient color contrast (4.5:1 minimum)</li>
+            <li>✅ Make all functionality keyboard accessible</li>
+            <li>✅ Provide visible focus indicators</li>
+            <li>✅ Use ARIA attributes when HTML semantics aren't enough</li>
+            <li>✅ Test with real screen readers (NVDA, VoiceOver)</li>
+            <li>✅ Don't rely on color alone to convey information</li>
+            <li>✅ Ensure forms have proper labels and error messages</li>
+            <li>✅ Implement skip links for navigation</li>
+          </ul>
+
+          <h2>Common Mistakes to Avoid</h2>
+
+          <h3>❌ Don't Use Divs as Buttons</h3>
+
+          <pre><code>// Bad
+&lt;div onClick={handleClick}&gt;Click me&lt;/div&gt;
+
+// Good
+&lt;button onClick={handleClick}&gt;Click me&lt;/button&gt;</code></pre>
+
+          <h3>❌ Don't Use Placeholder as Label</h3>
+
+          <pre><code>// Bad
+&lt;input placeholder="Enter your email" /&gt;
+
+// Good
+&lt;label htmlFor="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" placeholder="you@example.com" /&gt;</code></pre>
+
+          <h3>❌ Don't Forget Alt Text</h3>
+
+          <pre><code>// Bad
+&lt;img src="logo.png" /&gt;
+
+// Good
+&lt;img src="logo.png" alt="Company logo" /&gt;</code></pre>
+
+          <h2>Resources for Learning More</h2>
+
+          <ul>
+            <li>
+              <strong>WCAG Guidelines</strong> - Official accessibility
+              standards
+            </li>
+            <li>
+              <strong>React Aria</strong> - Accessible component library from
+              Adobe
+            </li>
+            <li><strong>Reach UI</strong> - Accessible React components</li>
+            <li>
+              <strong>axe DevTools</strong> - Browser extension for testing
+            </li>
+            <li><strong>WebAIM</strong> - Articles and testing tools</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>
+              Accessibility benefits everyone, not just users with disabilities
+            </li>
+            <li>TypeScript helps catch accessibility issues at compile time</li>
+            <li>Use semantic HTML before reaching for ARIA attributes</li>
+            <li>Test with keyboard navigation and screen readers</li>
+            <li>Focus management is critical for modals and dynamic content</li>
+            <li>Provide clear labels and error messages for forms</li>
+            <li>
+              Automated tools are helpful, but manual testing is essential
+            </li>
+          </ul>
+
+          <p>
+            Building accessible React components doesn't have to be complicated.
+            Start with semantic HTML, add ARIA attributes when needed, and
+            always test with real users. Your future users—and your SEO
+            rankings—will thank you!
+          </p>
+
+          <blockquote>
+            💡 Pro tip: Install a screen reader (NVDA for Windows, VoiceOver for
+            Mac) and navigate your components with it. This hands-on experience
+            is invaluable!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

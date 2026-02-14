@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSS Flexbox Tutorial for Beginners: A Complete Guide (2026)</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Learn CSS Flexbox from scratch with simple examples. This complete guide teaches you how to create responsive layouts using Flexbox. Perfect for beginners!"
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="css flexbox tutorial, flexbox guide, css layout, responsive design, flexbox for beginners, css flexbox examples, learn flexbox"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-10">February 10, 2026</time>
+            <span class="blog-post-category">CSS</span>
+            <span>6 min read</span>
+          </div>
+          <h1>CSS Flexbox Tutorial for Beginners: A Complete Guide</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            CSS Flexbox is one of the most powerful layout tools in modern web
+            development. If you've ever struggled with aligning elements or
+            creating responsive designs, Flexbox is here to help. In this
+            beginner-friendly guide, you'll learn everything you need to know to
+            start using Flexbox today.
+          </p>
+
+          <h2>What is CSS Flexbox?</h2>
+
+          <p>
+            Flexbox (Flexible Box Layout) is a CSS layout model that makes it
+            easy to design flexible and responsive layouts. Instead of using
+            floats or positioning, Flexbox lets you control how elements are
+            arranged, aligned, and distributed in a container.
+          </p>
+
+          <h3>Why Use Flexbox?</h3>
+
+          <ul>
+            <li>
+              <strong>Easy alignment</strong> - Center elements vertically and
+              horizontally with ease
+            </li>
+            <li>
+              <strong>Responsive design</strong> - Layouts adapt automatically
+              to different screen sizes
+            </li>
+            <li>
+              <strong>Simple syntax</strong> - Cleaner code compared to old CSS
+              techniques
+            </li>
+            <li>
+              <strong>Flexible ordering</strong> - Change element order without
+              touching HTML
+            </li>
+          </ul>
+
+          <h2>Getting Started with Flexbox</h2>
+
+          <p>
+            To use Flexbox, you need a <strong>flex container</strong> (parent
+            element) and <strong>flex items</strong> (child elements). Here's
+            the basic setup:
+          </p>
+
+          <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="container"&gt;
+  &lt;div class="item"&gt;Item 1&lt;/div&gt;
+  &lt;div class="item"&gt;Item 2&lt;/div&gt;
+  &lt;div class="item"&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS --&gt;
+.container {
+  display: flex;
+}</code></pre>
+
+          <p>
+            That's it! By adding <code>display: flex</code> to the container,
+            all child elements become flex items that you can easily control.
+          </p>
+
+          <h2>Essential Flexbox Properties</h2>
+
+          <h3>1. flex-direction</h3>
+
+          <p>Controls the direction of flex items:</p>
+
+          <pre><code>.container {
+  display: flex;
+  flex-direction: row; /* Default: left to right */
+}
+
+/* Other values */
+flex-direction: row-reverse; /* Right to left */
+flex-direction: column;      /* Top to bottom */
+flex-direction: column-reverse; /* Bottom to top */</code></pre>
+
+          <h3>2. justify-content</h3>
+
+          <p>Aligns items along the main axis (horizontally by default):</p>
+
+          <pre><code>.container {
+  display: flex;
+  justify-content: center; /* Center items */
+}
+
+/* Other values */
+justify-content: flex-start;    /* Align to start */
+justify-content: flex-end;      /* Align to end */
+justify-content: space-between; /* Equal space between */
+justify-content: space-around;  /* Equal space around */
+justify-content: space-evenly;  /* Perfect equal spacing */</code></pre>
+
+          <h3>3. align-items</h3>
+
+          <p>Aligns items along the cross axis (vertically by default):</p>
+
+          <pre><code>.container {
+  display: flex;
+  align-items: center; /* Center vertically */
+}
+
+/* Other values */
+align-items: flex-start; /* Align to top */
+align-items: flex-end;   /* Align to bottom */
+align-items: stretch;    /* Stretch to fill (default) */
+align-items: baseline;   /* Align text baselines */</code></pre>
+
+          <h3>4. flex-wrap</h3>
+
+          <p>Controls whether items wrap to new lines:</p>
+
+          <pre><code>.container {
+  display: flex;
+  flex-wrap: wrap; /* Items wrap to next line */
+}
+
+/* Other values */
+flex-wrap: nowrap;       /* All items on one line (default) */
+flex-wrap: wrap-reverse; /* Wrap in reverse order */</code></pre>
+
+          <h2>Practical Examples</h2>
+
+          <h3>Example 1: Center Everything Perfectly</h3>
+
+          <pre><code>.center-container {
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center */
+  height: 100vh;          /* Full viewport height */
+}
+
+&lt;div class="center-container"&gt;
+  &lt;h1&gt;Perfectly Centered!&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+
+          <h3>Example 2: Responsive Navigation Menu</h3>
+
+          <pre><code>.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+&lt;nav class="nav"&gt;
+  &lt;div class="logo"&gt;MyLogo&lt;/div&gt;
+  &lt;div class="nav-links"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;About&lt;/a&gt;
+    &lt;a href="#"&gt;Contact&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+
+          <h3>Example 3: Card Grid Layout</h3>
+
+          <pre><code>.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.card {
+  flex: 1 1 300px; /* Grow, shrink, base width */
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+&lt;div class="card-grid"&gt;
+  &lt;div class="card"&gt;Card 1&lt;/div&gt;
+  &lt;div class="card"&gt;Card 2&lt;/div&gt;
+  &lt;div class="card"&gt;Card 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+          <h2>Common Flexbox Mistakes to Avoid</h2>
+
+          <ul>
+            <li>
+              <strong>Forgetting <code>display: flex</code></strong> - The
+              container must have this property
+            </li>
+            <li>
+              <strong>Confusing axes</strong> - Remember:
+              <code>justify-content</code> is for the main axis,
+              <code>align-items</code> is for the cross axis
+            </li>
+            <li>
+              <strong>Not using <code>gap</code></strong> - Use
+              <code>gap</code> property instead of margins for spacing
+            </li>
+            <li>
+              <strong>Overthinking it</strong> - Start simple and add complexity
+              as needed
+            </li>
+          </ul>
+
+          <h2>Quick Reference Cheat Sheet</h2>
+
+          <pre><code>/* Container Properties */
+display: flex;
+flex-direction: row | column;
+justify-content: center | space-between | space-around;
+align-items: center | flex-start | flex-end;
+flex-wrap: wrap | nowrap;
+gap: 1rem; /* Spacing between items */
+
+/* Item Properties */
+flex: 1; /* Grow to fill space */
+align-self: center; /* Override container alignment */
+order: 2; /* Change visual order */</code></pre>
+
+          <h2>Next Steps</h2>
+
+          <p>Now that you understand Flexbox basics, practice by building:</p>
+
+          <ul>
+            <li>A responsive navigation bar</li>
+            <li>A photo gallery grid</li>
+            <li>A card-based layout</li>
+            <li>A footer with multiple columns</li>
+          </ul>
+
+          <p>
+            The best way to learn Flexbox is by doing. Start with simple layouts
+            and gradually increase complexity. Before you know it, Flexbox will
+            become your go-to tool for responsive design!
+          </p>
+
+          <blockquote>
+            Pro tip: Use browser DevTools to experiment with Flexbox properties
+            in real-time. Modern browsers have excellent Flexbox debugging
+            tools.
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

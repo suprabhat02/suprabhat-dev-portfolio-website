@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      JavaScript Array Methods Explained: map, filter, and reduce (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Master JavaScript array methods map, filter, and reduce with simple examples. Learn how to manipulate arrays effectively and write cleaner JavaScript code."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="javascript array methods, map filter reduce, javascript map, javascript filter, javascript reduce, array methods explained, learn javascript arrays"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-05">February 5, 2026</time>
+            <span class="blog-post-category">JavaScript</span>
+            <span>7 min read</span>
+          </div>
+          <h1>JavaScript Array Methods Explained: map, filter, and reduce</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            JavaScript array methods like <code>map()</code>,
+            <code>filter()</code>, and <code>reduce()</code> are essential tools
+            for every developer. They help you write cleaner, more readable code
+            while making data manipulation a breeze. In this guide, we'll
+            demystify these methods with simple, real-world examples.
+          </p>
+
+          <h2>Why Learn These Array Methods?</h2>
+
+          <p>
+            Before these methods, developers used <code>for</code> loops for
+            everything. While loops still have their place, modern array methods
+            offer:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Cleaner code</strong> - Less boilerplate, more readability
+            </li>
+            <li><strong>Fewer bugs</strong> - No manual index management</li>
+            <li>
+              <strong>Functional programming</strong> - Write more predictable
+              code
+            </li>
+            <li>
+              <strong>Chainability</strong> - Combine methods for powerful
+              operations
+            </li>
+          </ul>
+
+          <p>Let's explore each method with practical examples!</p>
+
+          <h2>Array.map() - Transform Every Item</h2>
+
+          <p>
+            <strong>What it does:</strong> Creates a new array by applying a
+            function to every element in the original array.
+          </p>
+
+          <p>
+            <strong>Use it when:</strong> You need to transform or modify each
+            item in an array.
+          </p>
+
+          <h3>Basic Example</h3>
+
+          <pre><code>// Double every number
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);
+
+console.log(doubled); // [2, 4, 6, 8, 10]
+console.log(numbers); // [1, 2, 3, 4, 5] (original unchanged!)</code></pre>
+
+          <p>
+            <strong>Key point:</strong> <code>map()</code> always returns a new
+            array with the same length as the original.
+          </p>
+
+          <h3>Real-World Example: User List</h3>
+
+          <pre><code>const users = [
+  { id: 1, firstName: 'John', lastName: 'Doe' },
+  { id: 2, firstName: 'Jane', lastName: 'Smith' },
+  { id: 3, firstName: 'Bob', lastName: 'Johnson' }
+];
+
+// Create full names
+const fullNames = users.map(user => `${user.firstName} ${user.lastName}`);
+
+console.log(fullNames);
+// ['John Doe', 'Jane Smith', 'Bob Johnson']
+
+// Or extract just IDs
+const userIds = users.map(user => user.id);
+console.log(userIds); // [1, 2, 3]</code></pre>
+
+          <h3>Map with Index</h3>
+
+          <pre><code>const fruits = ['apple', 'banana', 'orange'];
+
+const numbered = fruits.map((fruit, index) => {
+  return `${index + 1}. ${fruit}`;
+});
+
+console.log(numbered);
+// ['1. apple', '2. banana', '3. orange']</code></pre>
+
+          <h2>Array.filter() - Keep Only What You Need</h2>
+
+          <p>
+            <strong>What it does:</strong> Creates a new array containing only
+            elements that pass a test (return <code>true</code>).
+          </p>
+
+          <p>
+            <strong>Use it when:</strong> You want to select specific items from
+            an array based on a condition.
+          </p>
+
+          <h3>Basic Example</h3>
+
+          <pre><code>// Keep only even numbers
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+console.log(evenNumbers); // [2, 4, 6, 8, 10]</code></pre>
+
+          <h3>Real-World Example: Product Filter</h3>
+
+          <pre><code>const products = [
+  { name: 'Laptop', price: 999, inStock: true },
+  { name: 'Phone', price: 699, inStock: false },
+  { name: 'Tablet', price: 399, inStock: true },
+  { name: 'Monitor', price: 299, inStock: true },
+  { name: 'Keyboard', price: 79, inStock: false }
+];
+
+// Show only products in stock
+const availableProducts = products.filter(product => product.inStock);
+
+console.log(availableProducts);
+// [
+//   { name: 'Laptop', price: 999, inStock: true },
+//   { name: 'Tablet', price: 399, inStock: true },
+//   { name: 'Monitor', price: 299, inStock: true }
+// ]
+
+// Affordable products under $500
+const affordable = products.filter(product => product.price < 500);
+
+console.log(affordable);
+// [
+//   { name: 'Tablet', price: 399, inStock: true },
+//   { name: 'Monitor', price: 299, inStock: true },
+//   { name: 'Keyboard', price: 79, inStock: false }
+// ]</code></pre>
+
+          <h3>Filter with Multiple Conditions</h3>
+
+          <pre><code>// Products that are in stock AND affordable
+const affordableInStock = products.filter(product => {
+  return product.inStock && product.price < 500;
+});
+
+console.log(affordableInStock);
+// [
+//   { name: 'Tablet', price: 399, inStock: true },
+//   { name: 'Monitor', price: 299, inStock: true }
+// ]</code></pre>
+
+          <h2>Array.reduce() - Combine Into One Value</h2>
+
+          <p>
+            <strong>What it does:</strong> Reduces an array to a single value by
+            applying a function that accumulates results.
+          </p>
+
+          <p>
+            <strong>Use it when:</strong> You need to calculate a total, combine
+            values, or transform an array into a single result.
+          </p>
+
+          <h3>Basic Example: Sum Numbers</h3>
+
+          <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((total, num) => {
+  return total + num;
+}, 0); // 0 is the starting value
+
+console.log(sum); // 15
+
+// How it works step-by-step:
+// Step 1: total = 0, num = 1 → return 0 + 1 = 1
+// Step 2: total = 1, num = 2 → return 1 + 2 = 3
+// Step 3: total = 3, num = 3 → return 3 + 3 = 6
+// Step 4: total = 6, num = 4 → return 6 + 4 = 10
+// Step 5: total = 10, num = 5 → return 10 + 5 = 15</code></pre>
+
+          <h3>Real-World Example: Shopping Cart Total</h3>
+
+          <pre><code>const cart = [
+  { item: 'Laptop', price: 999, quantity: 1 },
+  { item: 'Mouse', price: 29, quantity: 2 },
+  { item: 'Keyboard', price: 79, quantity: 1 }
+];
+
+const total = cart.reduce((sum, item) => {
+  return sum + (item.price * item.quantity);
+}, 0);
+
+console.log(total); // 1136
+// 999 + (29 * 2) + 79 = 999 + 58 + 79 = 1136</code></pre>
+
+          <h3>Advanced Example: Count Occurrences</h3>
+
+          <pre><code>const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+
+const fruitCount = fruits.reduce((count, fruit) => {
+  count[fruit] = (count[fruit] || 0) + 1;
+  return count;
+}, {});
+
+console.log(fruitCount);
+// { apple: 3, banana: 2, orange: 1 }</code></pre>
+
+          <h3>Transform Array to Object</h3>
+
+          <pre><code>const users = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Jane' },
+  { id: 3, name: 'Bob' }
+];
+
+const usersById = users.reduce((obj, user) => {
+  obj[user.id] = user.name;
+  return obj;
+}, {});
+
+console.log(usersById);
+// { 1: 'John', 2: 'Jane', 3: 'Bob' }</code></pre>
+
+          <h2>Combining Methods (The Power Combo!) 🚀</h2>
+
+          <p>The real magic happens when you chain these methods together:</p>
+
+          <h3>Example: E-commerce Dashboard</h3>
+
+          <pre><code>const orders = [
+  { id: 1, status: 'completed', total: 150 },
+  { id: 2, status: 'pending', total: 89 },
+  { id: 3, status: 'completed', total: 200 },
+  { id: 4, status: 'cancelled', total: 50 },
+  { id: 5, status: 'completed', total: 175 }
+];
+
+// Calculate total revenue from completed orders
+const completedRevenue = orders
+  .filter(order => order.status === 'completed')  // Keep only completed
+  .map(order => order.total)                       // Extract totals
+  .reduce((sum, total) => sum + total, 0);        // Sum them up
+
+console.log(completedRevenue); // 525</code></pre>
+
+          <h3>Example: User Analytics</h3>
+
+          <pre><code>const users = [
+  { name: 'John', age: 25, active: true },
+  { name: 'Jane', age: 30, active: true },
+  { name: 'Bob', age: 35, active: false },
+  { name: 'Alice', age: 28, active: true }
+];
+
+// Get average age of active users
+const activeUsers = users.filter(user => user.active);
+const totalAge = activeUsers.reduce((sum, user) => sum + user.age, 0);
+const averageAge = totalAge / activeUsers.length;
+
+console.log(averageAge); // 27.67
+
+// Or chain it all together:
+const avgAge = users
+  .filter(user => user.active)
+  .reduce((sum, user, index, array) => {
+    sum += user.age;
+    return index === array.length - 1 ? sum / array.length : sum;
+  }, 0);
+
+console.log(avgAge); // 27.67</code></pre>
+
+          <h2>Common Patterns and Tips</h2>
+
+          <h3>1. Default Values in Reduce</h3>
+
+          <pre><code>// Always provide an initial value to avoid errors with empty arrays
+const emptyArray = [];
+
+// ❌ Can cause errors
+const badSum = emptyArray.reduce((a, b) => a + b);
+
+// ✅ Safe with initial value
+const goodSum = emptyArray.reduce((a, b) => a + b, 0);
+console.log(goodSum); // 0</code></pre>
+
+          <h3>2. Arrow Function Shortcuts</h3>
+
+          <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// Long form
+const doubled = numbers.map(num => {
+  return num * 2;
+});
+
+// Short form (implicit return)
+const doubled2 = numbers.map(num => num * 2);
+
+// Both produce the same result: [2, 4, 6, 8, 10]</code></pre>
+
+          <h3>3. When NOT to Use These Methods</h3>
+
+          <ul>
+            <li>
+              <strong>Breaking early:</strong> If you need to stop the loop
+              early, use a <code>for</code> loop instead
+            </li>
+            <li>
+              <strong>Async operations:</strong> These methods don't work well
+              with <code>async/await</code> (use <code>for...of</code> instead)
+            </li>
+            <li>
+              <strong>Mutating arrays:</strong> If you need to modify the
+              original array, consider <code>forEach()</code> or a traditional
+              loop
+            </li>
+          </ul>
+
+          <h2>Quick Reference Cheat Sheet</h2>
+
+          <pre><code>// MAP - Transform each item
+const newArray = array.map(item => transformation);
+
+// FILTER - Keep items that pass a test
+const filtered = array.filter(item => condition);
+
+// REDUCE - Combine into single value
+const result = array.reduce((accumulator, item) => {
+  return newAccumulator;
+}, initialValue);
+
+// CHAINING - Combine methods
+const result = array
+  .filter(item => condition)
+  .map(item => transformation)
+  .reduce((acc, item) => acc + item, 0);</code></pre>
+
+          <h2>Practice Exercises</h2>
+
+          <p>Try these challenges to test your understanding:</p>
+
+          <ol>
+            <li>
+              Given an array of numbers, return the sum of all even numbers
+            </li>
+            <li>Convert an array of Celsius temperatures to Fahrenheit</li>
+            <li>Find the most expensive product from an array of products</li>
+            <li>Group users by age range (18-25, 26-35, 36+)</li>
+          </ol>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>
+              <strong>map()</strong> transforms every element → new array (same
+              length)
+            </li>
+            <li>
+              <strong>filter()</strong> selects elements → new array (same or
+              shorter)
+            </li>
+            <li><strong>reduce()</strong> combines elements → single value</li>
+            <li>
+              All three methods create new arrays/values (don't mutate
+              originals)
+            </li>
+            <li>Chain methods together for powerful data transformations</li>
+            <li>
+              Always consider readability - sometimes a simple loop is better
+            </li>
+          </ul>
+
+          <p>
+            These three methods will become your go-to tools for array
+            manipulation. Practice with real-world data, and soon you'll be
+            writing cleaner, more expressive JavaScript code!
+          </p>
+
+          <blockquote>
+            Pro tip: Open your browser console and practice these methods with
+            your own data. Hands-on experience is the best way to learn!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to Center a Div in CSS: 5 Easy Methods That Work (2026)</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Learn 5 simple ways to center a div in CSS. From Flexbox to CSS Grid, discover the easiest methods to center elements horizontally and vertically."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="how to center a div, css center div, center div horizontally, center div vertically, css centering, flexbox center, grid center"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-08">February 8, 2026</time>
+            <span class="blog-post-category">CSS</span>
+            <span>5 min read</span>
+          </div>
+          <h1>How to Center a Div in CSS: 5 Easy Methods That Work</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Centering a div in CSS is one of the most common challenges for
+            beginners. Whether you need to center something horizontally,
+            vertically, or both, this guide covers 5 reliable methods that work
+            in modern browsers. Let's dive in!
+          </p>
+
+          <h2>Why is Centering a Div So Tricky?</h2>
+
+          <p>
+            CSS was originally designed for documents, not app-like layouts.
+            Over time, we've gained better tools like Flexbox and Grid that make
+            centering much easier. The right method depends on your specific
+            situation, but these 5 techniques will cover almost every use case.
+          </p>
+
+          <h2>Method 1: Flexbox (The Modern Way) ⭐</h2>
+
+          <p>
+            <strong>Best for:</strong> Most centering needs. Simple, reliable,
+            and widely supported.
+          </p>
+
+          <pre><code>/* HTML */
+&lt;div class="container"&gt;
+  &lt;div class="centered"&gt;I'm centered!&lt;/div&gt;
+&lt;/div&gt;
+
+/* CSS */
+.container {
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center;     /* Vertical center */
+  height: 100vh;          /* Full viewport height */
+}
+
+.centered {
+  width: 300px;
+  padding: 2rem;
+  background: #f0f0f0;
+}</code></pre>
+
+          <p>
+            <strong>Why it works:</strong> Flexbox gives you precise control
+            over alignment. <code>justify-content</code> centers horizontally,
+            and <code>align-items</code> centers vertically.
+          </p>
+
+          <p>
+            <strong>Pro tip:</strong> This is the recommended method for most
+            modern projects!
+          </p>
+
+          <h2>Method 2: CSS Grid (The Flexible Way)</h2>
+
+          <p>
+            <strong>Best for:</strong> Complex layouts where you're already
+            using Grid, or when you want even more flexibility.
+          </p>
+
+          <pre><code>/* CSS */
+.container {
+  display: grid;
+  place-items: center; /* Centers both horizontally and vertically */
+  height: 100vh;
+}
+
+/* Alternative using individual properties */
+.container-alt {
+  display: grid;
+  justify-items: center; /* Horizontal */
+  align-items: center;   /* Vertical */
+  height: 100vh;
+}</code></pre>
+
+          <p>
+            <strong>Why it works:</strong> Grid's
+            <code>place-items</code> property is shorthand for centering. It's
+            incredibly clean and concise.
+          </p>
+
+          <h2>
+            Method 3: Position Absolute with Transform (The Classic Trick)
+          </h2>
+
+          <p>
+            <strong>Best for:</strong> Centering elements over other content,
+            like modals or popups.
+          </p>
+
+          <pre><code>/* CSS */
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Shifts back by half its size */
+  width: 300px;
+  padding: 2rem;
+}</code></pre>
+
+          <p>
+            <strong>Why it works:</strong> <code>top: 50%</code> and
+            <code>left: 50%</code> position the element's top-left corner at the
+            center. <code>transform: translate(-50%, -50%)</code> shifts it back
+            by half its width and height, perfectly centering it.
+          </p>
+
+          <h2>Method 4: Margin Auto (For Horizontal Centering)</h2>
+
+          <p>
+            <strong>Best for:</strong> Horizontally centering block elements
+            with a fixed width.
+          </p>
+
+          <pre><code>/* CSS */
+.centered {
+  width: 600px;
+  margin: 0 auto; /* Top/bottom: 0, Left/right: auto */
+  padding: 2rem;
+}
+
+/* For complete centering with flexbox parent */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.centered {
+  width: 600px;
+  margin: auto; /* Centers in all directions within flex container */
+}</code></pre>
+
+          <p>
+            <strong>Why it works:</strong> When you set left and right margins
+            to <code>auto</code>, the browser distributes the remaining space
+            equally on both sides. Inside a flex container,
+            <code>margin: auto</code> works for vertical centering too!
+          </p>
+
+          <h2>Method 5: Text-Align for Inline Elements</h2>
+
+          <p>
+            <strong>Best for:</strong> Centering text or inline/inline-block
+            elements.
+          </p>
+
+          <pre><code>/* CSS */
+.container {
+  text-align: center; /* Centers inline content */
+  padding: 2rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #0066cc;
+  color: white;
+}</code></pre>
+
+          <p>
+            <strong>Why it works:</strong>
+            <code>text-align: center</code> centers inline and inline-block
+            elements within their container.
+          </p>
+
+          <h2>Quick Decision Guide</h2>
+
+          <p>Not sure which method to use? Here's a simple decision tree:</p>
+
+          <ul>
+            <li>
+              <strong>Need both horizontal and vertical centering?</strong> →
+              Use Flexbox (Method 1) or Grid (Method 2)
+            </li>
+            <li>
+              <strong>Centering a modal or overlay?</strong> → Use Position
+              Absolute (Method 3)
+            </li>
+            <li>
+              <strong>Only horizontal centering for a block element?</strong> →
+              Use Margin Auto (Method 4)
+            </li>
+            <li>
+              <strong>Centering text or inline elements?</strong> → Use
+              Text-Align (Method 5)
+            </li>
+          </ul>
+
+          <h2>Common Centering Mistakes</h2>
+
+          <h3>Mistake 1: Forgetting Container Height</h3>
+
+          <pre><code>/* ❌ Won't work - no height defined */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ✅ Works - height is defined */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* or height: 500px */
+}</code></pre>
+
+          <p>For vertical centering, the container needs a defined height!</p>
+
+          <h3>Mistake 2: Using Fixed Positioning Without Understanding</h3>
+
+          <pre><code>/* ❌ May cause issues */
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* Forgot transform! Will be off-center */
+}
+
+/* ✅ Correct */
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+          <h3>Mistake 3: Mixing Techniques Unnecessarily</h3>
+
+          <pre><code>/* ❌ Overly complex */
+.container {
+  display: flex;
+  position: relative;
+}
+.centered {
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  /* Too many techniques! */
+}
+
+/* ✅ Keep it simple */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+
+          <h2>Real-World Examples</h2>
+
+          <h3>Example 1: Centered Login Form</h3>
+
+          <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="login-page"&gt;
+  &lt;div class="login-form"&gt;
+    &lt;h2&gt;Welcome Back&lt;/h2&gt;
+    &lt;input type="email" placeholder="Email"&gt;
+    &lt;input type="password" placeholder="Password"&gt;
+    &lt;button&gt;Login&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS --&gt;
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-form {
+  background: white;
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+}</code></pre>
+
+          <h3>Example 2: Centered Hero Content</h3>
+
+          <pre><code>&lt;!-- HTML --&gt;
+&lt;section class="hero"&gt;
+  &lt;div class="hero-content"&gt;
+    &lt;h1&gt;Welcome to Our Website&lt;/h1&gt;
+    &lt;p&gt;Discover amazing content&lt;/p&gt;
+    &lt;button&gt;Get Started&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- CSS --&gt;
+.hero {
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+  background: url('hero-bg.jpg') center/cover;
+}
+
+.hero-content {
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  padding: 2rem;
+}</code></pre>
+
+          <h2>Browser Compatibility</h2>
+
+          <ul>
+            <li>
+              <strong>Flexbox (Method 1):</strong> Supported in all modern
+              browsers (IE 11+)
+            </li>
+            <li>
+              <strong>Grid (Method 2):</strong> All modern browsers (IE 10+ with
+              prefixes)
+            </li>
+            <li>
+              <strong>Transform (Method 3):</strong> All browsers including IE
+              9+
+            </li>
+            <li><strong>Margin Auto (Method 4):</strong> Works everywhere</li>
+            <li><strong>Text-Align (Method 5):</strong> Universal support</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>
+              Flexbox is the best modern solution for most centering needs
+            </li>
+            <li>
+              CSS Grid offers an even cleaner syntax with
+              <code>place-items: center</code>
+            </li>
+            <li>
+              Position absolute + transform is perfect for overlays and modals
+            </li>
+            <li>
+              Always ensure your container has a defined height for vertical
+              centering
+            </li>
+            <li>Choose the simplest method that works for your use case</li>
+          </ul>
+
+          <p>
+            Now you have 5 reliable methods to center a div in CSS! Practice
+            these techniques, and soon centering will become second nature.
+            Happy coding!
+          </p>
+
+          <blockquote>
+            Want to test these methods? Open your browser's DevTools and
+            experiment with the properties in real-time!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

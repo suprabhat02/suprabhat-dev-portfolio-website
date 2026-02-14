@@ -55,68 +55,87 @@
   const themes = ["light", "dark", "system"];
   const accents = ["orange", "neon"];
   let fadeTimer = 0;
-  function runFade() {
-    const prefersReduced = globalThis.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    )?.matches;
-    if (prefersReduced) return;
-    if (fadeTimer) globalThis.clearTimeout(fadeTimer);
-    root.dataset.themeFade = "1";
-    globalThis.requestAnimationFrame(() => {
-      root.dataset.themeFade = "2";
-      fadeTimer = globalThis.setTimeout(() => {
-        delete root.dataset.themeFade;
-        fadeTimer = 0;
-      }, 220);
-    });
-  }
-  function getStoredTheme() {
-    return localStorage.getItem(storageKey) || "system";
-  }
-  function setTheme(theme) {
-    if (!themes.includes(theme)) return;
-    if (root.dataset.theme === theme) return;
-    root.dataset.theme = theme;
-    document.querySelectorAll("[data-theme-option]").forEach((btn) => {
-      btn.setAttribute(
-        "aria-pressed",
-        btn.getAttribute("data-theme-option") === theme ? "true" : "false",
-      );
-    });
-    localStorage.setItem(storageKey, theme);
-    runFade();
-  }
-  function getStoredAccent() {
-    return (
-      localStorage.getItem(accentStorageKey) || root.dataset.accent || "orange"
-    );
-  }
-  function setAccent(accent) {
-    if (!accents.includes(accent)) return;
-    if (root.dataset.accent === accent) return;
-    root.dataset.accent = accent;
-    document.querySelectorAll("[data-accent-option]").forEach((btn) => {
-      btn.setAttribute(
-        "aria-pressed",
-        btn.getAttribute("data-accent-option") === accent ? "true" : "false",
-      );
-    });
-    localStorage.setItem(accentStorageKey, accent);
-    runFade();
-  }
-  setTheme(getStoredTheme());
-  setAccent(getStoredAccent());
-  document.addEventListener("click", (event) => {
-    const themeBtn = event.target.closest("[data-theme-option]");
-    if (themeBtn) {
-      setTheme(themeBtn.getAttribute("data-theme-option"));
-      return;
+
+  // Export for component loader
+  window.initThemeSwitcher = function initThemeSwitcher() {
+    function runFade() {
+      const prefersReduced = globalThis.matchMedia?.(
+        "(prefers-reduced-motion: reduce)",
+      )?.matches;
+      if (prefersReduced) return;
+      if (fadeTimer) globalThis.clearTimeout(fadeTimer);
+      root.dataset.themeFade = "1";
+      globalThis.requestAnimationFrame(() => {
+        root.dataset.themeFade = "2";
+        fadeTimer = globalThis.setTimeout(() => {
+          delete root.dataset.themeFade;
+          fadeTimer = 0;
+        }, 220);
+      });
     }
-    const accentBtn = event.target.closest("[data-accent-option]");
-    if (accentBtn) {
-      setAccent(accentBtn.getAttribute("data-accent-option"));
+    function getStoredTheme() {
+      return localStorage.getItem(storageKey) || "system";
     }
-  });
+    function setTheme(theme) {
+      if (!themes.includes(theme)) return;
+      if (root.dataset.theme === theme) return;
+      root.dataset.theme = theme;
+      document.querySelectorAll("[data-theme-option]").forEach((btn) => {
+        btn.setAttribute(
+          "aria-pressed",
+          btn.getAttribute("data-theme-option") === theme ? "true" : "false",
+        );
+      });
+      localStorage.setItem(storageKey, theme);
+      runFade();
+    }
+    function getStoredAccent() {
+      return (
+        localStorage.getItem(accentStorageKey) ||
+        root.dataset.accent ||
+        "orange"
+      );
+    }
+    function setAccent(accent) {
+      if (!accents.includes(accent)) return;
+      if (root.dataset.accent === accent) return;
+      root.dataset.accent = accent;
+      document.querySelectorAll("[data-accent-option]").forEach((btn) => {
+        btn.setAttribute(
+          "aria-pressed",
+          btn.getAttribute("data-accent-option") === accent ? "true" : "false",
+        );
+      });
+      localStorage.setItem(accentStorageKey, accent);
+      runFade();
+    }
+    setTheme(getStoredTheme());
+    setAccent(getStoredAccent());
+    document.addEventListener("click", (event) => {
+      const themeBtn = event.target.closest("[data-theme-option]");
+      if (themeBtn) {
+        setTheme(themeBtn.getAttribute("data-theme-option"));
+        return;
+      }
+      const accentBtn = event.target.closest("[data-accent-option]");
+      if (accentBtn) {
+        setAccent(accentBtn.getAttribute("data-accent-option"));
+      }
+    });
+  };
+
+  // Auto-initialize if theme buttons exist on page load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      if (document.querySelector("[data-theme-option]")) {
+        window.initThemeSwitcher();
+      }
+    });
+  } else {
+    if (document.querySelector("[data-theme-option]")) {
+      window.initThemeSwitcher();
+    }
+  }
 })();
 (function () {
   const form = document.querySelector("[data-contact-form]");
@@ -159,18 +178,18 @@
     }
   });
 })();
-function updateCurrentYear() {
+window.updateCurrentYear = function updateCurrentYear() {
   const yearEl = document.getElementById("currentyear");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-}
-function setHeaderOffsetCssVar() {
+};
+window.setHeaderOffsetCssVar = function setHeaderOffsetCssVar() {
   const header = document.querySelector(".site-header");
   if (!header) return 0;
   const height = Math.ceil(header.getBoundingClientRect().height);
   document.documentElement.style.setProperty("--header-offset", `${height}px`);
   return height;
-}
-function initLoader() {
+};
+window.initLoader = function initLoader() {
   const browser = globalThis;
   const hide = () => {
     document.documentElement.dataset.appLoaded = "true";
@@ -188,19 +207,62 @@ function initLoader() {
     },
     { once: true },
   );
-}
-function initActiveNav() {
+};
+window.initActiveNav = function initActiveNav() {
   const browser = globalThis;
+  const normalizePath = (path) =>
+    path.endsWith("/") ? `${path}index.html` : path;
+  const isSamePage = (url) =>
+    normalizePath(url.pathname) === normalizePath(browser.location.pathname);
+  const isHomePage =
+    normalizePath(browser.location.pathname) === normalizePath("/index.html");
+  const isBlogPage =
+    browser.location.pathname.includes("/blog/") ||
+    normalizePath(browser.location.pathname) === normalizePath("/blog.html");
+  const adjustHashLinksForPage = () => {
+    const basePath = browser.location.pathname.includes("/blog/")
+      ? "../"
+      : "./";
+    const indexPrefix = `${basePath}index.html`;
+    document
+      .querySelectorAll('.site-nav a[href^="#"], .mobile-menu-link[href^="#"]')
+      .forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href === "#") return;
+        link.setAttribute("href", isHomePage ? href : `${indexPrefix}${href}`);
+      });
+  };
+  const setBlogActive = () => {
+    const blogLink = document.querySelector(
+      '.site-nav a[href*="blog.html"], .site-nav a[href*="/blog/"]',
+    );
+    if (blogLink && isBlogPage) {
+      blogLink.setAttribute("aria-current", "page");
+    }
+  };
+  const getHashId = (href) => {
+    if (!href) return null;
+    try {
+      const url = new URL(href, browser.location.href);
+      if (!isSamePage(url) || !url.hash) return null;
+      return decodeURIComponent(url.hash.slice(1));
+    } catch {
+      if (!href.startsWith("#")) return null;
+      return decodeURIComponent(href.slice(1));
+    }
+  };
+  adjustHashLinksForPage();
+  setBlogActive();
   const navLinks = Array.from(
-    document.querySelectorAll('.site-nav a[href^="#"]'),
+    document.querySelectorAll('.site-nav a[href*="#"]'),
   );
   if (navLinks.length === 0) return;
   const idToLink = new Map();
   const sections = [];
   for (const link of navLinks) {
     const href = link.getAttribute("href");
-    if (!href || href === "#") continue;
-    const id = decodeURIComponent(href.slice(1));
+    const id = getHashId(href);
+    if (!id) continue;
     const section = document.getElementById(id);
     if (!section) continue;
     idToLink.set(id, link);
@@ -229,7 +291,7 @@ function initActiveNav() {
   const setPending = (id) => {
     pendingId = id;
     pendingUntil = Date.now() + 4000;
-    setHeaderOffsetCssVar();
+    window.setHeaderOffsetCssVar();
     setActive(id);
     schedulePick();
   };
@@ -275,7 +337,7 @@ function initActiveNav() {
   if (fonts && typeof fonts.ready?.then === "function") {
     fonts.ready
       .then(() => {
-        setHeaderOffsetCssVar();
+        window.setHeaderOffsetCssVar();
         schedulePick();
       })
       .catch(() => {});
@@ -283,7 +345,7 @@ function initActiveNav() {
   browser.addEventListener(
     "resize",
     () => {
-      setHeaderOffsetCssVar();
+      window.setHeaderOffsetCssVar();
       schedulePick();
     },
     { passive: true },
@@ -320,14 +382,132 @@ function initActiveNav() {
       { passive: true },
     );
   }
-}
-document.addEventListener("DOMContentLoaded", () => {
-  updateCurrentYear();
-  setHeaderOffsetCssVar();
-  initLoader();
-  initActiveNav();
-  initFormValidation();
-});
+};
+window.initMobileMenu = function initMobileMenu() {
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+  const mobileMenuOverlay = document.querySelector(".mobile-menu-overlay");
+  const mobileMenuClose = document.querySelector(".mobile-menu-close");
+  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+  const body = document.body;
+  const normalizePath = (path) =>
+    path.endsWith("/") ? `${path}index.html` : path;
+  const isSamePage = (url) =>
+    normalizePath(url.pathname) === normalizePath(window.location.pathname);
+  const getSamePageHash = (href) => {
+    if (!href) return null;
+    try {
+      const url = new URL(href, window.location.href);
+      if (!isSamePage(url) || !url.hash) return null;
+      return url.hash;
+    } catch {
+      if (!href.startsWith("#")) return null;
+      return href;
+    }
+  };
+
+  if (!mobileMenuBtn || !mobileMenuOverlay) return;
+
+  let isOpen = false;
+
+  function openMenu() {
+    isOpen = true;
+    mobileMenuBtn.setAttribute("aria-expanded", "true");
+    mobileMenuOverlay.setAttribute("aria-hidden", "false");
+    body.style.overflow = "hidden";
+    updateActiveLink();
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    mobileMenuBtn.setAttribute("aria-expanded", "false");
+    mobileMenuOverlay.setAttribute("aria-hidden", "true");
+    body.style.overflow = "";
+  }
+
+  function updateActiveLink() {
+    const currentSection = document.querySelector(
+      '.site-nav a[aria-current="page"]',
+    );
+    if (!currentSection) return;
+
+    const currentHref = currentSection.getAttribute("href");
+    mobileMenuLinks.forEach((link) => {
+      if (link.getAttribute("href") === currentHref) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  mobileMenuBtn.addEventListener("click", () => {
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close button in mobile menu
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener("click", closeMenu);
+  }
+
+  mobileMenuOverlay.addEventListener("click", (e) => {
+    if (e.target === mobileMenuOverlay) {
+      closeMenu();
+    }
+  });
+
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      const samePageHash = getSamePageHash(href);
+
+      // If it's not a same-page hash, let it navigate normally
+      if (!samePageHash) {
+        return;
+      }
+
+      e.preventDefault();
+      closeMenu();
+
+      // Smooth scroll to section
+      const targetId = samePageHash.slice(1);
+      const targetSection = document.getElementById(targetId);
+
+      if (targetSection) {
+        setTimeout(() => {
+          targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          // Update URL hash
+          if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, samePageHash);
+          } else {
+            window.location.hash = samePageHash;
+          }
+        }, 100);
+      }
+    });
+  });
+
+  // Close menu on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) {
+      closeMenu();
+    }
+  });
+
+  // Update active link when scrolling
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (isOpen) {
+        updateActiveLink();
+      }
+    },
+    { passive: true },
+  );
+};
 (function () {
   const emailSenderId = "service_default";
   const templateId = "template_default";
@@ -472,7 +652,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 })();
-(function () {
+
+// Back-to-top initialization - export for component loader
+window.initBackToTop = function initBackToTop() {
   const backToTopBtn = document.getElementById("back-to-top-btn");
   if (!backToTopBtn) return;
   function handleScroll() {
@@ -490,4 +672,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
-})();
+};

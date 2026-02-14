@@ -3,11 +3,9 @@ Allow: /
 Allow: /assets/
 Allow: /scripts/
 Allow: /styles/
-Disallow: 
-Disallow: /*.js$
-Disallow: /*.css$
+Disallow:
 
-Sitemap: https://suprabhat.dev/sitemap.xml
+Sitemap: https://suprabhat-portfolio.netlify.app/sitemap.xml
 
 User-agent: AdsBot-Google
 Allow: /

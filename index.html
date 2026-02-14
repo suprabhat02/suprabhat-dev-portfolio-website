@@ -84,9 +84,20 @@
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://api.emailjs.com" crossorigin />
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
-      rel="stylesheet"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Critical Images -->
     <link
@@ -188,10 +199,68 @@
           "GraphQL",
           "jQuery",
           "Accessibility",
-          "Responsive Web Design"
-          "Anthropic AI"
-          "Claude AI"
+          "Responsive Web Design",
+          "Anthropic AI",
+          "Claude AI",
           "Storybook"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What technologies do you specialize in?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I specialize in modern front-end technologies including React, Next.js, TypeScript, Redux Toolkit, React Query, Tailwind CSS, and web accessibility standards. I also work with design systems and responsive web design."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you focus on web performance and accessibility?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, web performance and accessibility are core priorities. I optimize for Core Web Vitals, implement lazy loading, optimize images, ensure WCAG compliance, and build keyboard-navigable interfaces."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's your experience with design systems?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I have extensive experience building scalable design systems using modern component libraries and CSS methodologies. I focus on consistency, reusability, and maintainability."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://suprabhat-portfolio.netlify.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About",
+            "item": "https://suprabhat-portfolio.netlify.app/#about"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Blog",
+            "item": "https://suprabhat-portfolio.netlify.app/blog.html"
+          }
         ]
       }
     </script>
@@ -215,20 +284,24 @@
       </style>
     </noscript>
 
+    <!-- Header component placeholder -->
     <header class="site-header">
       <div class="container header-content">
-        <a class="logo" href="#top" aria-label="Go to top">Suprabhat</a>
+        <a class="logo" href="index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
         <nav class="site-nav" aria-label="Primary">
           <ul class="nav-list">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#tools">Tools</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#tools">Tools</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
           </ul>
         </nav>
-        <div class="header-controls" aria-label="Appearance controls">
-          <fieldset class="segmented">
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
             <legend class="sr-only">Theme</legend>
             <button
               class="segmented__btn"
@@ -258,7 +331,6 @@
                 ></path>
               </svg>
             </button>
-
             <button
               class="segmented__btn"
               type="button"
@@ -284,7 +356,6 @@
                 />
               </svg>
             </button>
-
             <button
               class="segmented__btn"
               type="button"
@@ -303,38 +374,73 @@
               </svg>
             </button>
           </fieldset>
-
-          <fieldset class="accent-switch">
-            <legend class="sr-only">Accent palette</legend>
-            <button
-              class="accent-switch__btn"
-              type="button"
-              data-accent-option="orange"
-              aria-label="Accent: Orange"
-              aria-pressed="false"
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
             >
-              <span
-                class="accent-swatch accent-swatch--orange"
-                aria-hidden="true"
-              ></span>
-            </button>
-            <span class="accent-switch__label">Accent</span>
-            <button
-              class="accent-switch__btn"
-              type="button"
-              data-accent-option="neon"
-              aria-label="Accent: Neon"
-              aria-pressed="false"
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              /></svg
+            ><svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
             >
-              <span
-                class="accent-swatch accent-swatch--neon"
-                aria-hidden="true"
-              ></span>
-            </button>
-          </fieldset>
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </header>
+
+    <!-- Mobile menu component placeholder -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li><a href="index.html#about" class="mobile-menu-link">About</a></li>
+          <li>
+            <a href="index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li><a href="index.html#tools" class="mobile-menu-link">Tools</a></li>
+          <li><a href="blog.html" class="mobile-menu-link">Blog</a></li>
+          <li>
+            <a href="index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
     <main id="main">
       <section class="hero section" id="top" aria-labelledby="hero-title">
@@ -343,14 +449,13 @@
             <p class="eyebrow">
               Front-End Developer &amp; Web Designer based in
               <img
-                data-src="./assets/icons/india-flag-icon.svg"
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
+                src="./assets/icons/india-flag-icon.svg"
                 alt="India flag"
                 width="28"
                 height="28"
                 decoding="async"
+                loading="eager"
                 aria-labelledby="indian-flag"
-                class="lazy-image"
               />
               <span id="indian-flag" class="skip-link"
                 >This image represents the flag of India.</span
@@ -902,6 +1007,7 @@
       </section>
     </main>
 
+    <!-- Footer component placeholder -->
     <footer class="site-footer">
       <div class="container footer-content">
         <p>
@@ -938,7 +1044,6 @@
                 ></path>
               </svg>
             </button>
-
             <button
               class="segmented__btn"
               type="button"
@@ -964,7 +1069,6 @@
                 />
               </svg>
             </button>
-
             <button
               class="segmented__btn"
               type="button"
@@ -983,7 +1087,6 @@
               </svg>
             </button>
           </fieldset>
-
           <fieldset class="accent-switch">
             <legend class="sr-only">Accent palette</legend>
             <button
@@ -1027,7 +1130,7 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-          ></path>
+          />
         </svg>
       </button>
     </footer>
@@ -1038,6 +1141,9 @@
       defer
     ></script>
 
+    <!-- Main script: interactive features and initialization (MUST load first) -->
     <script src="./scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="./includes/component-loader.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Keyboard Navigation in Single Page Applications | A Practical Guide (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Make your SPA accessible with keyboard navigation. Learn focus management, skip links, and shortcuts with practical React examples for beginners."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="keyboard navigation, spa accessibility, focus management, skip links, keyboard shortcuts react, tab navigation, roving tabindex, focus trap"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://suprabhat-portfolio.netlify.app/blog/keyboard-navigation-spa.html"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Keyboard Navigation in Single Page Applications | A Practical Guide (2026)"
+    />
+    <meta
+      property="og:description"
+      content="Make your SPA accessible with keyboard navigation. Learn focus management, skip links, and shortcuts with practical React examples for beginners."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/keyboard-navigation-spa.html"
+    />
+    <meta property="article:published_time" content="2026-02-04" />
+    <meta property="article:author" content="Suprabhat Kumar" />
+    <meta property="article:section" content="Accessibility" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Keyboard Navigation in Single Page Applications"
+    />
+    <meta
+      name="twitter:description"
+      content="Practical guide to keyboard navigation in SPAs with React examples."
+    />
+    <meta name="twitter:creator" content="@suprabhat" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-04">February 4, 2026</time>
+            <span class="blog-post-category">Accessibility</span>
+            <span>7 min read</span>
+          </div>
+          <h1>Keyboard Navigation in Single Page Applications</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Many users navigate the web using only a keyboard—whether by choice
+            or necessity. In Single Page Applications (SPAs), keyboard
+            navigation becomes tricky because of client-side routing and dynamic
+            content. This guide will teach you how to make your SPA fully
+            keyboard accessible with focus management, skip links, and keyboard
+            shortcuts.
+          </p>
+
+          <h2>Why Keyboard Navigation Matters in SPAs</h2>
+
+          <p>
+            Traditional websites handle focus automatically on page changes.
+            SPAs don't—you need to manage it yourself:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Power users</strong> - Navigate faster with keyboard
+              shortcuts
+            </li>
+            <li>
+              <strong>Motor impairments</strong> - Can't use a mouse effectively
+            </li>
+            <li>
+              <strong>Screen reader users</strong> - Rely entirely on keyboard
+              navigation
+            </li>
+            <li>
+              <strong>Legal requirement</strong> - WCAG 2.1 mandates keyboard
+              accessibility
+            </li>
+            <li>
+              <strong>Better UX</strong> - Keyboard shortcuts improve everyone's
+              experience
+            </li>
+          </ul>
+
+          <h2>The Basics: Tab Order and Focus Indicators</h2>
+
+          <p>
+            First, understand how Tab navigation works and how to style it
+            properly:
+          </p>
+
+          <pre><code>/* CSS for visible focus indicators */
+*:focus-visible {
+  outline: 3px solid #3b82f6; /* Blue outline */
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Don't remove outlines completely! */
+button:focus {
+  outline: none; /* ❌ Bad - makes site unusable for keyboard users */
+}
+
+/* If you must remove, replace with custom style */
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* ✅ Good alternative */
+}
+
+/* Skip default focus for mouse users, show for keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}</code></pre>
+
+          <h3>Controlling Tab Order</h3>
+
+          <pre><code>// tabIndex values:
+// 0 = In natural tab order
+// -1 = Programmatically focusable, but not in tab order
+// 1+ = Custom tab order (avoid unless absolutely necessary)
+
+function TabOrderExample() {
+  return (
+    &lt;div&gt;
+      {/* Natural tab order */}
+      &lt;button tabIndex={0}&gt;First&lt;/button&gt;
+      &lt;button tabIndex={0}&gt;Second&lt;/button&gt;
+      
+      {/* Programmatically focusable, skipped in tab order */}
+      &lt;div tabIndex={-1} ref={contentRef}&gt;
+        Content that can be focused programmatically
+      &lt;/div&gt;
+      
+      {/* ❌ Avoid positive tabIndex - breaks natural order */}
+      &lt;button tabIndex={3}&gt;Don't do this&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>Focus Management on Route Changes</h2>
+
+          <p>
+            The biggest challenge in SPAs: focus doesn't automatically move when
+            routes change. You must handle it manually:
+          </p>
+
+          <pre><code>// React Router v6 - Focus management
+import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function FocusManagement() {
+  const location = useLocation();
+  const mainRef = useRef(null);
+
+  useEffect(() => {
+    // Focus main content area on route change
+    if (mainRef.current) {
+      mainRef.current.focus();
+      
+      // Announce route change to screen readers
+      const pageTitle = document.title;
+      announceRouteChange(pageTitle);
+    }
+  }, [location.pathname]);
+
+  return (
+    &lt;main
+      ref={mainRef}
+      tabIndex={-1}
+      id="main-content"
+      aria-label="Main content"
+      style={{ outline: 'none' }}
+    &gt;
+      {/* Your route content */}
+    &lt;/main&gt;
+  );
+}
+
+// Announce to screen readers
+function announceRouteChange(message) {
+  const announcement = document.createElement('div');
+  announcement.setAttribute('role', 'status');
+  announcement.setAttribute('aria-live', 'polite');
+  announcement.classList.add('sr-only');
+  announcement.textContent = `Navigated to ${message}`;
+  
+  document.body.appendChild(announcement);
+  
+  setTimeout(() => {
+    document.body.removeChild(announcement);
+  }, 1000);
+}
+
+// CSS for screen reader only content
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}</code></pre>
+
+          <h3>Complete React Router Example</h3>
+
+          <pre><code>import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function FocusManager({ children }) {
+  const location = useLocation();
+  const mainRef = useRef(null);
+  const isFirstMount = useRef(true);
+
+  useEffect(() => {
+    // Skip focus on initial mount
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
+    // Focus main content after route change
+    const timer = setTimeout(() => {
+      const heading = document.querySelector('h1');
+      const main = mainRef.current;
+      
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus();
+        heading.removeAttribute('tabindex');
+      } else if (main) {
+        main.focus();
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  return (
+    &lt;main ref={mainRef} tabIndex={-1} style={{ outline: 'none' }}&gt;
+      {children}
+    &lt;/main&gt;
+  );
+}
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;ScrollToTop /&gt;
+      &lt;FocusManager&gt;
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+          &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/FocusManager&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+
+          <h2>Skip Links: Essential for Keyboard Navigation</h2>
+
+          <p>
+            Skip links let users bypass repetitive navigation and jump straight
+            to main content:
+          </p>
+
+          <pre><code>function SkipLinks() {
+  return (
+    &lt;div className="skip-links"&gt;
+      &lt;a href="#main-content" className="skip-link"&gt;
+        Skip to main content
+      &lt;/a&gt;
+      &lt;a href="#navigation" className="skip-link"&gt;
+        Skip to navigation
+      &lt;/a&gt;
+      &lt;a href="#footer" className="skip-link"&gt;
+        Skip to footer
+      &lt;/a&gt;
+    &lt;/div&gt;
+  );
+}
+
+/* CSS - Show only when focused */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Example layout */
+function Layout({ children }) {
+  return (
+    &lt;&gt;
+      &lt;SkipLinks /&gt;
+      &lt;header&gt;
+        &lt;nav id="navigation"&gt;{/* Navigation */}&lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main id="main-content" tabIndex={-1}&gt;
+        {children}
+      &lt;/main&gt;
+      &lt;footer id="footer"&gt;{/* Footer */}&lt;/footer&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+          <h2>Implementing Keyboard Shortcuts</h2>
+
+          <p>Add keyboard shortcuts to improve navigation for power users:</p>
+
+          <pre><code>import { useEffect } from 'react';
+
+function useKeyboardShortcuts(shortcuts) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Check if user is typing in an input
+      const activeElement = document.activeElement;
+      const isInput = 
+        activeElement.tagName === 'INPUT' ||
+        activeElement.tagName === 'TEXTAREA' ||
+        activeElement.isContentEditable;
+
+      if (isInput) return;
+
+      // Match shortcut
+      const shortcut = shortcuts.find(s => {
+        return (
+          event.key.toLowerCase() === s.key.toLowerCase() &&
+          event.ctrlKey === !!s.ctrl &&
+          event.altKey === !!s.alt &&
+          event.shiftKey === !!s.shift
+        );
+      });
+
+      if (shortcut) {
+        event.preventDefault();
+        shortcut.action();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [shortcuts]);
+}
+
+// Usage
+function App() {
+  const navigate = useNavigate();
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  useKeyboardShortcuts([
+    {
+      key: '/',
+      action: () => setSearchOpen(true),
+      description: 'Open search',
+    },
+    {
+      key: 'h',
+      action: () => navigate('/'),
+      description: 'Go to homepage',
+    },
+    {
+      key: 'p',
+      ctrl: true,
+      action: () => navigate('/profile'),
+      description: 'Go to profile',
+    },
+    {
+      key: '?',
+      shift: true,
+      action: () => setHelpOpen(true),
+      description: 'Show keyboard shortcuts',
+    },
+  ]);
+
+  return &lt;div&gt;{/* App content */}&lt;/div&gt;;
+}
+
+// Shortcut help modal
+function KeyboardShortcutsHelp({ shortcuts }) {
+  return (
+    &lt;div role="dialog" aria-label="Keyboard shortcuts"&gt;
+      &lt;h2&gt;Keyboard Shortcuts&lt;/h2&gt;
+      &lt;dl&gt;
+        {shortcuts.map(shortcut => (
+          &lt;div key={shortcut.key}&gt;
+            &lt;dt&gt;
+              &lt;kbd&gt;
+                {shortcut.ctrl && 'Ctrl + '}
+                {shortcut.alt && 'Alt + '}
+                {shortcut.shift && 'Shift + '}
+                {shortcut.key.toUpperCase()}
+              &lt;/kbd&gt;
+            &lt;/dt&gt;
+            &lt;dd&gt;{shortcut.description}&lt;/dd&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/dl&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>Roving TabIndex for Lists and Grids</h2>
+
+          <p>
+            For components like toolbars or grids, use roving tabindex to manage
+            focus with arrow keys:
+          </p>
+
+          <pre><code>function Toolbar({ items }) {
+  const [focusedIndex, setFocusedIndex] = useState(0);
+  const itemRefs = useRef([]);
+
+  const handleKeyDown = (event, index) => {
+    let newIndex = index;
+
+    switch (event.key) {
+      case 'ArrowRight':
+        newIndex = (index + 1) % items.length;
+        break;
+      case 'ArrowLeft':
+        newIndex = (index - 1 + items.length) % items.length;
+        break;
+      case 'Home':
+        newIndex = 0;
+        break;
+      case 'End':
+        newIndex = items.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    setFocusedIndex(newIndex);
+    itemRefs.current[newIndex]?.focus();
+  };
+
+  return (
+    &lt;div role="toolbar" aria-label="Text formatting"&gt;
+      {items.map((item, index) => (
+        &lt;button
+          key={item.id}
+          ref={el => itemRefs.current[index] = el}
+          tabIndex={focusedIndex === index ? 0 : -1}
+          onClick={item.onClick}
+          onKeyDown={e => handleKeyDown(e, index)}
+          aria-label={item.label}
+        &gt;
+          {item.icon}
+        &lt;/button&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// Usage
+const toolbarItems = [
+  { id: 'bold', label: 'Bold', icon: &lt;BoldIcon /&gt;, onClick: () => format('bold') },
+  { id: 'italic', label: 'Italic', icon: &lt;ItalicIcon /&gt;, onClick: () => format('italic') },
+  { id: 'underline', label: 'Underline', icon: &lt;UnderlineIcon /&gt;, onClick: () => format('underline') },
+];</code></pre>
+
+          <h2>Focus Traps for Modals</h2>
+
+          <p>
+            When a modal opens, trap focus inside it to prevent tabbing to
+            background content:
+          </p>
+
+          <pre><code>import { useEffect, useRef } from 'react';
+
+function useFocusTrap(isActive) {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!isActive || !containerRef.current) return;
+
+    const container = containerRef.current;
+    const focusableElements = container.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Focus first element
+    firstElement?.focus();
+
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Tab') return;
+
+      if (event.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    container.addEventListener('keydown', handleKeyDown);
+    return () => container.removeEventListener('keydown', handleKeyDown);
+  }, [isActive]);
+
+  return containerRef;
+}
+
+// Usage
+function Modal({ isOpen, onClose, children }) {
+  const modalRef = useFocusTrap(isOpen);
+  const previousFocusRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement;
+    } else {
+      previousFocusRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    &lt;div className="modal-overlay"&gt;
+      &lt;div ref={modalRef} role="dialog" aria-modal="true"&gt;
+        {children}
+        &lt;button onClick={onClose}&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>Arrow Key Navigation for Custom Components</h2>
+
+          <pre><code>function ListBox({ options, value, onChange }) {
+  const [focusedIndex, setFocusedIndex] = useState(
+    options.findIndex(opt => opt.value === value)
+  );
+  const optionRefs = useRef([]);
+
+  const handleKeyDown = (event) => {
+    let newIndex = focusedIndex;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        newIndex = Math.min(focusedIndex + 1, options.length - 1);
+        break;
+      case 'ArrowUp':
+        newIndex = Math.max(focusedIndex - 1, 0);
+        break;
+      case 'Home':
+        newIndex = 0;
+        break;
+      case 'End':
+        newIndex = options.length - 1;
+        break;
+      case 'Enter':
+      case ' ':
+        onChange(options[focusedIndex].value);
+        return;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    setFocusedIndex(newIndex);
+    optionRefs.current[newIndex]?.focus();
+  };
+
+  return (
+    &lt;ul role="listbox" aria-label="Select option" onKeyDown={handleKeyDown}&gt;
+      {options.map((option, index) => (
+        &lt;li
+          key={option.value}
+          ref={el => optionRefs.current[index] = el}
+          role="option"
+          tabIndex={focusedIndex === index ? 0 : -1}
+          aria-selected={option.value === value}
+          onClick={() => onChange(option.value)}
+        &gt;
+          {option.label}
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+          <h2>Testing Keyboard Navigation</h2>
+
+          <pre><code>// Manual testing checklist:
+// 1. Unplug your mouse
+// 2. Tab through entire page
+// 3. Try all keyboard shortcuts
+// 4. Navigate through modals
+// 5. Test form submissions
+// 6. Verify focus indicators are visible
+
+// Automated testing with Testing Library
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+test('keyboard navigation works', async () => {
+  const user = userEvent.setup();
+  render(&lt;App /&gt;);
+
+  // Tab to button
+  await user.tab();
+  expect(screen.getByRole('button', { name: 'Submit' })).toHaveFocus();
+
+  // Press Enter
+  await user.keyboard('{Enter}');
+  expect(mockSubmit).toHaveBeenCalled();
+});
+
+test('skip link works', async () => {
+  const user = userEvent.setup();
+  render(&lt;App /&gt;);
+
+  // Tab to skip link
+  await user.tab();
+  const skipLink = screen.getByText('Skip to main content');
+  expect(skipLink).toHaveFocus();
+
+  // Activate skip link
+  await user.keyboard('{Enter}');
+  expect(screen.getByRole('main')).toHaveFocus();
+});</code></pre>
+
+          <h2>Common Keyboard Navigation Mistakes</h2>
+
+          <h3>❌ Removing Focus Outlines</h3>
+
+          <pre><code>/* Bad */
+*:focus {
+  outline: none;
+}
+
+/* Good */
+*:focus-visible {
+  outline: 3px solid blue;
+  outline-offset: 2px;
+}</code></pre>
+
+          <h3>❌ Not Managing Focus on Route Changes</h3>
+
+          <pre><code>// Bad - Focus stays on old link
+&lt;Link to="/about"&gt;About&lt;/Link&gt;
+
+// Good - Focus moves to new page
+useEffect(() => {
+  mainRef.current?.focus();
+}, [location]);</code></pre>
+
+          <h3>❌ Forgetting Skip Links</h3>
+
+          <pre><code>// Bad - Users must tab through entire nav
+&lt;nav&gt;{/* 20+ links */}&lt;/nav&gt;
+&lt;main&gt;{/* Content */}&lt;/main&gt;
+
+// Good - Skip link lets users jump to content
+&lt;a href="#main"&gt;Skip to content&lt;/a&gt;
+&lt;nav&gt;{/* Links */}&lt;/nav&gt;
+&lt;main id="main"&gt;{/* Content */}&lt;/main&gt;</code></pre>
+
+          <h2>Best Practices Checklist</h2>
+
+          <ul>
+            <li>✅ All interactive elements are keyboard accessible</li>
+            <li>✅ Focus indicators are clearly visible</li>
+            <li>✅ Tab order follows visual order</li>
+            <li>✅ Skip links are present and functional</li>
+            <li>✅ Focus moves to main content on route changes</li>
+            <li>✅ Modals trap focus inside when open</li>
+            <li>✅ Arrow keys work for lists and toolbars</li>
+            <li>
+              ✅ Keyboard shortcuts don't conflict with browser/screen reader
+              shortcuts
+            </li>
+            <li>✅ Escape key closes modals and menus</li>
+            <li>✅ Test navigation with mouse unplugged</li>
+          </ul>
+
+          <h2>Essential Keyboard Shortcuts Reference</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Action</th>
+                <th>Context</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tab</td>
+                <td>Move focus forward</td>
+                <td>Global</td>
+              </tr>
+              <tr>
+                <td>Shift + Tab</td>
+                <td>Move focus backward</td>
+                <td>Global</td>
+              </tr>
+              <tr>
+                <td>Enter</td>
+                <td>Activate link/button</td>
+                <td>Interactive elements</td>
+              </tr>
+              <tr>
+                <td>Space</td>
+                <td>Activate button/checkbox</td>
+                <td>Buttons, checkboxes</td>
+              </tr>
+              <tr>
+                <td>Escape</td>
+                <td>Close/cancel</td>
+                <td>Modals, dropdowns</td>
+              </tr>
+              <tr>
+                <td>Arrow keys</td>
+                <td>Navigate within component</td>
+                <td>Tabs, menus, lists</td>
+              </tr>
+              <tr>
+                <td>Home</td>
+                <td>Go to first item</td>
+                <td>Lists, toolbars</td>
+              </tr>
+              <tr>
+                <td>End</td>
+                <td>Go to last item</td>
+                <td>Lists, toolbars</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Resources for Further Learning</h2>
+
+          <ul>
+            <li>
+              <strong>ARIA Authoring Practices</strong> - Keyboard patterns for
+              components
+            </li>
+            <li><strong>WebAIM</strong> - Keyboard accessibility guidelines</li>
+            <li><strong>Pa11y</strong> - Automated accessibility testing</li>
+            <li>
+              <strong>axe DevTools</strong> - Browser extension for testing
+            </li>
+            <li>
+              <strong>React Focus Trap</strong> - Library for focus management
+            </li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>
+              Keyboard navigation is essential for accessibility compliance
+            </li>
+            <li>SPAs require manual focus management on route changes</li>
+            <li>Skip links save users time navigating repetitive content</li>
+            <li>Focus traps prevent users from leaving modals accidentally</li>
+            <li>Roving tabindex improves navigation in toolbars and lists</li>
+            <li>Never remove focus outlines without providing alternatives</li>
+            <li>Test with your mouse unplugged to catch issues</li>
+          </ul>
+
+          <p>
+            Keyboard navigation might seem complex, but it follows predictable
+            patterns. Start with the basics—visible focus indicators, skip
+            links, and focus management on route changes. Then add advanced
+            features like keyboard shortcuts and roving tabindex. Your keyboard
+            users will thank you!
+          </p>
+
+          <blockquote>
+            💡 Pro tip: Install the "Tab Order" Chrome extension to visualize
+            tab order on your page. It's incredibly helpful for debugging focus
+            issues!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog Post Title - Your Portfolio</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Your blog post meta description goes here"
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta name="keywords" content="keyword1, keyword2, keyword3" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+      }
+    </style>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <!-- Header placeholder: components will be injected here -->
+    <div id="header-placeholder"></div>
+
+    <!-- Mobile menu placeholder: components will be injected here -->
+    <div id="mobile-menu-placeholder"></div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <h1>Blog Post Title</h1>
+          <div class="blog-meta">
+            <time datetime="2024-12-20">December 20, 2024</time>
+            <span class="read-time">5 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-post section">
+        <div class="container blog-content">
+          <!-- Your blog post content goes here -->
+          <h2>Section One</h2>
+          <p>Your content here...</p>
+
+          <h2>Section Two</h2>
+          <p>More content...</p>
+        </div>
+      </article>
+    </main>
+
+    <!-- Footer placeholder: components will be injected here -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Component loader: loads header, mobile-menu, and footer -->
+    <script src="../includes/component-loader.js" defer></script>
+    <!-- Main script: contains initialization functions -->
+    <script src="../scripts/main.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Next.js Performance Optimization: Real-World Tips for Beginners (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Boost your Next.js app performance with practical tips. Learn image optimization, code splitting, ISR, SSG, and caching strategies explained simply for beginners."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="next.js performance, next.js optimization, image optimization next.js, code splitting, ISR, SSG, SSR, next.js caching, bundle analysis next.js, font optimization"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://suprabhat-portfolio.netlify.app/blog/nextjs-performance-optimization.html"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Next.js Performance Optimization: Real-World Tips for Beginners (2026)"
+    />
+    <meta
+      property="og:description"
+      content="Boost your Next.js app performance with practical tips. Learn image optimization, code splitting, ISR, SSG, and caching strategies explained simply for beginners."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/nextjs-performance-optimization.html"
+    />
+    <meta property="article:published_time" content="2026-02-11" />
+    <meta property="article:author" content="Suprabhat Kumar" />
+    <meta property="article:section" content="Next.js" />
+    <meta property="article:tag" content="Next.js" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Next.js Performance Optimization: Real-World Tips for Beginners (2026)"
+    />
+    <meta
+      name="twitter:description"
+      content="Boost your Next.js app performance with practical tips. Learn image optimization, code splitting, ISR, SSG, and caching strategies."
+    />
+    <meta name="twitter:creator" content="@suprabhat" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-11">February 11, 2026</time>
+            <span class="blog-post-category">Next.js</span>
+            <span>9 min read</span>
+          </div>
+          <h1>
+            Next.js Performance Optimization: Real-World Tips for Beginners
+          </h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Performance can make or break your Next.js application. In this
+            comprehensive guide, you'll learn practical, beginner-friendly
+            techniques to optimize your Next.js app—from image optimization to
+            code splitting, caching strategies, and more. Let's dive into
+            real-world tips that actually work!
+          </p>
+
+          <h2>Why Next.js Performance Matters</h2>
+
+          <p>Fast websites aren't just nice to have—they're essential:</p>
+
+          <ul>
+            <li>
+              <strong>Better SEO</strong> - Google prioritizes fast-loading
+              websites in search rankings
+            </li>
+            <li>
+              <strong>Higher conversions</strong> - A 1-second delay can reduce
+              conversions by 7%
+            </li>
+            <li>
+              <strong>Improved UX</strong> - Users expect pages to load in under
+              3 seconds
+            </li>
+            <li>
+              <strong>Lower costs</strong> - Optimized apps use less bandwidth
+              and server resources
+            </li>
+            <li>
+              <strong>Core Web Vitals</strong> - Essential metrics that affect
+              your site's ranking
+            </li>
+          </ul>
+
+          <h2>1. Optimizing Images with Next.js Image Component</h2>
+
+          <p>
+            The Next.js <code>Image</code> component is a game-changer for
+            performance. It automatically optimizes images, lazy loads them, and
+            serves them in modern formats like WebP.
+          </p>
+
+          <h3>Basic Image Optimization</h3>
+
+          <pre><code>// Basic usage
+import Image from 'next/image';
+
+export default function Profile() {
+  return (
+    &lt;div&gt;
+      &lt;Image
+        src="/profile.jpg"
+        alt="Profile photo"
+        width={500}
+        height={500}
+        priority // Load immediately (above fold)
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Responsive images
+&lt;Image
+  src="/hero.jpg"
+  alt="Hero image"
+  fill
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  style={{ objectFit: 'cover' }}
+/&gt;
+
+// External images (configure in next.config.js)
+&lt;Image
+  src="https://example.com/photo.jpg"
+  alt="External photo"
+  width={800}
+  height={600}
+  quality={85} // 1-100, default 75
+/&gt;</code></pre>
+
+          <h3>Advanced Image Configuration</h3>
+
+          <pre><code>// next.config.js
+module.exports = {
+  images: {
+    domains: ['example.com', 'cdn.example.com'],
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60, // Cache images for 60 seconds
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+};
+
+// Placeholder blur effect
+&lt;Image
+  src="/product.jpg"
+  alt="Product"
+  width={400}
+  height={300}
+  placeholder="blur"
+  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..." // Generate with plaiceholder
+/&gt;</code></pre>
+
+          <h3>Key Image Optimization Tips:</h3>
+
+          <ul>
+            <li>
+              <strong>Use <code>priority</code></strong> for above-the-fold
+              images to avoid LCP issues
+            </li>
+            <li>
+              <strong>Set proper <code>sizes</code></strong> for responsive
+              images to serve optimal breakpoints
+            </li>
+            <li>
+              <strong>Lower <code>quality</code></strong> to 75-85 for smaller
+              file sizes without visible loss
+            </li>
+            <li>
+              <strong>Use <code>placeholder="blur"</code></strong> for better
+              perceived performance
+            </li>
+            <li>
+              <strong>Configure <code>formats</code></strong> to serve AVIF/WebP
+              for modern browsers
+            </li>
+          </ul>
+
+          <h2>2. Understanding SSG, SSR, and ISR</h2>
+
+          <p>
+            Next.js offers three rendering strategies. Choosing the right one is
+            crucial for performance:
+          </p>
+
+          <h3>Static Site Generation (SSG) - Fastest Option</h3>
+
+          <pre><code>// pages/blog/[slug].js
+export async function getStaticProps({ params }) {
+  const post = await fetchPost(params.slug);
+  
+  return {
+    props: { post },
+    revalidate: 3600, // ISR: Revalidate every hour
+  };
+}
+
+export async function getStaticPaths() {
+  const posts = await fetchAllPosts();
+  
+  return {
+    paths: posts.map((post) => ({
+      params: { slug: post.slug },
+    })),
+    fallback: 'blocking', // Generate missing pages on-demand
+  };
+}
+
+export default function BlogPost({ post }) {
+  return &lt;article&gt;{post.content}&lt;/article&gt;;
+}</code></pre>
+
+          <h3>Server-Side Rendering (SSR) - For Dynamic Data</h3>
+
+          <pre><code>// Use only when data must be fresh on every request
+export async function getServerSideProps(context) {
+  const { req, res, query } = context;
+  
+  // Set cache headers for CDN
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+  
+  const data = await fetchUserData(req.cookies.token);
+  
+  return {
+    props: { data },
+  };
+}</code></pre>
+
+          <h3>Incremental Static Regeneration (ISR) - Best of Both</h3>
+
+          <pre><code>// Perfect for content that updates occasionally
+export async function getStaticProps() {
+  const products = await fetchProducts();
+  
+  return {
+    props: { products },
+    revalidate: 60, // Regenerate every 60 seconds
+  };
+}
+
+// On-Demand Revalidation (Next.js 12.2+)
+// pages/api/revalidate.js
+export default async function handler(req, res) {
+  // Check secret to prevent unauthorized revalidation
+  if (req.query.secret !== process.env.REVALIDATE_SECRET) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+
+  try {
+    await res.revalidate('/products');
+    return res.json({ revalidated: true });
+  } catch (err) {
+    return res.status(500).send('Error revalidating');
+  }
+}</code></pre>
+
+          <h3>When to Use Each Strategy:</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Strategy</th>
+                <th>Use Case</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>SSG</strong></td>
+                <td>Marketing pages, blogs, documentation</td>
+                <td>⚡ Fastest - served from CDN</td>
+              </tr>
+              <tr>
+                <td><strong>ISR</strong></td>
+                <td>E-commerce products, news articles</td>
+                <td>⚡ Very fast - regenerates in background</td>
+              </tr>
+              <tr>
+                <td><strong>SSR</strong></td>
+                <td>User dashboards, personalized content</td>
+                <td>🐢 Slower - generates on each request</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>3. Code Splitting and Dynamic Imports</h2>
+
+          <p>
+            Next.js automatically code-splits by page, but you can optimize
+            further with dynamic imports:
+          </p>
+
+          <pre><code>import dynamic from 'next/dynamic';
+
+// Lazy load heavy components
+const HeavyChart = dynamic(() => import('../components/HeavyChart'), {
+  loading: () => &lt;p&gt;Loading chart...&lt;/p&gt;,
+  ssr: false, // Don't render on server
+});
+
+// Lazy load with named export
+const Modal = dynamic(() => 
+  import('../components/Modal').then(mod => mod.Modal)
+);
+
+// Preload component on hover
+import { useEffect, useState } from 'react';
+
+export default function Page() {
+  const [showModal, setShowModal] = useState(false);
+  
+  // Preload modal component on button hover
+  const preloadModal = () => {
+    const modalPromise = import('../components/Modal');
+  };
+  
+  return (
+    &lt;button 
+      onMouseEnter={preloadModal}
+      onClick={() => setShowModal(true)}
+    &gt;
+      Open Modal
+    &lt;/button&gt;
+  );
+}</code></pre>
+
+          <h2>4. Font Optimization</h2>
+
+          <p>
+            Custom fonts can significantly impact performance. Next.js 13+ has
+            built-in font optimization:
+          </p>
+
+          <pre><code>// app/layout.tsx (App Router)
+import { Inter, Roboto_Mono } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
+});
+
+export default function RootLayout({ children }) {
+  return (
+    &lt;html lang="en" className={`${inter.variable} ${robotoMono.variable}`}&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+    &lt;/html&gt;
+  );
+}
+
+// Use in CSS
+// globals.css
+body {
+  font-family: var(--font-inter), sans-serif;
+}
+
+code {
+  font-family: var(--font-roboto-mono), monospace;
+}
+
+// Local fonts
+import localFont from 'next/font/local';
+
+const myFont = localFont({
+  src: './my-font.woff2',
+  display: 'swap',
+  weight: '400',
+});</code></pre>
+
+          <h2>5. Bundle Analysis and Optimization</h2>
+
+          <p>Analyze your bundle to identify large dependencies:</p>
+
+          <pre><code>// Install analyzer
+npm install @next/bundle-analyzer
+
+// next.config.js
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer({
+  // your config
+});
+
+// Run analysis
+ANALYZE=true npm run build
+
+// Optimize large packages
+// Instead of importing entire library:
+import _ from 'lodash'; // ❌ Entire lodash (71kb)
+
+// Import only what you need:
+import debounce from 'lodash/debounce'; // ✅ Just debounce (7kb)
+
+// Or use tree-shakeable alternatives:
+import { debounce } from 'lodash-es'; // ✅ ES modules version</code></pre>
+
+          <h2>6. Caching Strategies</h2>
+
+          <p>Proper caching dramatically improves performance:</p>
+
+          <pre><code>// next.config.js - Static asset caching
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: '/assets/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
+};
+
+// API route caching
+// pages/api/data.js
+export default async function handler(req, res) {
+  // Cache for 5 minutes, revalidate in background
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=300, stale-while-revalidate=600'
+  );
+  
+  const data = await fetchData();
+  res.status(200).json(data);
+}
+
+// SWR for client-side caching
+import useSWR from 'swr';
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function Profile() {
+  const { data, error } = useSWR('/api/user', fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    refreshInterval: 60000, // Refresh every minute
+  });
+  
+  if (error) return &lt;div&gt;Failed to load&lt;/div&gt;;
+  if (!data) return &lt;div&gt;Loading...&lt;/div&gt;;
+  
+  return &lt;div&gt;Hello {data.name}!&lt;/div&gt;;
+}</code></pre>
+
+          <h2>7. Script Optimization</h2>
+
+          <p>Control how third-party scripts load:</p>
+
+          <pre><code>import Script from 'next/script';
+
+export default function Page() {
+  return (
+    &lt;&gt;
+      {/* Load after page is interactive */}
+      &lt;Script
+        src="https://www.googletagmanager.com/gtag/js"
+        strategy="afterInteractive"
+      /&gt;
+      
+      {/* Load during idle time */}
+      &lt;Script
+        src="https://connect.facebook.net/en_US/sdk.js"
+        strategy="lazyOnload"
+      /&gt;
+      
+      {/* Inline script with proper strategy */}
+      &lt;Script id="analytics" strategy="afterInteractive"&gt;
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+        `}
+      &lt;/Script&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+          <h2>Performance Monitoring and Metrics</h2>
+
+          <p>Measure performance to track improvements:</p>
+
+          <pre><code>// next.config.js - Enable Web Vitals reporting
+export function reportWebVitals(metric) {
+  console.log(metric);
+  
+  // Send to analytics
+  if (metric.label === 'web-vital') {
+    // Send to Google Analytics
+    window.gtag('event', metric.name, {
+      value: Math.round(metric.value),
+      event_label: metric.id,
+      non_interaction: true,
+    });
+  }
+}
+
+// Lighthouse CI for automated testing
+// lighthouserc.js
+module.exports = {
+  ci: {
+    collect: {
+      startServerCommand: 'npm run start',
+      url: ['http://localhost:3000/'],
+      numberOfRuns: 3,
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['error', { minScore: 0.9 }],
+        'first-contentful-paint': ['error', { maxNumericValue: 2000 }],
+        'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
+        'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
+      },
+    },
+  },
+};</code></pre>
+
+          <h2>Common Performance Mistakes to Avoid</h2>
+
+          <h3>❌ Don't Use SSR Unnecessarily</h3>
+
+          <pre><code>// Bad - SSR for static content
+export async function getServerSideProps() {
+  const data = await fetch('https://api.example.com/static');
+  return { props: { data } };
+}
+
+// Good - Use SSG with ISR
+export async function getStaticProps() {
+  const data = await fetch('https://api.example.com/static');
+  return { props: { data }, revalidate: 3600 };
+}</code></pre>
+
+          <h3>❌ Don't Import Entire Libraries</h3>
+
+          <pre><code>// Bad
+import moment from 'moment'; // 288kb
+
+// Good
+import { format } from 'date-fns'; // 12kb (with tree-shaking)</code></pre>
+
+          <h3>❌ Don't Forget Image Dimensions</h3>
+
+          <pre><code>// Bad - Causes layout shift
+&lt;Image src="/photo.jpg" alt="Photo" /&gt;
+
+// Good - Provides dimensions
+&lt;Image src="/photo.jpg" alt="Photo" width={800} height={600} /&gt;</code></pre>
+
+          <h2>Best Practices Checklist</h2>
+
+          <ul>
+            <li>
+              ✅ Use <code>next/image</code> for all images with proper sizing
+            </li>
+            <li>✅ Choose SSG/ISR over SSR when possible</li>
+            <li>✅ Implement code splitting for heavy components</li>
+            <li>✅ Optimize fonts with <code>next/font</code></li>
+            <li>✅ Analyze bundle size regularly</li>
+            <li>✅ Set proper cache headers</li>
+            <li>✅ Load third-party scripts strategically</li>
+            <li>✅ Monitor Core Web Vitals</li>
+            <li>✅ Use dynamic imports for large dependencies</li>
+            <li>✅ Implement proper error boundaries</li>
+          </ul>
+
+          <h2>Resources for Further Learning</h2>
+
+          <ul>
+            <li>
+              <strong>Next.js Documentation</strong> - Official performance
+              optimization guide
+            </li>
+            <li>
+              <strong>web.dev</strong> - Google's performance best practices
+            </li>
+            <li>
+              <strong>Next.js Analytics</strong> - Built-in performance
+              monitoring
+            </li>
+            <li>
+              <strong>Vercel Analytics</strong> - Real user monitoring for
+              Next.js
+            </li>
+            <li>
+              <strong>Lighthouse</strong> - Automated performance auditing
+            </li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>Image optimization is the quickest win for performance</li>
+            <li>Choose the right rendering strategy (SSG > ISR > SSR)</li>
+            <li>Code splitting reduces initial bundle size significantly</li>
+            <li>Font optimization prevents FOUT and improves LCP</li>
+            <li>Regular bundle analysis helps identify bloat</li>
+            <li>Proper caching reduces server load and improves speed</li>
+            <li>Monitor performance metrics to track improvements</li>
+          </ul>
+
+          <p>
+            Next.js gives you powerful tools for optimization—use them! Start
+            with images, choose the right rendering strategy, and monitor your
+            metrics. Small optimizations compound into significant performance
+            gains. Your users (and your hosting bill) will thank you!
+          </p>
+
+          <blockquote>
+            💡 Pro tip: Use Vercel's Speed Insights to get real-world
+            performance data from actual users. It's free and provides
+            invaluable insights beyond synthetic testing!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Building Accessible Forms with React Hook Form | Complete Tutorial (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Create accessible forms with React Hook Form. Learn validation, error messages, and ARIA labels with real code examples perfect for beginners."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="react hook form, accessible forms, form validation react, aria forms, form accessibility, react forms tutorial, form errors accessibility, wcag forms"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://suprabhat-portfolio.netlify.app/blog/accessible-forms-react-hook-form.html"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Building Accessible Forms with React Hook Form | Complete Tutorial (2026)"
+    />
+    <meta
+      property="og:description"
+      content="Create accessible forms with React Hook Form. Learn validation, error messages, and ARIA labels with real code examples perfect for beginners."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/accessible-forms-react-hook-form.html"
+    />
+    <meta property="article:published_time" content="2026-02-02" />
+    <meta property="article:author" content="Suprabhat Kumar" />
+    <meta property="article:section" content="React" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Building Accessible Forms with React Hook Form"
+    />
+    <meta
+      name="twitter:description"
+      content="Complete tutorial for accessible forms with React Hook Form and ARIA."
+    />
+    <meta name="twitter:creator" content="@suprabhat" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <!-- Header component placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Mobile menu component placeholder -->
+    <div id="mobile-menu-placeholder"></div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-02">February 2, 2026</time>
+            <span class="blog-post-category">React</span>
+            <span>8 min read</span>
+          </div>
+          <h1>Building Accessible Forms with React Hook Form</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Forms are the backbone of user interaction, but they're often the
+            biggest accessibility barrier. React Hook Form makes building
+            performant forms easy—but you still need to add proper
+            accessibility. In this tutorial, you'll learn how to create fully
+            accessible forms with validation, error messages, ARIA labels, and
+            more. Let's build forms that work for everyone!
+          </p>
+
+          <h2>Why Form Accessibility Matters</h2>
+
+          <p>Inaccessible forms lock out millions of users:</p>
+
+          <ul>
+            <li>
+              <strong>Screen reader users</strong> - Need proper labels and
+              error announcements
+            </li>
+            <li>
+              <strong>Keyboard users</strong> - Must be able to navigate without
+              a mouse
+            </li>
+            <li>
+              <strong>Users with cognitive disabilities</strong> - Benefit from
+              clear instructions
+            </li>
+            <li>
+              <strong>Mobile users</strong> - Need large touch targets and
+              proper input types
+            </li>
+            <li>
+              <strong>Legal requirement</strong> - WCAG 2.1 AA compliance is
+              mandatory in many countries
+            </li>
+          </ul>
+
+          <h2>Setting Up React Hook Form</h2>
+
+          <pre><code>npm install react-hook-form
+
+// Basic setup
+import { useForm } from 'react-hook-form';
+
+function ContactForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    // Send to API
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+      {/* Form fields */}
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+          <h2>Building an Accessible Text Input</h2>
+
+          <p>
+            Every input needs a proper label, validation, and error handling:
+          </p>
+
+          <pre><code>import { useId } from 'react';
+import { useForm } from 'react-hook-form';
+
+function AccessibleInput({
+  label,
+  name,
+  type = 'text',
+  required = false,
+  helpText,
+  register,
+  errors,
+  ...rest
+}) {
+  const id = useId();
+  const errorId = `${id}-error`;
+  const helpId = `${id}-help`;
+  const error = errors[name];
+
+  return (
+    &lt;div className="form-field"&gt;
+      &lt;label htmlFor={id} className="form-label"&gt;
+        {label}
+        {required && (
+          &lt;span aria-label="required" className="required"&gt;
+            *
+          &lt;/span&gt;
+        )}
+      &lt;/label&gt;
+
+      {helpText && (
+        &lt;p id={helpId} className="form-help"&gt;
+          {helpText}
+        &lt;/p&gt;
+      )}
+
+      &lt;input
+        id={id}
+        type={type}
+        aria-required={required}
+        aria-invalid={!!error}
+        aria-describedby={
+          error
+            ? errorId
+            : helpText
+            ? helpId
+            : undefined
+        }
+        className={`form-input ${error ? 'error' : ''}`}
+        {...register(name, { required })}
+        {...rest}
+      /&gt;
+
+      {error && (
+        &lt;p id={errorId} role="alert" className="form-error"&gt;
+          {error.message}
+        &lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+// Usage
+function Form() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+      &lt;AccessibleInput
+        label="Email Address"
+        name="email"
+        type="email"
+        required
+        helpText="We'll never share your email"
+        register={register}
+        errors={errors}
+      /&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+          <h3>Key Accessibility Features:</h3>
+
+          <ul>
+            <li><code>htmlFor</code> connects label to input</li>
+            <li><code>useId()</code> generates unique IDs</li>
+            <li><code>aria-required</code> announces required fields</li>
+            <li><code>aria-invalid</code> indicates validation errors</li>
+            <li><code>aria-describedby</code> links help text and errors</li>
+            <li><code>role="alert"</code> announces errors immediately</li>
+          </ul>
+
+          <h2>Complete Registration Form Example</h2>
+
+          <pre><code>import { useForm } from 'react-hook-form';
+
+function RegistrationForm() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    mode: 'onBlur', // Validate on blur for better UX
+  });
+
+  const password = watch('password');
+
+  const onSubmit = async (data) => {
+    try {
+      await registerUser(data);
+      // Show success message
+    } catch (error) {
+      // Handle error
+    }
+  };
+
+  return (
+    &lt;form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      aria-label="Registration form"
+    &gt;
+      &lt;h2&gt;Create Account&lt;/h2&gt;
+
+      {/* Full Name */}
+      &lt;div className="form-field"&gt;
+        &lt;label htmlFor="name"&gt;
+          Full Name &lt;span aria-label="required"&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id="name"
+          type="text"
+          autoComplete="name"
+          aria-required="true"
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? 'name-error' : undefined}
+          {...register('name', {
+            required: 'Name is required',
+            minLength: {
+              value: 2,
+              message: 'Name must be at least 2 characters',
+            },
+          })}
+        /&gt;
+        {errors.name && (
+          &lt;p id="name-error" role="alert" className="error"&gt;
+            {errors.name.message}
+          &lt;/p&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Email */}
+      &lt;div className="form-field"&gt;
+        &lt;label htmlFor="email"&gt;
+          Email Address &lt;span aria-label="required"&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id="email"
+          type="email"
+          autoComplete="email"
+          aria-required="true"
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? 'email-error' : 'email-help'}
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Invalid email address',
+            },
+          })}
+        /&gt;
+        &lt;p id="email-help" className="help-text"&gt;
+          We'll send a verification link to this address
+        &lt;/p&gt;
+        {errors.email && (
+          &lt;p id="email-error" role="alert" className="error"&gt;
+            {errors.email.message}
+          &lt;/p&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Password */}
+      &lt;div className="form-field"&gt;
+        &lt;label htmlFor="password"&gt;
+          Password &lt;span aria-label="required"&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id="password"
+          type="password"
+          autoComplete="new-password"
+          aria-required="true"
+          aria-invalid={!!errors.password}
+          aria-describedby={
+            errors.password ? 'password-error' : 'password-requirements'
+          }
+          {...register('password', {
+            required: 'Password is required',
+            minLength: {
+              value: 8,
+              message: 'Password must be at least 8 characters',
+            },
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+              message: 'Password must contain uppercase, lowercase, and number',
+            },
+          })}
+        /&gt;
+        &lt;ul id="password-requirements" className="help-text"&gt;
+          &lt;li&gt;At least 8 characters&lt;/li&gt;
+          &lt;li&gt;One uppercase letter&lt;/li&gt;
+          &lt;li&gt;One lowercase letter&lt;/li&gt;
+          &lt;li&gt;One number&lt;/li&gt;
+        &lt;/ul&gt;
+        {errors.password && (
+          &lt;p id="password-error" role="alert" className="error"&gt;
+            {errors.password.message}
+          &lt;/p&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Confirm Password */}
+      &lt;div className="form-field"&gt;
+        &lt;label htmlFor="confirmPassword"&gt;
+          Confirm Password &lt;span aria-label="required"&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input
+          id="confirmPassword"
+          type="password"
+          autoComplete="new-password"
+          aria-required="true"
+          aria-invalid={!!errors.confirmPassword}
+          aria-describedby={
+            errors.confirmPassword ? 'confirm-error' : undefined
+          }
+          {...register('confirmPassword', {
+            required: 'Please confirm your password',
+            validate: (value) =>
+              value === password || 'Passwords do not match',
+          })}
+        /&gt;
+        {errors.confirmPassword && (
+          &lt;p id="confirm-error" role="alert" className="error"&gt;
+            {errors.confirmPassword.message}
+          &lt;/p&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Terms and Conditions */}
+      &lt;div className="form-field"&gt;
+        &lt;label className="checkbox-label"&gt;
+          &lt;input
+            type="checkbox"
+            aria-required="true"
+            aria-invalid={!!errors.terms}
+            aria-describedby={errors.terms ? 'terms-error' : undefined}
+            {...register('terms', {
+              required: 'You must accept the terms',
+            })}
+          /&gt;
+          &lt;span&gt;
+            I agree to the{' '}
+            &lt;a href="/terms" target="_blank" rel="noopener"&gt;
+              Terms and Conditions
+            &lt;/a&gt;
+          &lt;/span&gt;
+        &lt;/label&gt;
+        {errors.terms && (
+          &lt;p id="terms-error" role="alert" className="error"&gt;
+            {errors.terms.message}
+          &lt;/p&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Submit Button */}
+      &lt;button
+        type="submit"
+        disabled={isSubmitting}
+        aria-busy={isSubmitting}
+      &gt;
+        {isSubmitting ? 'Creating Account...' : 'Create Account'}
+      &lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+          <h2>Accessible Select Dropdown</h2>
+
+          <pre><code>function AccessibleSelect({
+  label,
+  name,
+  options,
+  required,
+  register,
+  errors,
+}) {
+  const id = useId();
+  const error = errors[name];
+
+  return (
+    &lt;div className="form-field"&gt;
+      &lt;label htmlFor={id}&gt;
+        {label}
+        {required && &lt;span aria-label="required"&gt;*&lt;/span&gt;}
+      &lt;/label&gt;
+
+      &lt;select
+        id={id}
+        aria-required={required}
+        aria-invalid={!!error}
+        aria-describedby={error ? `${id}-error` : undefined}
+        {...register(name, { required: required && `${label} is required` })}
+      &gt;
+        &lt;option value=""&gt;Select {label.toLowerCase()}&lt;/option&gt;
+        {options.map((option) => (
+          &lt;option key={option.value} value={option.value}&gt;
+            {option.label}
+          &lt;/option&gt;
+        ))}
+      &lt;/select&gt;
+
+      {error && (
+        &lt;p id={`${id}-error`} role="alert" className="error"&gt;
+          {error.message}
+        &lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+// Usage
+&lt;AccessibleSelect
+  label="Country"
+  name="country"
+  required
+  options={[
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'ca', label: 'Canada' },
+  ]}
+  register={register}
+  errors={errors}
+/&gt;</code></pre>
+
+          <h2>Accessible Radio Buttons</h2>
+
+          <pre><code>function AccessibleRadioGroup({
+  legend,
+  name,
+  options,
+  required,
+  register,
+  errors,
+}) {
+  const groupId = useId();
+  const error = errors[name];
+
+  return (
+    &lt;fieldset
+      className="form-field"
+      aria-required={required}
+      aria-invalid={!!error}
+      aria-describedby={error ? `${groupId}-error` : undefined}
+    &gt;
+      &lt;legend&gt;
+        {legend}
+        {required && &lt;span aria-label="required"&gt;*&lt;/span&gt;}
+      &lt;/legend&gt;
+
+      {options.map((option) => {
+        const optionId = `${groupId}-${option.value}`;
+        return (
+          &lt;div key={option.value} className="radio-option"&gt;
+            &lt;input
+              type="radio"
+              id={optionId}
+              value={option.value}
+              {...register(name, {
+                required: required && `${legend} is required`,
+              })}
+            /&gt;
+            &lt;label htmlFor={optionId}&gt;
+              {option.label}
+              {option.description && (
+                &lt;span className="option-description"&gt;
+                  {option.description}
+                &lt;/span&gt;
+              )}
+            &lt;/label&gt;
+          &lt;/div&gt;
+        );
+      })}
+
+      {error && (
+        &lt;p id={`${groupId}-error`} role="alert" className="error"&gt;
+          {error.message}
+        &lt;/p&gt;
+      )}
+    &lt;/fieldset&gt;
+  );
+}
+
+// Usage
+&lt;AccessibleRadioGroup
+  legend="Subscription Plan"
+  name="plan"
+  required
+  options={[
+    {
+      value: 'free',
+      label: 'Free',
+      description: '$0/month - Basic features',
+    },
+    {
+      value: 'pro',
+      label: 'Pro',
+      description: '$10/month - All features',
+    },
+  ]}
+  register={register}
+  errors={errors}
+/&gt;</code></pre>
+
+          <h2>Accessible Checkbox Group</h2>
+
+          <pre><code>function AccessibleCheckboxGroup({
+  legend,
+  name,
+  options,
+  required,
+  register,
+  errors,
+}) {
+  const groupId = useId();
+  const error = errors[name];
+
+  return (
+    &lt;fieldset
+      className="form-field"
+      aria-required={required}
+      aria-invalid={!!error}
+    &gt;
+      &lt;legend&gt;
+        {legend}
+        {required && &lt;span aria-label="required"&gt;*&lt;/span&gt;}
+      &lt;/legend&gt;
+
+      {options.map((option) => {
+        const optionId = `${groupId}-${option.value}`;
+        return (
+          &lt;div key={option.value} className="checkbox-option"&gt;
+            &lt;input
+              type="checkbox"
+              id={optionId}
+              value={option.value}
+              {...register(name, {
+                required: required && `Select at least one ${legend.toLowerCase()}`,
+              })}
+            /&gt;
+            &lt;label htmlFor={optionId}&gt;{option.label}&lt;/label&gt;
+          &lt;/div&gt;
+        );
+      })}
+
+      {error && (
+        &lt;p role="alert" className="error"&gt;
+          {error.message}
+        &lt;/p&gt;
+      )}
+    &lt;/fieldset&gt;
+  );
+}
+
+// Usage
+&lt;AccessibleCheckboxGroup
+  legend="Interests"
+  name="interests"
+  required
+  options={[
+    { value: 'design', label: 'Design' },
+    { value: 'development', label: 'Development' },
+    { value: 'marketing', label: 'Marketing' },
+  ]}
+  register={register}
+  errors={errors}
+/&gt;</code></pre>
+
+          <h2>Form-Level Error Summary</h2>
+
+          <p>
+            Display all errors at the top of the form for better accessibility:
+          </p>
+
+          <pre><code>function ErrorSummary({ errors }) {
+  const errorEntries = Object.entries(errors);
+  const errorSummaryRef = useRef(null);
+
+  useEffect(() => {
+    if (errorEntries.length > 0) {
+      errorSummaryRef.current?.focus();
+    }
+  }, [errorEntries.length]);
+
+  if (errorEntries.length === 0) return null;
+
+  return (
+    &lt;div
+      ref={errorSummaryRef}
+      role="alert"
+      aria-labelledby="error-summary-title"
+      className="error-summary"
+      tabIndex={-1}
+    &gt;
+      &lt;h3 id="error-summary-title"&gt;
+        Please fix the following errors:
+      &lt;/h3&gt;
+      &lt;ul&gt;
+        {errorEntries.map(([field, error]) => (
+          &lt;li key={field}&gt;
+            &lt;a href={`#${field}`}&gt;
+              {error.message}
+            &lt;/a&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Usage in form
+function Form() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+      &lt;ErrorSummary errors={errors} /&gt;
+      {/* Form fields */}
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+          <h2>Success Message After Submission</h2>
+
+          <pre><code>function Form() {
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const successRef = useRef(null);
+
+  const onSubmit = async (data) => {
+    try {
+      await submitForm(data);
+      setSubmitSuccess(true);
+      // Focus success message
+      setTimeout(() => {
+        successRef.current?.focus();
+      }, 100);
+    } catch (error) {
+      // Handle error
+    }
+  };
+
+  if (submitSuccess) {
+    return (
+      &lt;div
+        ref={successRef}
+        role="alert"
+        aria-live="polite"
+        className="success-message"
+        tabIndex={-1}
+      &gt;
+        &lt;h2&gt;Success!&lt;/h2&gt;
+        &lt;p&gt;Your form has been submitted successfully.&lt;/p&gt;
+        &lt;button onClick={() => setSubmitSuccess(false)}&gt;
+          Submit Another
+        &lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  return &lt;form&gt;{/* Form */}&lt;/form&gt;;
+}</code></pre>
+
+          <h2>Accessible File Upload</h2>
+
+          <pre><code>function AccessibleFileUpload({ label, name, accept, register, errors }) {
+  const [fileName, setFileName] = useState('');
+  const id = useId();
+  const error = errors[name];
+
+  return (
+    &lt;div className="form-field"&gt;
+      &lt;label htmlFor={id}&gt;{label}&lt;/label&gt;
+
+      &lt;input
+        type="file"
+        id={id}
+        accept={accept}
+        aria-invalid={!!error}
+        aria-describedby={
+          fileName ? `${id}-status` : error ? `${id}-error` : undefined
+        }
+        {...register(name, {
+          onChange: (e) => {
+            const file = e.target.files[0];
+            setFileName(file ? file.name : '');
+          },
+        })}
+      /&gt;
+
+      {fileName && (
+        &lt;p id={`${id}-status`} role="status" aria-live="polite"&gt;
+          Selected file: {fileName}
+        &lt;/p&gt;
+      )}
+
+      {error && (
+        &lt;p id={`${id}-error`} role="alert" className="error"&gt;
+          {error.message}
+        &lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>Testing Your Accessible Forms</h2>
+
+          <pre><code>import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+describe('Registration Form', () => {
+  test('shows validation errors', async () => {
+    const user = userEvent.setup();
+    render(&lt;RegistrationForm /&gt;);
+
+    // Submit without filling
+    const submitBtn = screen.getByRole('button', { name: /create account/i });
+    await user.click(submitBtn);
+
+    // Check for error messages
+    expect(screen.getByRole('alert')).toHaveTextContent('Name is required');
+  });
+
+  test('form is keyboard accessible', async () => {
+    const user = userEvent.setup();
+    render(&lt;RegistrationForm /&gt;);
+
+    // Tab through form
+    await user.tab();
+    expect(screen.getByLabelText(/full name/i)).toHaveFocus();
+
+    await user.tab();
+    expect(screen.getByLabelText(/email/i)).toHaveFocus();
+  });
+
+  test('labels are properly associated', () => {
+    render(&lt;RegistrationForm /&gt;);
+
+    const emailInput = screen.getByLabelText(/email address/i);
+    expect(emailInput).toBeInTheDocument();
+    expect(emailInput).toHaveAttribute('type', 'email');
+  });
+
+  test('required fields are marked', () => {
+    render(&lt;RegistrationForm /&gt;);
+
+    const nameInput = screen.getByLabelText(/full name/i);
+    expect(nameInput).toHaveAttribute('aria-required', 'true');
+  });
+});</code></pre>
+
+          <h2>Common Form Accessibility Mistakes</h2>
+
+          <h3>❌ Using Placeholder as Label</h3>
+
+          <pre><code>// Bad
+&lt;input placeholder="Enter your email" /&gt;
+
+// Good
+&lt;label htmlFor="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" placeholder="you@example.com" /&gt;</code></pre>
+
+          <h3>❌ Not Announcing Errors</h3>
+
+          <pre><code>// Bad
+{error && &lt;div className="error"&gt;{error}&lt;/div&gt;}
+
+// Good
+{error && &lt;div role="alert"&gt;{error}&lt;/div&gt;}</code></pre>
+
+          <h3>❌ Poor Error Messages</h3>
+
+          <pre><code>// Bad
+&lt;p&gt;Invalid input&lt;/p&gt;
+
+// Good
+&lt;p&gt;Email must be in format: name@example.com&lt;/p&gt;</code></pre>
+
+          <h3>❌ No Focus Management</h3>
+
+          <pre><code>// Bad - No focus after submission error
+const onSubmit = async (data) => {
+  try {
+    await submit(data);
+  } catch (error) {
+    setError(error);
+  }
+};
+
+// Good - Focus error summary
+const onSubmit = async (data) => {
+  try {
+    await submit(data);
+  } catch (error) {
+    setError(error);
+    errorSummaryRef.current?.focus();
+  }
+};</code></pre>
+
+          <h2>Best Practices Checklist</h2>
+
+          <ul>
+            <li>✅ Every input has a visible label</li>
+            <li>✅ Labels are properly associated with inputs</li>
+            <li>
+              ✅ Required fields are marked with <code>aria-required</code>
+            </li>
+            <li>✅ Error messages use <code>role="alert"</code></li>
+            <li>✅ Errors are linked with <code>aria-describedby</code></li>
+            <li>✅ Invalid fields have <code>aria-invalid="true"</code></li>
+            <li>✅ Help text is associated with inputs</li>
+            <li>
+              ✅ Use <code>&lt;fieldset&gt;</code> and
+              <code>&lt;legend&gt;</code> for groups
+            </li>
+            <li>✅ Provide clear, specific error messages</li>
+            <li>✅ Focus management on submit/error</li>
+            <li>✅ Submit button has loading state</li>
+            <li>✅ Use proper <code>autocomplete</code> attributes</li>
+            <li>✅ Test with keyboard and screen reader</li>
+          </ul>
+
+          <h2>Useful AutoComplete Values</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>AutoComplete Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Full Name</td>
+                <td><code>name</code></td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td><code>email</code></td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td><code>tel</code></td>
+              </tr>
+              <tr>
+                <td>Address</td>
+                <td><code>street-address</code></td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td><code>address-level2</code></td>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td><code>country</code></td>
+              </tr>
+              <tr>
+                <td>Postal Code</td>
+                <td><code>postal-code</code></td>
+              </tr>
+              <tr>
+                <td>New Password</td>
+                <td><code>new-password</code></td>
+              </tr>
+              <tr>
+                <td>Current Password</td>
+                <td><code>current-password</code></td>
+              </tr>
+              <tr>
+                <td>Birthday</td>
+                <td><code>bday</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Resources for Further Learning</h2>
+
+          <ul>
+            <li>
+              <strong>React Hook Form Docs</strong> - Official documentation
+            </li>
+            <li>
+              <strong>WCAG Form Guidelines</strong> - Accessibility standards
+            </li>
+            <li>
+              <strong>WebAIM Form Accessibility</strong> - Best practices guide
+            </li>
+            <li>
+              <strong>GOV.UK Design System</strong> - Excellent form patterns
+            </li>
+            <li><strong>a11y Project</strong> - Accessibility checklist</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>
+              React Hook Form handles validation, you handle accessibility
+            </li>
+            <li>Every input needs a proper label and error handling</li>
+            <li>
+              Use <code>aria-required</code>, <code>aria-invalid</code>, and
+              <code>aria-describedby</code>
+            </li>
+            <li>
+              Error messages must have <code>role="alert"</code> for immediate
+              announcement
+            </li>
+            <li>
+              Group related fields with <code>&lt;fieldset&gt;</code> and
+              <code>&lt;legend&gt;</code>
+            </li>
+            <li>Provide clear, actionable error messages</li>
+            <li>Test with keyboard navigation and screen readers</li>
+            <li>Focus management is crucial for good UX</li>
+          </ul>
+
+          <p>
+            Building accessible forms with React Hook Form isn't hard—it just
+            requires attention to detail. Use proper labels, manage focus,
+            announce errors clearly, and always test with keyboard and screen
+            readers. Your users will appreciate the effort, and you'll avoid
+            expensive accessibility lawsuits. Win-win!
+          </p>
+
+          <blockquote>
+            💡 Pro tip: Create reusable accessible form components in your
+            project. Once you've built them correctly once, you can use them
+            everywhere and maintain consistency across your app!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>

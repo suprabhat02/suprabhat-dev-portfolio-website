@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      React Query vs Redux Toolkit: When to Use Each | Beginner's Guide (2026)
+    </title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="Confused between React Query and Redux Toolkit? This beginner-friendly guide explains when to use each tool with simple examples and comparisons."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="react query, redux toolkit, state management react, react query vs redux, when to use redux, tanstack query, rtk query, state management comparison"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      content="https://suprabhat-portfolio.netlify.app/blog/react-query-vs-redux-toolkit.html"
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="React Query vs Redux Toolkit: When to Use Each | Beginner's Guide (2026)"
+    />
+    <meta
+      property="og:description"
+      content="Confused between React Query and Redux Toolkit? This beginner-friendly guide explains when to use each tool with simple examples and comparisons."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/react-query-vs-redux-toolkit.html"
+    />
+    <meta property="article:published_time" content="2026-02-09" />
+    <meta property="article:author" content="Suprabhat Kumar" />
+    <meta property="article:section" content="React" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="React Query vs Redux Toolkit: When to Use Each"
+    />
+    <meta
+      name="twitter:description"
+      content="Beginner-friendly comparison of React Query and Redux Toolkit with real examples."
+    />
+    <meta name="twitter:creator" content="@suprabhat" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li>
+            <a href="../blog.html" class="mobile-menu-link active">Blog</a>
+          </li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-02-09">February 9, 2026</time>
+            <span class="blog-post-category">React</span>
+            <span>7 min read</span>
+          </div>
+          <h1>React Query vs Redux Toolkit: When to Use Each</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            Choosing between React Query and Redux Toolkit can be confusing for
+            beginners. They both manage state, but they solve different
+            problems. In this guide, you'll learn exactly when to use each tool,
+            with clear examples and practical advice. Let's end the confusion!
+          </p>
+
+          <h2>The Core Difference</h2>
+
+          <p>Here's the key insight that will guide all your decisions:</p>
+
+          <ul>
+            <li>
+              <strong>React Query (TanStack Query)</strong> - Manages
+              <em>server state</em> (data from APIs)
+            </li>
+            <li>
+              <strong>Redux Toolkit</strong> - Manages <em>client state</em> (UI
+              state, user preferences)
+            </li>
+          </ul>
+
+          <p>
+            Understanding this distinction is crucial. Server state has unique
+            challenges: caching, synchronization, background updates, and
+            staleness. Client state is simpler: it's local to your app and
+            doesn't need syncing with a server.
+          </p>
+
+          <h2>What is React Query?</h2>
+
+          <p>
+            React Query is a data-fetching library that makes working with
+            server state effortless. It handles caching, background updates, and
+            synchronization automatically.
+          </p>
+
+          <h3>React Query Example</h3>
+
+          <pre><code>import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+// Fetching data
+function UserProfile({ userId }) {
+  const { data, isLoading, error, isError } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: async () => {
+      const response = await fetch(`/api/users/${userId}`);
+      if (!response.ok) throw new Error('Failed to fetch');
+      return response.json();
+    },
+    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
+    cacheTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
+    retry: 3, // Retry failed requests 3 times
+  });
+
+  if (isLoading) return &lt;div&gt;Loading...&lt;/div&gt;;
+  if (isError) return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+
+  return &lt;div&gt;{data.name}&lt;/div&gt;;
+}
+
+// Updating data
+function UpdateProfile() {
+  const queryClient = useQueryClient();
+  
+  const mutation = useMutation({
+    mutationFn: async (newData) => {
+      const response = await fetch('/api/user', {
+        method: 'PUT',
+        body: JSON.stringify(newData),
+      });
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch user queries
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+
+  const handleUpdate = () => {
+    mutation.mutate({ name: 'John Doe' });
+  };
+
+  return (
+    &lt;button onClick={handleUpdate} disabled={mutation.isLoading}&gt;
+      {mutation.isLoading ? 'Updating...' : 'Update Profile'}
+    &lt;/button&gt;
+  );
+}</code></pre>
+
+          <h3>React Query Pros:</h3>
+
+          <ul>
+            <li>✅ Automatic caching and background refetching</li>
+            <li>✅ Loading and error states built-in</li>
+            <li>✅ Optimistic updates made easy</li>
+            <li>✅ Automatic request deduplication</li>
+            <li>✅ Pagination and infinite scroll support</li>
+            <li>✅ Much less boilerplate code</li>
+            <li>✅ DevTools for debugging queries</li>
+          </ul>
+
+          <h3>React Query Cons:</h3>
+
+          <ul>
+            <li>❌ Only handles server state</li>
+            <li>❌ Learning curve for query keys</li>
+            <li>❌ Adds another dependency</li>
+          </ul>
+
+          <h2>What is Redux Toolkit?</h2>
+
+          <p>
+            Redux Toolkit is the modern way to write Redux. It simplifies Redux
+            by providing opinionated utilities for common patterns like creating
+            reducers, actions, and stores.
+          </p>
+
+          <h3>Redux Toolkit Example</h3>
+
+          <pre><code>import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
+
+// Create a slice
+const themeSlice = createSlice({
+  name: 'theme',
+  initialState: {
+    mode: 'light',
+    sidebarOpen: false,
+    notifications: [],
+  },
+  reducers: {
+    toggleTheme: (state) => {
+      state.mode = state.mode === 'light' ? 'dark' : 'light';
+    },
+    toggleSidebar: (state) => {
+      state.sidebarOpen = !state.sidebarOpen;
+    },
+    addNotification: (state, action) => {
+      state.notifications.push(action.payload);
+    },
+    removeNotification: (state, action) => {
+      state.notifications = state.notifications.filter(
+        (n) => n.id !== action.payload
+      );
+    },
+  },
+});
+
+export const { 
+  toggleTheme, 
+  toggleSidebar, 
+  addNotification, 
+  removeNotification 
+} = themeSlice.actions;
+
+// Configure store
+const store = configureStore({
+  reducer: {
+    theme: themeSlice.reducer,
+  },
+});
+
+// Using in components
+function ThemeToggle() {
+  const mode = useSelector((state) => state.theme.mode);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;button onClick={() => dispatch(toggleTheme())}&gt;
+      Current theme: {mode}
+    &lt;/button&gt;
+  );
+}
+
+function Sidebar() {
+  const isOpen = useSelector((state) => state.theme.sidebarOpen);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;aside className={isOpen ? 'open' : 'closed'}&gt;
+      &lt;button onClick={() => dispatch(toggleSidebar())}&gt;
+        Toggle Sidebar
+      &lt;/button&gt;
+    &lt;/aside&gt;
+  );
+}</code></pre>
+
+          <h3>Redux Toolkit Pros:</h3>
+
+          <ul>
+            <li>✅ Predictable state management</li>
+            <li>✅ Great for complex client state</li>
+            <li>✅ Time-travel debugging with DevTools</li>
+            <li>✅ Immer for immutable updates</li>
+            <li>✅ Middleware ecosystem (sagas, thunks)</li>
+            <li>✅ Server state support via RTK Query</li>
+          </ul>
+
+          <h3>Redux Toolkit Cons:</h3>
+
+          <ul>
+            <li>❌ More boilerplate than React Query for API calls</li>
+            <li>❌ Steeper learning curve</li>
+            <li>❌ Can be overkill for simple apps</li>
+            <li>❌ Requires understanding of Redux concepts</li>
+          </ul>
+
+          <h2>When to Use React Query</h2>
+
+          <p>
+            Choose React Query when you're primarily dealing with server data:
+          </p>
+
+          <h3>✅ Perfect Use Cases for React Query:</h3>
+
+          <ul>
+            <li>
+              <strong>Fetching user profiles</strong> - Needs caching and
+              background updates
+            </li>
+            <li>
+              <strong>Product listings</strong> - Benefits from pagination and
+              infinite scroll
+            </li>
+            <li>
+              <strong>Dashboard data</strong> - Requires automatic refetching
+            </li>
+            <li>
+              <strong>Search results</strong> - Needs request deduplication
+            </li>
+            <li>
+              <strong>Real-time data</strong> - Benefits from polling and window
+              focus refetching
+            </li>
+            <li>
+              <strong>CRUD operations</strong> - Mutations with optimistic
+              updates
+            </li>
+          </ul>
+
+          <h3>Real-World React Query Example</h3>
+
+          <pre><code>// Infinite scroll with React Query
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+function ProductList() {
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['products'],
+    queryFn: async ({ pageParam = 1 }) => {
+      const response = await fetch(`/api/products?page=${pageParam}`);
+      return response.json();
+    },
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.hasMore ? pages.length + 1 : undefined;
+    },
+  });
+
+  return (
+    &lt;div&gt;
+      {data?.pages.map((page) => (
+        page.products.map((product) => (
+          &lt;ProductCard key={product.id} product={product} /&gt;
+        ))
+      ))}
+      
+      {hasNextPage && (
+        &lt;button 
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+        &gt;
+          {isFetchingNextPage ? 'Loading...' : 'Load More'}
+        &lt;/button&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>When to Use Redux Toolkit</h2>
+
+          <p>
+            Choose Redux Toolkit when you need complex client-side state
+            management:
+          </p>
+
+          <h3>✅ Perfect Use Cases for Redux Toolkit:</h3>
+
+          <ul>
+            <li><strong>Theme preferences</strong> - Global UI state</li>
+            <li>
+              <strong>User authentication</strong> - Token and user info across
+              app
+            </li>
+            <li>
+              <strong>Shopping cart</strong> - Complex client state with
+              calculations
+            </li>
+            <li>
+              <strong>Multi-step forms</strong> - State persisted across steps
+            </li>
+            <li>
+              <strong>UI state</strong> - Sidebar open/closed, modals,
+              notifications
+            </li>
+            <li>
+              <strong>Complex filtering</strong> - Multiple filter criteria to
+              manage
+            </li>
+          </ul>
+
+          <h3>Real-World Redux Toolkit Example</h3>
+
+          <pre><code>import { createSlice } from '@reduxjs/toolkit';
+
+// Shopping cart with complex logic
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: {
+    items: [],
+    coupon: null,
+    shipping: 0,
+  },
+  reducers: {
+    addToCart: (state, action) => {
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({ ...action.payload, quantity: 1 });
+      }
+    },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(
+        (item) => item.id !== action.payload
+      );
+    },
+    updateQuantity: (state, action) => {
+      const item = state.items.find((i) => i.id === action.payload.id);
+      if (item) {
+        item.quantity = action.payload.quantity;
+      }
+    },
+    applyCoupon: (state, action) => {
+      state.coupon = action.payload;
+    },
+    setShipping: (state, action) => {
+      state.shipping = action.payload;
+    },
+  },
+});
+
+// Selectors with complex calculations
+export const selectCartTotal = (state) => {
+  const subtotal = state.cart.items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  
+  const discount = state.cart.coupon 
+    ? subtotal * state.cart.coupon.percent / 100 
+    : 0;
+  
+  return subtotal - discount + state.cart.shipping;
+};
+
+export const selectItemCount = (state) => {
+  return state.cart.items.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+};</code></pre>
+
+          <h2>Can You Use Both Together?</h2>
+
+          <p>Absolutely! In fact, using both is often the best approach:</p>
+
+          <ul>
+            <li>
+              <strong>React Query</strong> for all server state (API calls, data
+              fetching)
+            </li>
+            <li>
+              <strong>Redux Toolkit</strong> for client state (UI state, cart,
+              preferences)
+            </li>
+          </ul>
+
+          <h3>Combined Example</h3>
+
+          <pre><code>// React Query for products (server state)
+function ProductList() {
+  const { data: products } = useQuery({
+    queryKey: ['products'],
+    queryFn: fetchProducts,
+  });
+
+  // Redux for cart (client state)
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  return (
+    &lt;div&gt;
+      {products?.map((product) => (
+        &lt;div key={product.id}&gt;
+          &lt;h3&gt;{product.name}&lt;/h3&gt;
+          &lt;button onClick={() => handleAddToCart(product)}&gt;
+            Add to Cart
+          &lt;/button&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+          <h2>RTK Query: Redux's Answer to React Query</h2>
+
+          <p>
+            Redux Toolkit includes RTK Query, which brings React Query-like
+            features to Redux:
+          </p>
+
+          <pre><code>import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+const api = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  endpoints: (builder) => ({
+    getUsers: builder.query({
+      query: () => 'users',
+    }),
+    getUserById: builder.query({
+      query: (id) => `users/${id}`,
+    }),
+    updateUser: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `users/${id}`,
+        method: 'PUT',
+        body: patch,
+      }),
+    }),
+  }),
+});
+
+export const { useGetUsersQuery, useGetUserByIdQuery, useUpdateUserMutation } = api;
+
+// Usage
+function UserList() {
+  const { data, isLoading, error } = useGetUsersQuery();
+  
+  if (isLoading) return &lt;div&gt;Loading...&lt;/div&gt;;
+  if (error) return &lt;div&gt;Error!&lt;/div&gt;;
+  
+  return &lt;ul&gt;{data.map((user) => &lt;li&gt;{user.name}&lt;/li&gt;)}&lt;/ul&gt;;
+}</code></pre>
+
+          <h2>Decision Tree: Which Should You Use?</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Is it data from an API?</td>
+                <td>Yes</td>
+                <td>React Query</td>
+              </tr>
+              <tr>
+                <td>Is it UI state (theme, sidebar)?</td>
+                <td>Yes</td>
+                <td>Redux Toolkit</td>
+              </tr>
+              <tr>
+                <td>Does it need caching?</td>
+                <td>Yes</td>
+                <td>React Query</td>
+              </tr>
+              <tr>
+                <td>Does it persist across pages?</td>
+                <td>Yes</td>
+                <td>Redux Toolkit</td>
+              </tr>
+              <tr>
+                <td>Complex calculations on state?</td>
+                <td>Yes</td>
+                <td>Redux Toolkit</td>
+              </tr>
+              <tr>
+                <td>Already using Redux?</td>
+                <td>Yes</td>
+                <td>Consider RTK Query</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Common Mistakes to Avoid</h2>
+
+          <h3>❌ Using Redux for API Calls</h3>
+
+          <pre><code>// Bad - Complex and error-prone
+const [data, setData] = useState(null);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState(null);
+
+useEffect(() => {
+  setLoading(true);
+  fetch('/api/data')
+    .then(res => res.json())
+    .then(data => { setData(data); setLoading(false); })
+    .catch(err => { setError(err); setLoading(false); });
+}, []);
+
+// Good - Use React Query
+const { data, isLoading, error } = useQuery({
+  queryKey: ['data'],
+  queryFn: fetchData,
+});</code></pre>
+
+          <h3>❌ Using React Query for UI State</h3>
+
+          <pre><code>// Bad - Misusing React Query
+const { data: sidebarOpen } = useQuery({
+  queryKey: ['sidebar'],
+  queryFn: () => false, // Not server data!
+});
+
+// Good - Use local state or Redux
+const [sidebarOpen, setSidebarOpen] = useState(false);
+// or
+const sidebarOpen = useSelector((state) => state.ui.sidebarOpen);</code></pre>
+
+          <h2>Quick Setup Guide</h2>
+
+          <h3>React Query Setup</h3>
+
+          <pre><code>npm install @tanstack/react-query
+
+// App.jsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1 * 60 * 1000, // 1 minute
+      cacheTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+function App() {
+  return (
+    &lt;QueryClientProvider client={queryClient}&gt;
+      &lt;YourApp /&gt;
+    &lt;/QueryClientProvider&gt;
+  );
+}</code></pre>
+
+          <h3>Redux Toolkit Setup</h3>
+
+          <pre><code>npm install @reduxjs/toolkit react-redux
+
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './cartSlice';
+import themeReducer from './themeSlice';
+
+export const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+    theme: themeReducer,
+  },
+});
+
+// App.jsx
+import { Provider } from 'react-redux';
+import { store } from './store';
+
+function App() {
+  return (
+    &lt;Provider store={store}&gt;
+      &lt;YourApp /&gt;
+    &lt;/Provider&gt;
+  );
+}</code></pre>
+
+          <h2>Resources for Learning More</h2>
+
+          <ul>
+            <li>
+              <strong>TanStack Query Docs</strong> - Official React Query
+              documentation
+            </li>
+            <li><strong>Redux Toolkit Docs</strong> - Modern Redux guide</li>
+            <li><strong>RTK Query</strong> - Redux's data fetching solution</li>
+            <li>
+              <strong>React Query vs Redux</strong> - Official comparison guide
+            </li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+
+          <ul>
+            <li>React Query is for <strong>server state</strong> (API data)</li>
+            <li>
+              Redux Toolkit is for <strong>client state</strong> (UI state)
+            </li>
+            <li>You can (and often should) use both together</li>
+            <li>React Query reduces boilerplate for data fetching</li>
+            <li>Redux is better for complex client-side logic</li>
+            <li>RTK Query bridges the gap if you're already using Redux</li>
+            <li>Choose based on the type of state, not popularity</li>
+          </ul>
+
+          <p>
+            Stop worrying about which is "better"—they solve different problems!
+            Use React Query for server data, Redux Toolkit for complex client
+            state, and enjoy the best of both worlds. Your code will be cleaner,
+            more maintainable, and easier to understand.
+          </p>
+
+          <blockquote>
+            💡 Pro tip: Start with React Query for all your API calls. Only add
+            Redux if you find yourself prop-drilling complex client state
+            through multiple components!
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer component placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- EmailJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Main script: interactive features and initialization (MUST load first) -->
+    <script src="../scripts/main.js" defer></script>
+    <!-- Component loader: initializes all components after main.js defines functions -->
+    <script src="../includes/component-loader.js" defer></script>
+  </body>
+</html>
