@@ -218,7 +218,8 @@ window.initActiveNav = function initActiveNav() {
     normalizePath(browser.location.pathname) === normalizePath("/index.html");
   const isBlogPage =
     browser.location.pathname.includes("/blog/") ||
-    normalizePath(browser.location.pathname) === normalizePath("/blog.html");
+    normalizePath(browser.location.pathname) === normalizePath("/blog.html") ||
+    normalizePath(browser.location.pathname) === normalizePath("/blog");
   const adjustHashLinksForPage = () => {
     const basePath = browser.location.pathname.includes("/blog/")
       ? "../"
@@ -234,7 +235,7 @@ window.initActiveNav = function initActiveNav() {
   };
   const setBlogActive = () => {
     const blogLink = document.querySelector(
-      '.site-nav a[href*="blog.html"], .site-nav a[href*="/blog/"]',
+      '.site-nav a[href*="blog.html"], .site-nav a[href="/blog"], .site-nav a[href*="/blog/"]',
     );
     if (blogLink && isBlogPage) {
       blogLink.setAttribute("aria-current", "page");

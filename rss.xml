@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Suprabhat Kumar - Front-End Development Blog</title>
+    <link>https://suprabhat-portfolio.netlify.app/blog</link>
+    <description>Insights and tutorials on front-end development, performance, accessibility, and modern React practices.</description>
+    <language>en</language>
+    <lastBuildDate>Wed, 18 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Why Clean and Minimal UI Works Better for Professional Websites</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/why-clean-minimal-ui-professional-website.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/why-clean-minimal-ui-professional-website.html</guid>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Learn why clean, minimal UI builds trust, improves clarity, and helps professional websites convert with beginner-friendly tips.</description>
+    </item>
+    <item>
+      <title>Building Accessible React Components with TypeScript</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/building-accessible-react-components.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/building-accessible-react-components.html</guid>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Learn how to create accessible React components using TypeScript, ARIA, keyboard navigation, and screen reader support.</description>
+    </item>
+    <item>
+      <title>Next.js Performance Optimization: Real-World Tips</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/nextjs-performance-optimization.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/nextjs-performance-optimization.html</guid>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Boost Next.js performance with image optimization, code splitting, and caching strategies.</description>
+    </item>
+    <item>
+      <title>CSS Flexbox Tutorial for Beginners: A Complete Guide</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/css-flexbox-tutorial-for-beginners.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/css-flexbox-tutorial-for-beginners.html</guid>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Learn CSS Flexbox from scratch and build responsive layouts with practical examples.</description>
+    </item>
+    <item>
+      <title>React Query vs Redux Toolkit: When to Use Each</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/react-query-vs-redux-toolkit.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/react-query-vs-redux-toolkit.html</guid>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Understand when to use React Query or Redux Toolkit with simple comparisons and examples.</description>
+    </item>
+    <item>
+      <title>How to Center a Div in CSS: 5 Easy Methods That Work</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/how-to-center-a-div-in-css.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/how-to-center-a-div-in-css.html</guid>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Five reliable ways to center elements in CSS using Flexbox, Grid, and positioning.</description>
+    </item>
+    <item>
+      <title>Lazy Loading Images for Better Core Web Vitals</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/lazy-loading-images-core-web-vitals.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/lazy-loading-images-core-web-vitals.html</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Improve Core Web Vitals with lazy loading and image optimization techniques.</description>
+    </item>
+    <item>
+      <title>ARIA Patterns in React: Complete Beginner's Guide</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/aria-patterns-react-guide.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/aria-patterns-react-guide.html</guid>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Learn ARIA roles, states, and patterns to build accessible React interfaces.</description>
+    </item>
+    <item>
+      <title>JavaScript Array Methods Explained: map, filter, and reduce</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/javascript-array-methods-explained.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/javascript-array-methods-explained.html</guid>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Master map, filter, and reduce with clear examples for cleaner JavaScript.</description>
+    </item>
+    <item>
+      <title>Keyboard Navigation in Single Page Applications</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/keyboard-navigation-spa.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/keyboard-navigation-spa.html</guid>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Make SPAs accessible with keyboard navigation, focus management, and skip links.</description>
+    </item>
+    <item>
+      <title>Screen Reader Testing for React Developers</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/screen-reader-testing-react.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/screen-reader-testing-react.html</guid>
+      <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Step-by-step guide to testing React apps with NVDA and VoiceOver.</description>
+    </item>
+    <item>
+      <title>Building Accessible Forms with React Hook Form</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/accessible-forms-react-hook-form.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/accessible-forms-react-hook-form.html</guid>
+      <pubDate>Mon, 02 Feb 2026 00:00:00 +0000</pubDate>
+      <description>Create accessible forms with validation, error messages, and ARIA labels.</description>
+    </item>
+  </channel>
+</rss>
