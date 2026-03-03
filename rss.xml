@@ -5,7 +5,14 @@
     <link>https://suprabhat-portfolio.netlify.app/blog</link>
     <description>Insights and tutorials on front-end development, performance, accessibility, and modern React practices.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 18 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Frontend Best Practices for Clean, Scalable UI</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/frontend-best-practices-clean-ui.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/frontend-best-practices-clean-ui.html</guid>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Beginner-friendly best practices for clean structure, accessibility, and performance in modern front-end UI.</description>
+    </item>
     <item>
       <title>Why Clean and Minimal UI Works Better for Professional Websites</title>
       <link>https://suprabhat-portfolio.netlify.app/blog/why-clean-minimal-ui-professional-website.html</link>
