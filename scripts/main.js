@@ -137,47 +137,6 @@
     }
   }
 })();
-(function () {
-  const form = document.querySelector("[data-contact-form]");
-  if (!form) return;
-  const statusEl = form.querySelector("[data-form-status]");
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const publicKey = "8mGUhqGd1FiBHRw-g";
-  const serviceId = "service_ac324gx";
-  const templateId = "template_pl3hp25";
-  function setStatus(message) {
-    if (!statusEl) return;
-    statusEl.textContent = message;
-  }
-  function setBusy(isBusy) {
-    if (submitBtn) submitBtn.disabled = isBusy;
-  }
-  if (!window.emailjs) {
-    setStatus("Email service failed to load. Please try again later.");
-    return;
-  }
-  window.emailjs.init({ publicKey });
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    setBusy(true);
-    setStatus("Sending…");
-    try {
-      await window.emailjs.sendForm(serviceId, templateId, form);
-      setStatus("Message sent successfully.");
-      window.alert("Thanks — your message has been sent.");
-      form.reset();
-    } catch (err) {
-      setStatus("Failed to send. Please try again.");
-      window.alert("Sorry — your message could not be sent. Please try again.");
-    } finally {
-      setBusy(false);
-    }
-  });
-})();
 window.updateCurrentYear = function updateCurrentYear() {
   const yearEl = document.getElementById("currentyear");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -510,17 +469,30 @@ window.initMobileMenu = function initMobileMenu() {
   );
 };
 (function () {
-  const emailSenderId = "service_default";
-  const templateId = "template_default";
-  const userId = "user_default";
+  const form = document.querySelector("[data-contact-form]");
+  const dataset = form?.dataset ?? {};
+  const publicKey = (dataset.emailjsPublicKey || "9RrcfAG32EeSdCoIj").trim();
+  const emailSenderId = (dataset.emailjsServiceId || "service_ac324gx").trim();
+  const templateId = (dataset.emailjsTemplateId || "template_pl3hp25").trim();
   let emailJsReady = false;
-  if (typeof emailjs !== "undefined") {
-    emailjs.init(userId);
+  if (
+    typeof emailjs !== "undefined" &&
+    publicKey &&
+    emailSenderId &&
+    templateId
+  ) {
+    emailjs.init({ publicKey });
     emailJsReady = true;
+  }
+  function getErrorElement(fieldId) {
+    const exactMatch = document.getElementById(`${fieldId}-error`);
+    if (exactMatch) return exactMatch;
+    const fallbackId = fieldId.replace(/^contact-/, "");
+    return document.getElementById(`${fallbackId}-error`);
   }
   function displayError(inputId, message) {
     const input = document.getElementById(inputId);
-    const errorSpan = document.getElementById(`${inputId}-error`);
+    const errorSpan = getErrorElement(inputId);
     if (!input || !errorSpan) return;
     if (message) {
       input.classList.add("is-invalid");
@@ -628,7 +600,7 @@ window.initMobileMenu = function initMobileMenu() {
             message: messageInput.value,
             to_email: "suprabhatkumar02@gmail.com",
           },
-          userId,
+          publicKey,
         );
         statusOutput.textContent =
           "✓ Message sent successfully! I'll get back to you soon.";
@@ -639,7 +611,7 @@ window.initMobileMenu = function initMobileMenu() {
         );
         inputs.forEach((input) => {
           input.classList.remove("is-invalid");
-          const errorSpan = document.getElementById(`${input.id}-error`);
+          const errorSpan = getErrorElement(input.id);
           if (errorSpan) errorSpan.textContent = "";
         });
         setTimeout(() => {
@@ -647,7 +619,11 @@ window.initMobileMenu = function initMobileMenu() {
         }, 5000);
       } catch (error) {
         console.error("EmailJS error:", error);
-        statusOutput.textContent = "✗ Failed to send message. Try again.";
+        const message =
+          typeof error?.text === "string" && error.text.trim()
+            ? error.text
+            : "Failed to send message. Try again.";
+        statusOutput.textContent = `✗ ${message}`;
         statusOutput.style.color = "var(--color-red-500, #dc2626)";
       }
     });
