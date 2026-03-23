@@ -5,7 +5,14 @@
     <link>https://suprabhat-portfolio.netlify.app/blog</link>
     <description>Insights and tutorials on front-end development, performance, accessibility, and modern React practices.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 03 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Front-End Code Review Checklist Before You Ship</title>
+      <link>https://suprabhat-portfolio.netlify.app/blog/frontend-code-review-checklist.html</link>
+      <guid>https://suprabhat-portfolio.netlify.app/blog/frontend-code-review-checklist.html</guid>
+      <pubDate>Mon, 23 Mar 2026 00:00:00 +0000</pubDate>
+      <description>A simple front-end checklist to catch UI, accessibility, responsive, and performance issues before release.</description>
+    </item>
     <item>
       <title>Frontend Best Practices for Clean, Scalable UI</title>
       <link>https://suprabhat-portfolio.netlify.app/blog/frontend-best-practices-clean-ui.html</link>

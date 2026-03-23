@@ -118,6 +118,8 @@ html {
   display: grid;
   gap: var(--space-3);
   margin-top: var(--space-4);
+  padding: 0;
+  list-style: none;
 }
 .faq-item {
   border: 0.0625rem solid var(--color-border-soft);
@@ -259,6 +261,8 @@ html {
 .hero-content {
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 .skills-grid,
 .tools-grid {
@@ -660,10 +664,6 @@ html[data-app-loaded="true"] .app-loader {
   );
   pointer-events: none;
   z-index: 0;
-}
-.hero-content {
-  position: relative;
-  z-index: 1;
 }
 html[data-theme="dark"] .hero::before {
   opacity: 0.7;

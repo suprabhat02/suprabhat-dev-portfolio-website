@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Front-End Code Review Checklist Before You Ship (2026)</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/suprabhat-favicon.png"
+    />
+
+    <meta
+      name="description"
+      content="A simple front-end code review checklist for cleaner UI, fewer bugs, better accessibility, and stronger performance before shipping to production."
+    />
+    <meta name="theme-color" content="#f28c28" />
+    <meta name="author" content="Suprabhat Kumar" />
+    <meta
+      name="keywords"
+      content="front-end code review checklist, frontend review checklist, ui quality checklist, accessibility checklist, performance checklist, front-end best practices"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://suprabhat-portfolio.netlify.app/blog/frontend-code-review-checklist.html"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Suprabhat Kumar Blog RSS"
+      href="/rss.xml"
+    />
+
+    <meta
+      property="og:title"
+      content="Front-End Code Review Checklist Before You Ship (2026)"
+    />
+    <meta
+      property="og:description"
+      content="Use this simple front-end code review checklist to catch UI issues, accessibility gaps, and performance problems before release."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://suprabhat-portfolio.netlify.app/blog/frontend-code-review-checklist.html"
+    />
+    <meta property="article:published_time" content="2026-03-23" />
+    <meta property="article:author" content="Suprabhat Kumar" />
+    <meta property="article:section" content="Front-End" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Front-End Code Review Checklist Before You Ship"
+    />
+    <meta
+      name="twitter:description"
+      content="A simple checklist for cleaner front-end releases with better UI quality, accessibility, and performance."
+    />
+    <meta name="twitter:creator" content="@suprabhat" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Front-End Code Review Checklist Before You Ship (2026)",
+        "description": "A simple front-end code review checklist for cleaner UI, fewer bugs, better accessibility, and stronger performance before shipping to production.",
+        "image": "https://suprabhat-portfolio.netlify.app/assets/images/og-image.svg",
+        "author": {
+          "@type": "Person",
+          "name": "Suprabhat Kumar"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Suprabhat Kumar"
+        },
+        "datePublished": "2026-03-23",
+        "dateModified": "2026-03-23",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://suprabhat-portfolio.netlify.app/blog/frontend-code-review-checklist.html"
+        }
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inconsolata",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+      :focus-visible {
+        outline: 0.1875rem solid var(--color-orange-500);
+        outline-offset: 0.25rem;
+      }
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0.625rem 1.5rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="logo" href="../index.html" aria-label="Go to homepage"
+          >Suprabhat</a
+        >
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#tools">Tools</a></li>
+            <li><a href="../blog.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-controls">
+          <fieldset class="segmented mobile-theme-picker">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <button
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              /></svg
+            ><svg
+              class="close-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu-list">
+          <li>
+            <a href="../index.html#about" class="mobile-menu-link">About</a>
+          </li>
+          <li>
+            <a href="../index.html#skills" class="mobile-menu-link">Skills</a>
+          </li>
+          <li>
+            <a href="../index.html#experience" class="mobile-menu-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="../index.html#tools" class="mobile-menu-link">Tools</a>
+          </li>
+          <li><a href="../blog.html" class="mobile-menu-link">Blog</a></li>
+          <li>
+            <a href="../index.html#contact" class="mobile-menu-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="main">
+      <article class="blog-post-header section">
+        <div class="container">
+          <a href="../blog.html" class="blog-back-link">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="blog-post-meta">
+            <time datetime="2026-03-23">March 23, 2026</time>
+            <span class="blog-post-category">Front-End</span>
+            <span>8 min read</span>
+          </div>
+          <h1>Front-End Code Review Checklist Before You Ship</h1>
+        </div>
+      </article>
+
+      <section class="blog-post-content">
+        <div class="container">
+          <p>
+            A front-end code review should do more than catch typos. It should
+            help you ship cleaner UI, avoid common bugs, and protect user
+            experience before release. If you are a beginner, it is easy to miss
+            small issues that later become production problems. This checklist
+            gives you a simple review flow you can use on personal projects,
+            team work, or client websites.
+          </p>
+
+          <h2>1. Check the page structure first</h2>
+          <p>
+            Start with the HTML structure before looking at visual details. Ask:
+          </p>
+          <ul>
+            <li>Does the page have one clear <code>h1</code>?</li>
+            <li>Are headings in the right order?</li>
+            <li>Are sections grouped logically?</li>
+            <li>Is the navigation easy to follow?</li>
+          </ul>
+          <p>
+            Good structure improves accessibility, readability, and SEO at the
+            same time.
+          </p>
+
+          <h2>2. Review text clarity and labels</h2>
+          <p>
+            UI copy is part of front-end quality. Buttons, links, and form
+            labels should be clear. Replace vague text like "Click here" with
+            action-focused text like "Read pricing" or "Send message".
+          </p>
+
+          <h2>3. Test responsiveness on small screens</h2>
+          <p>
+            A design can look perfect on desktop and still break on mobile. In
+            every review, test smaller widths and check for:
+          </p>
+          <ul>
+            <li>Text that becomes too small or too wide</li>
+            <li>Buttons that feel cramped</li>
+            <li>Cards or grids that overflow</li>
+            <li>Navigation that becomes hard to use</li>
+          </ul>
+
+          <h2>4. Confirm spacing and consistency</h2>
+          <p>
+            Inconsistent spacing makes polished UI feel messy. Review whether
+            sections, cards, inputs, and buttons follow the same rhythm. Even a
+            strong design system looks weak when spacing becomes random.
+          </p>
+
+          <h2>5. Review accessibility basics</h2>
+          <p>
+            Every front-end review should include a short accessibility pass.
+            Check these first:
+          </p>
+          <ul>
+            <li>Images have meaningful alt text</li>
+            <li>Form inputs have labels</li>
+            <li>Interactive elements are keyboard reachable</li>
+            <li>Focus states are visible</li>
+            <li>Color contrast is readable</li>
+          </ul>
+
+          <h2>6. Look for performance issues</h2>
+          <p>
+            Front-end code review is also the right time to catch performance
+            waste. Ask whether the page loads more than it needs to.
+          </p>
+          <ul>
+            <li>Are large images optimized?</li>
+            <li>Are script files necessary on this page?</li>
+            <li>Do images have width and height set?</li>
+            <li>Is there any unnecessary animation?</li>
+          </ul>
+
+          <h2>7. Verify states, not just the happy path</h2>
+          <p>
+            Review empty states, loading states, error states, and long content.
+            Many interfaces feel polished until real data arrives. A good review
+            checks how the UI behaves when conditions are not perfect.
+          </p>
+
+          <h2>8. Check links and interaction flow</h2>
+          <p>
+            Broken links and confusing click paths reduce trust quickly. Make
+            sure internal links work, external links open correctly when needed,
+            and CTAs lead users to the right next step.
+          </p>
+
+          <h2>9. Use a short repeatable checklist</h2>
+          <p>
+            The best review process is the one your team will actually follow.
+            Keep your checklist short and repeatable so it becomes part of your
+            shipping workflow.
+          </p>
+          <ul>
+            <li>Structure</li>
+            <li>Copy</li>
+            <li>Responsive layout</li>
+            <li>Spacing consistency</li>
+            <li>Accessibility</li>
+            <li>Performance</li>
+            <li>States and links</li>
+          </ul>
+
+          <h2>Final thoughts</h2>
+          <p>
+            A solid front-end review is not about being overly strict. It is
+            about protecting user experience before the page goes live. If you
+            review structure, clarity, accessibility, responsiveness, and
+            performance on every release, your UI quality will improve fast.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>
+          &#169; <span id="currentyear"></span> SUPRABHAT. All rights reserved.
+        </p>
+        <div class="header-controls" aria-label="Appearance controls">
+          <fieldset class="segmented">
+            <legend class="sr-only">Theme</legend>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="system"
+              aria-label="Theme: System"
+              aria-pressed="false"
+            >
+              <svg
+                viewBox="0 0 28 28"
+                focusable="false"
+                aria-hidden="true"
+                fill="none"
+              >
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V16.5C20.5 17.0523 20.0523 17.5 19.5 17.5H8.5C7.94772 17.5 7.5 17.0523 7.5 16.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M7.5 8.5C7.5 7.94772 7.94772 7.5 8.5 7.5H19.5C20.0523 7.5 20.5 7.94772 20.5 8.5V14.5C20.5 15.0523 20.0523 15.5 19.5 15.5H8.5C7.94772 15.5 7.5 15.0523 7.5 14.5V8.5Z"
+                  stroke="currentColor"
+                ></path>
+                <path
+                  d="M16.5 20.5V17.5H11.5V20.5M16.5 20.5H11.5M16.5 20.5H17.5M11.5 20.5H10.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="light"
+              aria-label="Theme: Light"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 3v2m0 14v2M3 12h2m14 0h2M6.2 6.2l1.4 1.4m8.8 8.8l1.4 1.4m0-11.6-1.4 1.4M7.6 16.4 6.2 17.8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button
+              class="segmented__btn"
+              type="button"
+              data-theme-option="dark"
+              aria-label="Theme: Dark"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </fieldset>
+          <fieldset class="accent-switch">
+            <legend class="sr-only">Accent palette</legend>
+            <button
+              class="accent-switch__btn"
+              type="button"
+              data-accent-option="orange"
+              aria-label="Accent: Orange"
+              aria-pressed="false"
+            >
+              <span
+                class="accent-swatch accent-swatch--orange"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <span class="accent-switch__label">Accent</span>
+            <button
+              class="accent-switch__btn"
+              type="button"
+              data-accent-option="neon"
+              aria-label="Accent: Neon"
+              aria-pressed="false"
+            >
+              <span
+                class="accent-swatch accent-swatch--neon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </fieldset>
+        </div>
+      </div>
+      <button
+        class="back-to-top"
+        id="back-to-top-btn"
+        aria-label="Back to top"
+        hidden
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 20v-16m0 0l-5 5m5-5l5 5"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </footer>
+
+    <script src="../scripts/main.js" defer></script>
+  </body>
+</html>
