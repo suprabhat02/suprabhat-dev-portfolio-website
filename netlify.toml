@@ -2,30 +2,151 @@
   publish = "."
   command = ""
 
+# This site has moved to https://suprabhat-dev.com. Every real page 301s to
+# its closest match there, so link equity and search rankings transfer
+# instead of resetting. Google Search Console's "Change of address" tool
+# (run once from the old suprabhat-portfolio.netlify.app property) is what
+# actually merges the two entities; these redirects are what makes that
+# merge correct page-by-page instead of flattening everything to the
+# homepage. See MIGRATION.md for the full mapping and the one-time GSC step.
+#
+# Verification files (google*.html, BingSiteAuth.xml) and robots.txt are
+# left unmatched on purpose: they still need to serve so Search Console
+# access to the old property keeps working while Change of address runs.
+
+[[redirects]]
+  from = "/"
+  to = "https://suprabhat-dev.com/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog"
-  to = "/blog.html"
-  status = 200
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/blog/"
-  to = "/blog.html"
-  status = 200
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/blog.html"
-  to = "/blog"
+  to = "https://suprabhat-dev.com/blog/"
   status = 301
+  force = true
+
+# Same article kept on the new site under the same slug.
+[[redirects]]
+  from = "/blog/frontend-best-practices-clean-ui.html"
+  to = "https://suprabhat-dev.com/blog/frontend-best-practices-clean-ui/"
+  status = 301
+  force = true
 
 [[redirects]]
-  from = "/404"
-  to = "/404.html"
-  status = 404
+  from = "/blog/frontend-code-review-checklist.html"
+  to = "https://suprabhat-dev.com/blog/frontend-code-review-checklist/"
+  status = 301
+  force = true
 
 [[redirects]]
-  from = "/404.html"
-  to = "/404.html"
-  status = 404
+  from = "/blog/why-clean-minimal-ui-professional-website.html"
+  to = "https://suprabhat-dev.com/blog/why-clean-minimal-ui-professional-website/"
+  status = 301
+  force = true
+
+# No direct equivalent on the new site: closest topic match, accessibility.
+[[redirects]]
+  from = "/blog/building-accessible-react-components.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/aria-patterns-react-guide.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/keyboard-navigation-spa.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/screen-reader-testing-react.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/accessible-forms-react-hook-form.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+# No direct equivalent: closest topic match, the performance-audit service.
+[[redirects]]
+  from = "/blog/lazy-loading-images-core-web-vitals.html"
+  to = "https://suprabhat-dev.com/services/#performance-audit"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/nextjs-performance-optimization.html"
+  to = "https://suprabhat-dev.com/services/#performance-audit"
+  status = 301
+  force = true
+
+# Generic coding tutorials with nothing comparable on the new site: send to
+# the blog index rather than the homepage, so the redirect still lands on a
+# relevant section.
+[[redirects]]
+  from = "/blog/css-flexbox-tutorial-for-beginners.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/how-to-center-a-div-in-css.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/javascript-array-methods-explained.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/react-query-vs-redux-toolkit.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+# Feeds: send any crawler still polling the old URLs to the live ones.
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "https://suprabhat-dev.com/sitemap-index.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rss.xml"
+  to = "https://suprabhat-dev.com/rss.xml"
+  status = 301
+  force = true
+
+# Everything else not matched above (old asset URLs, the unused component
+# template, include partials) falls back to the new homepage.
+[[redirects]]
+  from = "/*"
+  to = "https://suprabhat-dev.com/"
+  status = 301
 
 [[headers]]
   for = "/*"
