@@ -45,14 +45,35 @@
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/frontend-best-practices-clean-ui"
+  to = "https://suprabhat-dev.com/blog/frontend-best-practices-clean-ui/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/frontend-code-review-checklist.html"
   to = "https://suprabhat-dev.com/blog/frontend-code-review-checklist/"
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/frontend-code-review-checklist"
+  to = "https://suprabhat-dev.com/blog/frontend-code-review-checklist/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/why-clean-minimal-ui-professional-website.html"
+  to = "https://suprabhat-dev.com/blog/why-clean-minimal-ui-professional-website/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/why-clean-minimal-ui-professional-website"
   to = "https://suprabhat-dev.com/blog/why-clean-minimal-ui-professional-website/"
   status = 301
   force = true
@@ -64,8 +85,22 @@
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/building-accessible-react-components"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/aria-patterns-react-guide.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/aria-patterns-react-guide"
   to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
   status = 301
   force = true
@@ -76,14 +111,35 @@
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/keyboard-navigation-spa"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/screen-reader-testing-react.html"
   to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/screen-reader-testing-react"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/accessible-forms-react-hook-form.html"
+  to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/accessible-forms-react-hook-form"
   to = "https://suprabhat-dev.com/blog/accessibility-in-react-what-developers-skip/"
   status = 301
   force = true
@@ -95,8 +151,22 @@
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/lazy-loading-images-core-web-vitals"
+  to = "https://suprabhat-dev.com/services/#performance-audit"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/nextjs-performance-optimization.html"
+  to = "https://suprabhat-dev.com/services/#performance-audit"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/nextjs-performance-optimization"
   to = "https://suprabhat-dev.com/services/#performance-audit"
   status = 301
   force = true
@@ -110,8 +180,22 @@
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/css-flexbox-tutorial-for-beginners"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/how-to-center-a-div-in-css.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/how-to-center-a-div-in-css"
   to = "https://suprabhat-dev.com/blog/"
   status = 301
   force = true
@@ -122,8 +206,22 @@
   status = 301
   force = true
 
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/javascript-array-methods-explained"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/blog/react-query-vs-redux-toolkit.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/react-query-vs-redux-toolkit"
   to = "https://suprabhat-dev.com/blog/"
   status = 301
   force = true
@@ -138,6 +236,33 @@
 [[redirects]]
   from = "/rss.xml"
   to = "https://suprabhat-dev.com/rss.xml"
+  status = 301
+  force = true
+
+# Search Console's Change of address check samples old pages: the file
+# aliases of "/" still answered 200 here.
+[[redirects]]
+  from = "/index.html"
+  to = "https://suprabhat-dev.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/404.html"
+  to = "https://suprabhat-dev.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/index.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/index"
+  to = "https://suprabhat-dev.com/blog/"
   status = 301
   force = true
 
@@ -172,6 +297,21 @@
 
 [[redirects]]
   from = "/blog/COMPONENT_TEMPLATE.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+# Netlify also serves the page without ".html", and Google indexed that form.
+[[redirects]]
+  from = "/blog/COMPONENT_TEMPLATE"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
+# Anything else under /blog/ (including the unused template and any future
+# stray path) goes to the blog index. Must stay after the specific rules above.
+[[redirects]]
+  from = "/blog/*"
   to = "https://suprabhat-dev.com/blog/"
   status = 301
   force = true
