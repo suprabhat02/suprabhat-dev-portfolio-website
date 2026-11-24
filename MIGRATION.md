@@ -51,6 +51,8 @@ keeps serving unless a forced rule above covers it. Forced on purpose:
 | `/blog/COMPONENT_TEMPLATE.html` | `/blog/` | unused template |
 | `/index.html`, `/404.html` | `/` | file aliases of the homepage, sampled by Change of address |
 | `/blog/index.html` | `/blog/` | alias of the blog index |
+| every `/blog/<slug>` (no `.html`) | same target as `/blog/<slug>.html` | Netlify serves pages without the extension and Google indexed that form |
+| any other `/blog/*` | `/blog/` | forced fallback, kept after the specific rules |
 
 Left serving on purpose: `google5d9d5a15a5829e80.html`, `BingSiteAuth.xml`
 and `robots.txt`. Search Console and Bing Webmaster Tools need the
