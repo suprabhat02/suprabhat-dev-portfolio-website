@@ -141,6 +141,41 @@
   status = 301
   force = true
 
+# Files that still answered 200 because the catch-all below is not forced.
+# The resume PDF and the portrait were indexed under this old domain, and the
+# include partials are HTML fragments a crawler can treat as thin pages, so
+# each is forced onto its match on the new site.
+[[redirects]]
+  from = "/assets/suprabhat-kumar-resume.pdf"
+  to = "https://suprabhat-dev.com/about/"
+  status = 301
+  force = true
+
+# Same photo on the new site, so image search moves it instead of losing it.
+[[redirects]]
+  from = "/assets/images/suprabhat.webp"
+  to = "https://suprabhat-dev.com/assets/images/suprabhat.webp"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/assets/images/og-image.svg"
+  to = "https://suprabhat-dev.com/assets/images/og-image.jpg"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/includes/*"
+  to = "https://suprabhat-dev.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/COMPONENT_TEMPLATE.html"
+  to = "https://suprabhat-dev.com/blog/"
+  status = 301
+  force = true
+
 # Everything else not matched above (old asset URLs, the unused component
 # template, include partials) falls back to the new homepage.
 [[redirects]]
