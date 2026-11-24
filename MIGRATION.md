@@ -39,14 +39,22 @@ Every real page here 301s to its closest match on the new site:
 
 Every rule above sets `force = true`, which makes it fire even though a
 real file sits at that path (Netlify otherwise serves the file and skips
-the redirect). The catch-all does **not** set `force`, so anything with a
-real file still behind it — `google5d9d5a15a5829e80.html`, `BingSiteAuth.xml`,
-`robots.txt`, the images, `includes/*.html`, `blog/COMPONENT_TEMPLATE.html`
-— keeps serving exactly as before. The two verification files staying
-reachable is deliberate: Search Console and Bing Webmaster Tools need them
-to keep recognizing this property as verified while the migration below
-runs. The rest (images, template, includes) were simply never public pages
-with anything to lose by being left alone.
+the redirect). The catch-all does **not** set `force`, so a file still behind a path
+keeps serving unless a forced rule above covers it. Forced on purpose:
+
+| Old URL | New URL | Why |
+| --- | --- | --- |
+| `/assets/suprabhat-kumar-resume.pdf` | `/about/` | was indexed and still listed this old domain |
+| `/assets/images/suprabhat.webp` | `/assets/images/suprabhat.webp` | same photo, moves image search |
+| `/assets/images/og-image.svg` | `/assets/images/og-image.jpg` | share image |
+| `/includes/*` | `/` | HTML fragments, thin pages if crawled |
+| `/blog/COMPONENT_TEMPLATE.html` | `/blog/` | unused template |
+
+Left serving on purpose: `google5d9d5a15a5829e80.html`, `BingSiteAuth.xml`
+and `robots.txt`. Search Console and Bing Webmaster Tools need the
+verification files to keep recognizing this property as verified while the
+migration below runs, and `robots.txt` must keep allowing crawling so the
+301s are seen. Remaining styles, scripts and icon images were never pages.
 
 ## The one-time step that actually matters: Change of address
 
@@ -73,5 +81,7 @@ Change of address takes effect gradually, generally weeks, not days.
 
 Confirm in GSC that the old property shows "Moved" and new-site impressions
 for branded queries ("Suprabhat Kumar") have picked up the old property's
-former volume. After that, this repo can be deleted outright — the 301s
-will have done their job and a dead domain carries no further benefit.
+former volume. Keep this redirect site live for at least a year after
+that, as Google's site-move guidance asks, and longer if old links still
+bring visitors: deleting it turns every old link into a 404, and Google keeps
+re-checking old URLs for months.
